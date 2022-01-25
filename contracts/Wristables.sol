@@ -8,7 +8,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Wristables is ERC721A, PaymentSplitter, Ownable {
 
-    constructor() {
+    constructor (uint256 maxBatchSize_, address[] memory payees, uint256[] memory shares_) 
+    ERC721A("Wristables", "WRISTS", maxBatchSize_) 
+    PaymentSplitter( payees, shares_) {
 
     }
 
