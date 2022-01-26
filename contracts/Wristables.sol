@@ -7,13 +7,21 @@ import "@openzeppelin/contracts/finance/PaymentSplitter.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
     /// @dev spec:
-    /// ERC721(a) contract with 555 unique tokens.
+
+    /// ERC721(a) contract with 555 unique tokens. 
+    ///     (first drop is 555, total is 9999, will be released in drops of 555 (so ~18 total drops))
+
     /// Dutch Auction style mint. 
-    /// Starts at 3 ETH per token dropping by 0.5 ETH every 5 minutes until sell-out (base price of 0.25ETH).
+    ///     Starts at 3 ETH per token dropping by 0.5 ETH every 5 minutes until sell-out (base price of 0.25ETH).
+    
     /// Payout primary sales to addresses based on pre-determined %.
     /// Payout royalties to addresses based on pre-determined %.
+    
     /// ERC2981 compliant.
-    /// (Maybe) Should have an airdrop function that only the owner can call.
+    
+    /// Airdrop function that only the owner can call.
+    /// Whitelist functionality (merkle tree?)
+    ///     We don't know addresses of whitelisted users for future drops so the whitelist should be able to be manipulated at any given time.
 
 
 contract Wristables is ERC721A, PaymentSplitter, Ownable {
