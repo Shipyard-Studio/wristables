@@ -33,7 +33,7 @@ contract Wristables is ERC721A, PaymentSplitterUpgradeable, OwnableUpgradeable, 
 
     struct DutchAuction {
         uint256 startingPrice;
-        uint256 tartAt;
+        uint256 startAt;
         uint256 expiresAt;
         uint256 priceDeductionRate;
     }
@@ -68,7 +68,11 @@ contract Wristables is ERC721A, PaymentSplitterUpgradeable, OwnableUpgradeable, 
     }
 
     /// @dev dutch auction mint
-    // TODO:
+    function mintAuction (uint256 quantity) external payable {
+        require(block.timestamp > dutchAuction.startAt , "auction has not started yet" );
+        require(block.timestamp < dutchAuction.expiresAt, "auction expired");
+
+    }
 
     /// @notice Called with the sale price to determine how much royalty
     //          is owed and to whom.
