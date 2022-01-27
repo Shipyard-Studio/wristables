@@ -30,14 +30,22 @@ contract Wristables is ERC721A, PaymentSplitter, Ownable {
 
     /// @dev `maxBatchSize` refers to how much a minter can mint at a time.
     /// @dev See `PaymentSplitter.sol` for documentation on `payees` and `shares_`.
-    constructor (uint256 maxBatchSize_, address[] memory payees, uint256[] memory shares_) 
+    constructor (
+        uint256 maxBatchSize_, 
+        address[] memory payees, 
+        uint256[] memory shares_
+    ) 
     ERC721A("Wristables", "WRST", maxBatchSize_) 
-    PaymentSplitter( payees, shares_) {
-        
-    supportsInterface(_INTERFACE_ID_ERC2981)
-
+    PaymentSplitter( payees, shares_) 
+    { 
+        supportsInterface(_INTERFACE_ID_ERC2981);
     }
 
+
+    /// @dev sends the next token to the `to` address for free + gas
+    function airdrop (address to, uint256 quantity) onlyOwner {
+
+    }
 
     /// @notice Called with the sale price to determine how much royalty
     //          is owed and to whom.
