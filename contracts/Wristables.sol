@@ -2,9 +2,11 @@
 pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
-import "erc721a/contracts/ERC721A.sol";
-import "@openzeppelin/contracts/finance/PaymentSplitter.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "erc721a/contracts/ERC721A.sol"; // TODO: Needs to be updated to use initializer instead of constructor
+import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitter.sol";
+import "@openzeppelin/contracts-upgradeable/access/Ownable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+
 
     /// @dev spec:
 
@@ -24,23 +26,23 @@ import "@openzeppelin/contracts/access/Ownable.sol";
     ///     We don't know addresses of whitelisted users for future drops so the whitelist should be able to be manipulated at any given time.
 
 
-contract Wristables is ERC721A, PaymentSplitter, Ownable {
+contract Wristables is ERC721A, PaymentSplitter, Ownable, Initializable {
 
     bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
 
     /// @dev `maxBatchSize` refers to how much a minter can mint at a time.
     /// @dev See `PaymentSplitter.sol` for documentation on `payees` and `shares_`.
-    constructor (
+    function initialize(
         uint256 maxBatchSize_, 
         address[] memory payees, 
         uint256[] memory shares_
-    ) 
-    ERC721A("Wristables", "WRST", maxBatchSize_) 
-    PaymentSplitter( payees, shares_) 
-    { 
+    ) public initializer {
+        // TODO: USE AS INITIALIZERS:
+        // ERC721A("Wristables", "WRST", maxBatchSize_) 
+        // PaymentSplitter( payees, shares_) 
+
         supportsInterface(_INTERFACE_ID_ERC2981);
     }
-
 
     /// @dev sends the next token to the `to` address for free + gas
     function airdrop (address to, uint256 quantity) onlyOwner {
