@@ -57,7 +57,7 @@ contract Wristables is ERC721A, PaymentSplitterUpgradeable, OwnableUpgradeable, 
 
     }
 
-    /// @dev sets the starting price of the dutch auction
+    /// @dev sets dutch auction struct
     function setDutchAuction ( 
         uint256 _startingPrice,
         uint256 _startAt,
