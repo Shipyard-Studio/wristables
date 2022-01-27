@@ -47,6 +47,9 @@ contract Wristables is ERC721A, PaymentSplitter, Ownable {
 
     }
 
+    /// @dev dutch auction mint
+    // TODO:
+
     /// @notice Called with the sale price to determine how much royalty
     //          is owed and to whom.
     /// @param _tokenId - the NFT asset queried for royalty information
