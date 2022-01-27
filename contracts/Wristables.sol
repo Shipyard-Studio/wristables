@@ -29,6 +29,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 contract Wristables is ERC721A, PaymentSplitter, Ownable, Initializable {
 
     uint256 private startingPrice; //dutch auction starting price
+    uint256 private priceDeductionRate; // dutch auction price deduction rate per step
 
     bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
 
@@ -54,6 +55,11 @@ contract Wristables is ERC721A, PaymentSplitter, Ownable, Initializable {
     /// @dev sets the starting price of the dutch auction
     function setStartingPrice (uint256 _startingPrice) public onlyOwner {
         startingPrice = _startingPrice;
+    }
+
+    /// @dev sets the starting price of the dutch auction
+    function setPriceDeductionRate (uint256 _priceDeductionRate) public onlyOwner {
+        priceDeductionRate = _priceDeductionRate;
     }
 
     /// @dev dutch auction mint
