@@ -28,6 +28,8 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 contract Wristables is ERC721A, PaymentSplitter, Ownable, Initializable {
 
+    uint256 private startingPrice; //dutch auction starting price
+
     bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
 
     /// @dev `maxBatchSize` refers to how much a minter can mint at a time.
@@ -45,8 +47,13 @@ contract Wristables is ERC721A, PaymentSplitter, Ownable, Initializable {
     }
 
     /// @dev sends the next token to the `to` address for free + gas
-    function airdrop (address to, uint256 quantity) onlyOwner {
+    function airdrop (address to, uint256 quantity) public onlyOwner {
 
+    }
+
+    /// @dev sets the starting price of the dutch auction
+    function setStartingPrice (uint256 _startingPrice) public onlyOwner {
+        startingPrice = _startingPrice;
     }
 
     /// @dev dutch auction mint
