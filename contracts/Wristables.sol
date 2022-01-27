@@ -3,8 +3,8 @@ pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
 import "erc721a/contracts/ERC721A.sol"; // TODO: Needs to be updated to use initializer instead of constructor
-import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitter.sol";
-import "@openzeppelin/contracts-upgradeable/access/Ownable.sol";
+import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 
@@ -26,12 +26,17 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
     ///     We don't know addresses of whitelisted users for future drops so the whitelist should be able to be manipulated at any given time.
 
 
-contract Wristables is ERC721A, PaymentSplitter, Ownable, Initializable {
+contract Wristables is ERC721A, PaymentSplitterUpgradeable, OwnableUpgradeable, Initializable {
 
-    uint256 private startingPrice; //dutch auction starting price
-    uint256 private priceDeductionRate; // dutch auction price deduction rate per step
-
+    DutchAuction public dutchAuction; 
     bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
+
+    struct DutchAuction {
+        uint256 startingPrice;
+        uint256 tartAt;
+        uint256 expiresAt;
+        uint256 priceDeductionRate;
+    }
 
     /// @dev `maxBatchSize` refers to how much a minter can mint at a time.
     /// @dev See `PaymentSplitter.sol` for documentation on `payees` and `shares_`.
@@ -53,13 +58,13 @@ contract Wristables is ERC721A, PaymentSplitter, Ownable, Initializable {
     }
 
     /// @dev sets the starting price of the dutch auction
-    function setStartingPrice (uint256 _startingPrice) public onlyOwner {
-        startingPrice = _startingPrice;
-    }
-
-    /// @dev sets the starting price of the dutch auction
-    function setPriceDeductionRate (uint256 _priceDeductionRate) public onlyOwner {
-        priceDeductionRate = _priceDeductionRate;
+    function setDutchAuction ( 
+        uint256 _startingPrice,
+        uint256 _startAt,
+        uint256 _expiresAt,
+        uint256 _priceDeductionRate
+        ) public onlyOwner {
+        dutchAuction = DutchAuction(_startingPrice, _startAt, _expiresAt, _priceDeductionRate);
     }
 
     /// @dev dutch auction mint
@@ -77,8 +82,10 @@ contract Wristables is ERC721A, PaymentSplitter, Ownable, Initializable {
     ) external view returns (
         address receiver,
         uint256 royaltyAmount
-    );
-}
+    ) {
+
+    }
+
 
 
 
