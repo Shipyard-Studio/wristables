@@ -25,13 +25,36 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 
 contract Wristables is ERC721A, PaymentSplitter, Ownable {
+
+    bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
+
     /// @dev `maxBatchSize` refers to how much a minter can mint at a time.
     /// @dev See `PaymentSplitter.sol` for documentation on `payees` and `shares_`.
     constructor (uint256 maxBatchSize_, address[] memory payees, uint256[] memory shares_) 
     ERC721A("Wristables", "WRST", maxBatchSize_) 
     PaymentSplitter( payees, shares_) {
+        
+    supportsInterface(_INTERFACE_ID_ERC2981)
 
     }
+
+
+    /// @notice Called with the sale price to determine how much royalty
+    //          is owed and to whom.
+    /// @param _tokenId - the NFT asset queried for royalty information
+    /// @param _salePrice - the sale price of the NFT asset specified by _tokenId
+    /// @return receiver - address of who should be sent the royalty payment
+    /// @return royaltyAmount - the royalty payment amount for _salePrice
+    function royaltyInfo(
+        uint256 _tokenId,
+        uint256 _salePrice
+    ) external view returns (
+        address receiver,
+        uint256 royaltyAmount
+    );
+}
+
+
 
     /// @dev override token uri to append .json to string
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
