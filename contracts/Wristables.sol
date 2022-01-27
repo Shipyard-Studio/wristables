@@ -62,9 +62,6 @@ contract Wristables is ERC721A, PaymentSplitter, Ownable, Initializable {
         address receiver,
         uint256 royaltyAmount
     );
-}
-
-
 
     /// @dev override token uri to append .json to string
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
