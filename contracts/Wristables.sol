@@ -2,9 +2,9 @@
 pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
-import "erc721a/contracts/ERC721A.sol";
-import "@openzeppelin/contracts/finance/PaymentSplitter.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "erc721a/contracts/ERC721A.sol"; // TODO: Needs to be updated to use initializer instead of constructor
+import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitter.sol";
+import "@openzeppelin/contracts-upgradeable/access/Ownable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 
