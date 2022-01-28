@@ -27,7 +27,7 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
     ///     We don't know addresses of whitelisted users for future drops so the whitelist should be able to be manipulated at any given time.
 
 
-contract Wristables is ERC721Upgradeable, PaymentSplitterUpgradeable, OwnableUpgradeable, Initializable {
+contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable  {
 
     //TODO: MERKLE PROOF STATE / FUNCTIONS
 
