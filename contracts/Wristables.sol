@@ -70,6 +70,16 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         }
     }
 
+    /// @dev sends one token to each address in the `to` array
+    function batchAirdrop (address[] memory to) public onlyOwner {
+        uint mintIndex = _tokenSupply.current();
+        require(mintIndex + to.length <= MAX_SUPPLY, "exceeds token supply");
+        for (uint256 i = 0; i < to.length; i++) {
+            _safeMint(to[i], mintIndex + i);
+            _tokenSupply.increment();
+        }
+    }
+
 
     /// @dev dutch auction mint
     function mintAuction () external payable {
