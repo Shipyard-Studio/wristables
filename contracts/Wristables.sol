@@ -7,6 +7,7 @@ import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.s
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
+import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 
 
     /// @dev spec:
@@ -23,18 +24,19 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
     /// ERC2981 compliant.
     
     /// Airdrop function that only the owner can call.
-    /// Whitelist functionality (merkle tree?)
-    ///     We don't know addresses of whitelisted users for future drops so the whitelist should be able to be manipulated at any given time.
-
 
 contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable  {
+    
+    //TODO: MERKLE PROOF STATE / FUNCTIONS
 
     using AddressUpgradeable for address;
     using StringsUpgradeable for uint256;
+    using CountersUpgradeable for CountersUpgradeable.Counter;
 
-    //TODO: MERKLE PROOF STATE / FUNCTIONS
 
     DutchAuction public dutchAuction; 
+    CountersUpgradeable.Counter private _tokenSupply;
+    uint public constant MAX_SUPPLY = 9999;
     bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
 
     struct DutchAuction {
