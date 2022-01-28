@@ -6,6 +6,7 @@ import "erc721a/contracts/ERC721A.sol"; // TODO: Needs to be updated to use init
 import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
 
     /// @dev spec:
@@ -27,6 +28,8 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 
 contract Wristables is ERC721A, PaymentSplitterUpgradeable, OwnableUpgradeable, Initializable {
+
+    //TODO: MERKLE PROOF STATE / FUNCTIONS
 
     DutchAuction public dutchAuction; 
     bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
@@ -90,9 +93,6 @@ contract Wristables is ERC721A, PaymentSplitterUpgradeable, OwnableUpgradeable, 
     ) {
 
     }
-
-
-
 
     /// @dev override token uri to append .json to string
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
