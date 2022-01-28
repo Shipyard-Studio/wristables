@@ -29,6 +29,9 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
 contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable  {
 
+    using AddressUpgradeable for address;
+    using StringsUpgradeable for uint256;
+
     //TODO: MERKLE PROOF STATE / FUNCTIONS
 
     DutchAuction public dutchAuction; 
