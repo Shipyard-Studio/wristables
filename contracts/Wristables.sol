@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
-import "erc721a/contracts/ERC721A.sol"; // TODO: Needs to be updated to use initializer instead of constructor
+import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol"; // TODO: Needs to be updated to use initializer instead of constructor
 import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
@@ -27,7 +27,7 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
     ///     We don't know addresses of whitelisted users for future drops so the whitelist should be able to be manipulated at any given time.
 
 
-contract Wristables is ERC721A, PaymentSplitterUpgradeable, OwnableUpgradeable, Initializable {
+contract Wristables is ERC721Upgradeable, PaymentSplitterUpgradeable, OwnableUpgradeable, Initializable {
 
     //TODO: MERKLE PROOF STATE / FUNCTIONS
 
