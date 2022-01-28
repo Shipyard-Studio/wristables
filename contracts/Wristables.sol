@@ -36,7 +36,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 
     DutchAuction public dutchAuction; 
     CountersUpgradeable.Counter private _tokenSupply;
-    uint public constant MAX_SUPPLY = 9999;
+    uint public MAX_SUPPLY = 9999;
     bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
 
     struct DutchAuction {
@@ -62,18 +62,14 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 
     /// @dev sends the next token to the `to` address for free + gas
     function airdrop (address to, uint256 quantity) public onlyOwner {
-        _safeMint(to, quantity);
+        uint mintIndex = _tokenSupply.current();
+        require(mintIndex + quantity <= MAX_SUPPLY, "exceeds token supply");
+        for (uint256 i = 0; i < quantity; i++) {
+            _safeMint(to, mintIndex + i);
+            _tokenSupply.increment();
+        }
     }
 
-    /// @dev sets dutch auction struct
-    function setDutchAuction ( 
-        uint256 _startingPrice,
-        uint256 _startAt,
-        uint256 _expiresAt,
-        uint256 _priceDeductionRate
-        ) public onlyOwner {
-        dutchAuction = DutchAuction(_startingPrice, _startAt, _expiresAt, _priceDeductionRate);
-    }
 
     /// @dev dutch auction mint
     function mintAuction () external payable {
@@ -97,6 +93,21 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         uint256 royaltyAmount
     ) {
 
+    }
+
+    /// @dev sets dutch auction struct
+    function setDutchAuction ( 
+        uint256 _startingPrice,
+        uint256 _startAt,
+        uint256 _expiresAt,
+        uint256 _priceDeductionRate
+        ) public onlyOwner {
+        dutchAuction = DutchAuction(_startingPrice, _startAt, _expiresAt, _priceDeductionRate);
+    }
+
+    /// @dev set max token supply
+    function setMaxSupply (uint256 newSupply) public onlyOwner {
+        MAX_SUPPLY = newSupply;
     }
 
     /// @dev override token uri to append .json to string
