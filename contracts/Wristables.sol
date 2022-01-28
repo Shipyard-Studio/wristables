@@ -54,7 +54,7 @@ contract Wristables is ERC721A, PaymentSplitterUpgradeable, OwnableUpgradeable, 
 
     /// @dev sends the next token to the `to` address for free + gas
     function airdrop (address to, uint256 quantity) public onlyOwner {
-
+        _safeMint(to, quantity);
     }
 
     /// @dev sets dutch auction struct
@@ -68,10 +68,11 @@ contract Wristables is ERC721A, PaymentSplitterUpgradeable, OwnableUpgradeable, 
     }
 
     /// @dev dutch auction mint
-    function mintAuction (uint256 quantity) external payable {
+    function mintAuction () external payable {
         require(block.timestamp > dutchAuction.startAt , "auction has not started yet" );
         require(block.timestamp < dutchAuction.expiresAt, "auction expired");
-
+        // every 5 minutes from start time, reduce price required to mint by the deduction rate
+        // mint nft to user
     }
 
     /// @notice Called with the sale price to determine how much royalty
