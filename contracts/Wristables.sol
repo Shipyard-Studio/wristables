@@ -102,7 +102,10 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         address receiver,
         uint256 royaltyAmount
     ) {
-
+        return (
+            address(this), 
+            _salePrice * 6 / 100 // 6% royalty
+        );
     }
 
     /// @dev sets dutch auction struct
