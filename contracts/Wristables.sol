@@ -36,6 +36,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 
     DutchAuction public dutchAuction; 
     CountersUpgradeable.Counter private _tokenSupply;
+    string private _baseTokenURI;
     uint public MAX_SUPPLY = 9999;
     bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
 
@@ -123,11 +124,16 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         MAX_SUPPLY = newSupply;
     }
 
+    /// @dev allows owner to reset base uri when updating metadata
+    function setBaseURI(string memory baseURI) public onlyOwner {
+        _baseTokenURI = baseURI;
+    }
+
     /// @dev override token uri to append .json to string
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
         string memory json = ".json";
-        string memory baseURI = _baseURI();
+        string memory baseURI = _baseTokenURI;
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), json)) : "";
     }
 
