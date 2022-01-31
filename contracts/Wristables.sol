@@ -42,6 +42,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 
     struct DutchAuction {
         uint256 startingPrice;
+        uint256 floorPrice;
         uint256 startAt;
         uint256 expiresAt;
         uint256 priceDeductionRate;
@@ -81,11 +82,16 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         }
     }
 
-
     /// @dev dutch auction mint
     function mintAuction () external payable {
         require(block.timestamp > dutchAuction.startAt , "auction has not started yet" );
         require(block.timestamp < dutchAuction.expiresAt, "auction expired");
+
+        uint timeElapsed = block.timestamp - dutchAuction.startAt;
+        uint deduction = dutchAuction.priceDeductionRate * (timeElapsed / 5 minutes);
+        uint price = dutchAuction.startingPrice - deduction;
+
+
         // every 5 minutes from start time, reduce price required to mint by the deduction rate
         // mint nft to user
     }
@@ -112,11 +118,12 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     /// @dev sets dutch auction struct
     function setDutchAuction ( 
         uint256 _startingPrice,
+        uint256 _floorPrice,
         uint256 _startAt,
         uint256 _expiresAt,
         uint256 _priceDeductionRate
         ) public onlyOwner {
-        dutchAuction = DutchAuction(_startingPrice, _startAt, _expiresAt, _priceDeductionRate);
+        dutchAuction = DutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
     }
 
     /// @dev set max token supply
