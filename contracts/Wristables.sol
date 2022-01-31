@@ -93,8 +93,9 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 
         require(msg.value >= price, "insufficient funds");
 
-        // every 5 minutes from start time, reduce price required to mint by the deduction rate
-        // mint nft to user
+        uint mintIndex = _tokenSupply.current();
+        _safeMint(msg.sender, mintIndex);
+        _tokenSupply.increment();
     }
 
     /// @notice Called with the sale price to determine how much royalty
