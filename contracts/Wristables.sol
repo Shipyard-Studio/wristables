@@ -88,9 +88,10 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         require(block.timestamp < dutchAuction.expiresAt, "auction expired");
 
         uint timeElapsed = block.timestamp - dutchAuction.startAt;
-        uint deduction = dutchAuction.priceDeductionRate * (timeElapsed / 5 minutes);
-        uint price = dutchAuction.startingPrice - deduction;
+        uint deduction = dutchAuction.priceDeductionRate * (timeElapsed / 5 minutes); // calculate the number of 5 minute intervals & calculates the deduction from the starting price accordingly
+        uint price = dutchAuction.startingPrice - deduction < dutchAuction.floorPrice ? dutchAuction.floorPrice : dutchAuction.startingPrice - deduction; // calculates the current price + does not allow the price to drop below the floor
 
+        require(msg.value >= price, 'insufficient funds');
 
         // every 5 minutes from start time, reduce price required to mint by the deduction rate
         // mint nft to user
