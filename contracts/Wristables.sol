@@ -50,14 +50,13 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 
     /// @dev `maxBatchSize` refers to how much a minter can mint at a time.
     /// @dev See `PaymentSplitter.sol` for documentation on `payees` and `shares_`.
-    function initialize(
-        uint256 maxBatchSize_, 
+    function initialize( 
         address[] memory payees, 
         uint256[] memory shares_
     ) public initializer {
         // TODO: USE AS INITIALIZERS:
-        // ERC721A("Wristables", "WRST", maxBatchSize_) 
-        // PaymentSplitter( payees, shares_) 
+         __ERC721_init("Wristables", "WRST");
+        __PaymentSplitter_init( payees, shares_);
 
         supportsInterface(_INTERFACE_ID_ERC2981);
     }
