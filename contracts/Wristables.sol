@@ -35,7 +35,8 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     DutchAuction public dutchAuction; 
     CountersUpgradeable.Counter private _tokenSupply;
     string private _baseTokenURI;
-    uint public MAX_SUPPLY = 9999;
+    uint public availableSupply; // max number of tokens currently available for mint
+    uint public constant MAX_SUPPLY = 9999;
     bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
 
     struct DutchAuction {
@@ -46,6 +47,14 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         uint256 priceDeductionRate;
     }
 
+    event NewDutchAuction(
+        uint256 startingPrice,
+        uint256 floorPrice,
+        uint256 startAt,
+        uint256 expiresAt,
+        uint256 priceDeductionRate
+    );
+
     /// @dev `maxBatchSize` refers to how much a minter can mint at a time.
     /// @dev See `PaymentSplitter.sol` for documentation on `payees` and `shares_`.
     function initialize( 
@@ -53,8 +62,9 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         uint256[] memory shares_
     ) public initializer {
         // TODO: USE AS INITIALIZERS:
-         __ERC721_init("Wristables", "WRST");
+        __ERC721_init("Wristables", "WRST");
         __PaymentSplitter_init( payees, shares_);
+        __Ownable_init();
 
         supportsInterface(_INTERFACE_ID_ERC2981);
     }
@@ -62,7 +72,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     /// @dev sends the next token to the `to` address for free + gas
     function airdrop (address to, uint256 quantity) public onlyOwner {
         uint mintIndex = _tokenSupply.current();
-        require(mintIndex + quantity <= MAX_SUPPLY, "exceeds token supply");
+        require(mintIndex + quantity <= availableSupply, "exceeds available supply");
         for (uint256 i = 0; i < quantity; i++) {
             _safeMint(to, mintIndex + i);
             _tokenSupply.increment();
@@ -72,7 +82,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     /// @dev sends one token to each address in the `to` array
     function batchAirdrop (address[] memory to) public onlyOwner {
         uint mintIndex = _tokenSupply.current();
-        require(mintIndex + to.length <= MAX_SUPPLY, "exceeds token supply");
+        require(mintIndex + to.length <= availableSupply, "exceeds token supply");
         for (uint256 i = 0; i < to.length; i++) {
             _safeMint(to[i], mintIndex + i);
             _tokenSupply.increment();
@@ -91,6 +101,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         require(msg.value >= price, "insufficient funds");
 
         uint mintIndex = _tokenSupply.current();
+        require(mintIndex <= availableSupply, "exceeds token supply");
         _safeMint(msg.sender, mintIndex);
         _tokenSupply.increment();
     }
@@ -123,11 +134,13 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         uint256 _priceDeductionRate
         ) public onlyOwner {
         dutchAuction = DutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
+        emit NewDutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
     }
 
     /// @dev set max token supply
-    function setMaxSupply (uint256 newSupply) public onlyOwner {
-        MAX_SUPPLY = newSupply;
+    function setAvailableSupply (uint256 availableSupplyIncrease) public onlyOwner {
+        require(availableSupply + availableSupplyIncrease <= MAX_SUPPLY, "cannot be greater than 9999");
+        availableSupply += availableSupplyIncrease;
     }
 
     /// @dev allows owner to reset base uri when updating metadata
@@ -137,7 +150,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 
     /// @dev override token uri to append .json to string
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
+        require(_exists(tokenId), "URI query for nonexistent token");
         string memory json = ".json";
         string memory baseURI = _baseTokenURI;
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), json)) : "";
