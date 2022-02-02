@@ -2,9 +2,11 @@
 pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
-import "erc721a/contracts/ERC721A.sol";
-import "@openzeppelin/contracts/finance/PaymentSplitter.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol"; // TODO: Needs to be updated to use initializer instead of constructor
+import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
+
 
     /// @dev spec:
 
@@ -20,31 +22,77 @@ import "@openzeppelin/contracts/access/Ownable.sol";
     /// ERC2981 compliant.
     
     /// Airdrop function that only the owner can call.
-    /// Whitelist functionality (merkle tree?)
-    ///     We don't know addresses of whitelisted users for future drops so the whitelist should be able to be manipulated at any given time.
+
+contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable  {
+    
+    //TODO: MERKLE PROOF STATE / FUNCTIONS
+
+    using AddressUpgradeable for address;
+    using StringsUpgradeable for uint256;
+    using CountersUpgradeable for CountersUpgradeable.Counter;
 
 
-contract Wristables is ERC721A, PaymentSplitter, Ownable {
-
+    DutchAuction public dutchAuction; 
+    CountersUpgradeable.Counter private _tokenSupply;
+    string private _baseTokenURI;
+    uint public MAX_SUPPLY = 9999;
     bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
+
+    struct DutchAuction {
+        uint256 startingPrice;
+        uint256 floorPrice;
+        uint256 startAt;
+        uint256 expiresAt;
+        uint256 priceDeductionRate;
+    }
 
     /// @dev `maxBatchSize` refers to how much a minter can mint at a time.
     /// @dev See `PaymentSplitter.sol` for documentation on `payees` and `shares_`.
-    constructor (
-        uint256 maxBatchSize_, 
+    function initialize( 
         address[] memory payees, 
         uint256[] memory shares_
-    ) 
-    ERC721A("Wristables", "WRST", maxBatchSize_) 
-    PaymentSplitter( payees, shares_) 
-    { 
+    ) public initializer {
+        // TODO: USE AS INITIALIZERS:
+         __ERC721_init("Wristables", "WRST");
+        __PaymentSplitter_init( payees, shares_);
+
         supportsInterface(_INTERFACE_ID_ERC2981);
     }
 
-
     /// @dev sends the next token to the `to` address for free + gas
-    function airdrop (address to, uint256 quantity) onlyOwner {
+    function airdrop (address to, uint256 quantity) public onlyOwner {
+        uint mintIndex = _tokenSupply.current();
+        require(mintIndex + quantity <= MAX_SUPPLY, "exceeds token supply");
+        for (uint256 i = 0; i < quantity; i++) {
+            _safeMint(to, mintIndex + i);
+            _tokenSupply.increment();
+        }
+    }
 
+    /// @dev sends one token to each address in the `to` array
+    function batchAirdrop (address[] memory to) public onlyOwner {
+        uint mintIndex = _tokenSupply.current();
+        require(mintIndex + to.length <= MAX_SUPPLY, "exceeds token supply");
+        for (uint256 i = 0; i < to.length; i++) {
+            _safeMint(to[i], mintIndex + i);
+            _tokenSupply.increment();
+        }
+    }
+
+    /// @dev dutch auction mint
+    function mintAuction () external payable {
+        require(block.timestamp > dutchAuction.startAt , "auction has not started yet" );
+        require(block.timestamp < dutchAuction.expiresAt, "auction expired");
+
+        uint timeElapsed = block.timestamp - dutchAuction.startAt;
+        uint deduction = dutchAuction.priceDeductionRate * (timeElapsed / 5 minutes); // calculate the number of 5 minute intervals & calculates the deduction from the starting price accordingly
+        uint price = dutchAuction.startingPrice - deduction < dutchAuction.floorPrice ? dutchAuction.floorPrice : dutchAuction.startingPrice - deduction; // calculates the current price + does not allow the price to drop below the floor
+
+        require(msg.value >= price, "insufficient funds");
+
+        uint mintIndex = _tokenSupply.current();
+        _safeMint(msg.sender, mintIndex);
+        _tokenSupply.increment();
     }
 
     /// @notice Called with the sale price to determine how much royalty
@@ -59,16 +107,39 @@ contract Wristables is ERC721A, PaymentSplitter, Ownable {
     ) external view returns (
         address receiver,
         uint256 royaltyAmount
-    );
-}
+    ) {
+        return (
+            address(this), 
+            _salePrice * 6 / 100 // 6% royalty
+        );
+    }
 
+    /// @dev sets dutch auction struct
+    function setDutchAuction ( 
+        uint256 _startingPrice,
+        uint256 _floorPrice,
+        uint256 _startAt,
+        uint256 _expiresAt,
+        uint256 _priceDeductionRate
+        ) public onlyOwner {
+        dutchAuction = DutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
+    }
 
+    /// @dev set max token supply
+    function setMaxSupply (uint256 newSupply) public onlyOwner {
+        MAX_SUPPLY = newSupply;
+    }
+
+    /// @dev allows owner to reset base uri when updating metadata
+    function setBaseURI(string memory baseURI) public onlyOwner {
+        _baseTokenURI = baseURI;
+    }
 
     /// @dev override token uri to append .json to string
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
         string memory json = ".json";
-        string memory baseURI = _baseURI();
+        string memory baseURI = _baseTokenURI;
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), json)) : "";
     }
 
