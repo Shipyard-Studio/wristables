@@ -35,9 +35,17 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     DutchAuction public dutchAuction; 
     CountersUpgradeable.Counter private _tokenSupply;
     string private _baseTokenURI;
-    uint public availableSupply; // max number of tokens currently available for mint
-    uint public constant MAX_SUPPLY = 9999;
+    uint256 public availableSupply; // max number of tokens currently available for mint
+    uint256 public constant MAX_SUPPLY = 9999;
+    bool private toggleAuction; // true = dutch auction active, false = mint for flat price active
+    bool private saleActive; // if false, mint functions will revert
     bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
+
+
+    modifier SaleActive () {
+        require(saleActive, "sale paused");
+        _;
+    }
 
     struct DutchAuction {
         uint256 startingPrice;
@@ -90,7 +98,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     }
 
     /// @dev dutch auction mint
-    function mintAuction () external payable {
+    function mintAuction () external payable SaleActive {
         require(block.timestamp > dutchAuction.startAt , "auction has not started yet" );
         require(block.timestamp < dutchAuction.expiresAt, "auction expired");
 
@@ -104,6 +112,10 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         require(mintIndex <= availableSupply, "exceeds token supply");
         _safeMint(msg.sender, mintIndex);
         _tokenSupply.increment();
+    }
+
+    function mint () external payable SaleActive {
+
     }
 
     /// @notice Called with the sale price to determine how much royalty
