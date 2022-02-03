@@ -37,6 +37,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     string private _baseTokenURI;
     uint256 public availableSupply; // max number of tokens currently available for mint
     uint256 public constant MAX_SUPPLY = 9999;
+    uint256 private mintPrice; // price of each token in the `mint` functions
     bool private toggleAuction; // true = dutch auction active, false = mint for flat price active
     bool private saleActive; // if false, mint functions will revert
     bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
@@ -99,6 +100,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 
     /// @dev dutch auction mint
     function mintAuction () external payable SaleActive {
+        require(toggleAuction, "use `mint`");
         require(block.timestamp > dutchAuction.startAt , "auction has not started yet" );
         require(block.timestamp < dutchAuction.expiresAt, "auction expired");
 
@@ -115,7 +117,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     }
 
     function mint () external payable SaleActive {
-
+        require(toggleAuction, "use `mintAuction`");
     }
 
     /// @notice Called with the sale price to determine how much royalty
@@ -149,10 +151,25 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         emit NewDutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
     }
 
-    /// @dev set max token supply
+    /// @dev set available token supply
     function setAvailableSupply (uint256 availableSupplyIncrease) public onlyOwner {
         require(availableSupply + availableSupplyIncrease <= MAX_SUPPLY, "cannot be greater than 9999");
         availableSupply += availableSupplyIncrease;
+    }
+
+    /// @dev set price of each token in the `mint` function
+    function setMintPrice (uint256 _mintPrice) public onlyOwner {
+        mintPrice = _mintPrice;
+    }
+
+    /// @dev set price of each token in the `mint` function
+    function setToggleAuction (bool _toggleAuction) public onlyOwner {
+        toggleAuction = _toggleAuction;
+    }
+
+    /// @dev set price of each token in the `mint` function
+    function setSaleActive (bool _saleActive) public onlyOwner {
+        saleActive = _saleActive;
     }
 
     /// @dev allows owner to reset base uri when updating metadata
