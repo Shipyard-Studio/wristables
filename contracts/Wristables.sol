@@ -178,7 +178,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     }
 
     /// @dev allows owner to reset base uri when updating metadata
-    function setBaseURI(string memory baseURI) external; onlyOwner {
+    function setBaseURI(string memory baseURI) external onlyOwner {
         _baseTokenURI = baseURI;
     }
 
