@@ -9,7 +9,7 @@ import "solidity-coverage";
 
 //
 // for UUPS deployment stuff
-import '@nomiclabs/hardhat-ethers';
+// import '@nomiclabs/hardhat-ethers';
 import '@openzeppelin/hardhat-upgrades';
 //
 //

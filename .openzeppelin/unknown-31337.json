@@ -12,6 +12,11 @@
       "kind": "uups"
     },
     {
+      "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+      "txHash": "0x486c174fe7622b2052375e2c7c183bc9d57d91aa5e8f75c664daaa18720fa32a",
+      "kind": "uups"
+    },
+    {
       "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
       "txHash": "0x0604d067b1112588d4b7c2b063f14ce39737b321f0324a67fe2885c34157786c",
       "kind": "uups"
@@ -24,11 +29,6 @@
     {
       "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
       "txHash": "0xa8a86284e9c4022a5f51713c6d02569619cdcaf80aded28835fa894979ec9f0a",
-      "kind": "uups"
-    },
-    {
-      "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
-      "txHash": "0x486c174fe7622b2052375e2c7c183bc9d57d91aa5e8f75c664daaa18720fa32a",
       "kind": "uups"
     }
   ],
