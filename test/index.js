@@ -41,10 +41,6 @@ describe("Wristables", function () {
     expect(await wristablesV2.version(), "V2");
   })
 
-  it("Should only be upgradeable by owner", async function () {
-    addr2
-  })
-
   it("Should run a test", async function() {
     // your test here!
   });
