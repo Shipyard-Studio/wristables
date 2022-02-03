@@ -117,7 +117,12 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     }
 
     function mint () external payable SaleActive {
-        require(toggleAuction, "use `mintAuction`");
+        require(!toggleAuction, "use `mintAuction`");
+        require(msg.value == mintPrice, "incorrect ether sent");
+        uint mintIndex = _tokenSupply.current();
+        require(mintIndex <= availableSupply, "exceeds token supply");
+        _safeMint(msg.sender, mintIndex);
+        _tokenSupply.increment();
     }
 
     /// @notice Called with the sale price to determine how much royalty
@@ -146,34 +151,34 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         uint256 _startAt,
         uint256 _expiresAt,
         uint256 _priceDeductionRate
-        ) public onlyOwner {
+        ) external onlyOwner {
         dutchAuction = DutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
         emit NewDutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
     }
 
     /// @dev set available token supply
-    function setAvailableSupply (uint256 availableSupplyIncrease) public onlyOwner {
+    function setAvailableSupply (uint256 availableSupplyIncrease) external onlyOwner {
         require(availableSupply + availableSupplyIncrease <= MAX_SUPPLY, "cannot be greater than 9999");
         availableSupply += availableSupplyIncrease;
     }
 
     /// @dev set price of each token in the `mint` function
-    function setMintPrice (uint256 _mintPrice) public onlyOwner {
+    function setMintPrice (uint256 _mintPrice) external onlyOwner {
         mintPrice = _mintPrice;
     }
 
     /// @dev set price of each token in the `mint` function
-    function setToggleAuction (bool _toggleAuction) public onlyOwner {
+    function setToggleAuction (bool _toggleAuction) external onlyOwner {
         toggleAuction = _toggleAuction;
     }
 
     /// @dev set price of each token in the `mint` function
-    function setSaleActive (bool _saleActive) public onlyOwner {
+    function setSaleActive (bool _saleActive) external onlyOwner {
         saleActive = _saleActive;
     }
 
     /// @dev allows owner to reset base uri when updating metadata
-    function setBaseURI(string memory baseURI) public onlyOwner {
+    function setBaseURI(string memory baseURI) external; onlyOwner {
         _baseTokenURI = baseURI;
     }
 
