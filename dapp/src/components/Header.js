@@ -1,13 +1,18 @@
 import React from 'react';
+import '../style/Header.css';
 //import backgroundVideo from './test.mp4';
 
-const Header = () => {
+function Header ({walletAddress, connect}) {
   return (
-    <div className="Header">
+    <div className="header">
         <div>
             <p><b>Wristable</b></p>
             <p><b>BY</b> WRIST AFICIONADO</p>
         </div> 
+        <div onClick={connect} className='address'>
+        {walletAddress.length > 0 ? `${walletAddress.slice(0,6)}...${walletAddress.slice(-4)}` :
+        'CONNECT'
+        }</div>
         <br /><br /><br /><br /><br /><br />
         <div>
             <h1>The official watch maker of the Metaverse.</h1>
