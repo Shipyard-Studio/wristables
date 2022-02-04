@@ -35,7 +35,18 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     DutchAuction public dutchAuction; 
     CountersUpgradeable.Counter private _tokenSupply;
     string private _baseTokenURI;
-    uint public MAX_SUPPLY;
+    uint256 public availableSupply; // max number of tokens currently available for mint
+    uint256 public MAX_SUPPLY;
+    uint256 private mintPrice; // price of each token in the `mint` functions
+    bool private toggleAuction; // true = dutch auction active, false = mint for flat price active
+    bool private saleActive; // if false, mint functions will revert
+
+
+
+    modifier SaleActive () {
+        require(saleActive, "sale paused");
+        _;
+    }
 
     struct DutchAuction {
         uint256 startingPrice;
@@ -44,6 +55,14 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         uint256 expiresAt;
         uint256 priceDeductionRate;
     }
+
+    event NewDutchAuction(
+        uint256 startingPrice,
+        uint256 floorPrice,
+        uint256 startAt,
+        uint256 expiresAt,
+        uint256 priceDeductionRate
+    );
 
     /// @dev `maxBatchSize` refers to how much a minter can mint at a time.
     /// @dev See `PaymentSplitter.sol` for documentation on `payees` and `shares_`.
@@ -69,7 +88,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     /// @dev sends the next token to the `to` address for free + gas
     function airdrop (address to, uint256 quantity) public onlyOwner {
         uint mintIndex = _tokenSupply.current();
-        require(mintIndex + quantity <= MAX_SUPPLY, "exceeds token supply");
+        require(mintIndex + quantity <= availableSupply, "exceeds available supply");
         for (uint256 i = 0; i < quantity; i++) {
             _safeMint(to, mintIndex + i);
             _tokenSupply.increment();
@@ -79,7 +98,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     /// @dev sends one token to each address in the `to` array
     function batchAirdrop (address[] memory to) public onlyOwner {
         uint mintIndex = _tokenSupply.current();
-        require(mintIndex + to.length <= MAX_SUPPLY, "exceeds token supply");
+        require(mintIndex + to.length <= availableSupply, "exceeds token supply");
         for (uint256 i = 0; i < to.length; i++) {
             _safeMint(to[i], mintIndex + i);
             _tokenSupply.increment();
@@ -87,7 +106,8 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     }
 
     /// @dev dutch auction mint
-    function mintAuction () external payable {
+    function mintAuction () external payable SaleActive {
+        require(toggleAuction, "use `mint`");
         require(block.timestamp > dutchAuction.startAt , "auction has not started yet" );
         require(block.timestamp < dutchAuction.expiresAt, "auction expired");
 
@@ -98,6 +118,16 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         require(msg.value >= price, "insufficient funds");
 
         uint mintIndex = _tokenSupply.current();
+        require(mintIndex <= availableSupply, "exceeds token supply");
+        _safeMint(msg.sender, mintIndex);
+        _tokenSupply.increment();
+    }
+
+    function mint () external payable SaleActive {
+        require(!toggleAuction, "use `mintAuction`");
+        require(msg.value == mintPrice, "incorrect ether sent");
+        uint mintIndex = _tokenSupply.current();
+        require(mintIndex <= availableSupply, "exceeds token supply");
         _safeMint(msg.sender, mintIndex);
         _tokenSupply.increment();
     }
@@ -128,23 +158,40 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         uint256 _startAt,
         uint256 _expiresAt,
         uint256 _priceDeductionRate
-        ) public onlyOwner {
+        ) external onlyOwner {
         dutchAuction = DutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
+        emit NewDutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
     }
 
-    /// @dev set max token supply
-    function setMaxSupply (uint256 newSupply) public onlyOwner {
-        MAX_SUPPLY = newSupply;
+    /// @dev set available token supply
+    function setAvailableSupply (uint256 availableSupplyIncrease) external onlyOwner {
+        require(availableSupply + availableSupplyIncrease <= MAX_SUPPLY, "cannot be greater than 9999");
+        availableSupply += availableSupplyIncrease;
+    }
+
+    /// @dev set price of each token in the `mint` function
+    function setMintPrice (uint256 _mintPrice) external onlyOwner {
+        mintPrice = _mintPrice;
+    }
+
+    /// @dev set price of each token in the `mint` function
+    function setToggleAuction (bool _toggleAuction) external onlyOwner {
+        toggleAuction = _toggleAuction;
+    }
+
+    /// @dev set price of each token in the `mint` function
+    function setSaleActive (bool _saleActive) external onlyOwner {
+        saleActive = _saleActive;
     }
 
     /// @dev allows owner to reset base uri when updating metadata
-    function setBaseURI(string memory baseURI) public onlyOwner {
+    function setBaseURI(string memory baseURI) external onlyOwner {
         _baseTokenURI = baseURI;
     }
 
     /// @dev override token uri to append .json to string
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
+        require(_exists(tokenId), "URI query for nonexistent token");
         string memory json = ".json";
         string memory baseURI = _baseTokenURI;
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), json)) : "";
