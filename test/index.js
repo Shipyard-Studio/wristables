@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 const { expect } = require("chai");
 const { ethers, upgrades } = require("hardhat");
 
@@ -57,9 +58,11 @@ describe("Wristables Proxy", function () {
   });
 
   it("Should be upgradeable", async function () {
-    expect(wristables.functions.hasOwnProperty("version")).to.be.false;
+    expect(wristables.functions.hasOwnProperty("version")).to.deep.equal(false);
     wristablesV2 = await upgrades.upgradeProxy(wristables, WristablesV2);
-    expect(wristablesV2.functions.hasOwnProperty("version")).to.be.true;
+    expect(wristablesV2.functions.hasOwnProperty("version")).to.deep.equal(
+      true
+    );
     expect(await wristablesV2.version(), "V2");
   });
 
