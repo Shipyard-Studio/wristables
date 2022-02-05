@@ -81,9 +81,36 @@ describe("Wristables Contract Unit Tests", function () {
     await wristables.airdrop(addr2.address, 2);
     expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
     expect(await wristables.ownerOf(1)).to.deep.equal(addr2.address);
+    expect(
+      wristables.connect(addr2).airdrop(addr2.address, 2)
+    ).to.be.revertedWith("");
   });
 
   it("Should batch airdrop", async function () {
+    await wristables.batchAirdrop([
+      addr2.address,
+      addr3.address,
+      addr4.address,
+      addr5.address,
+      addr6.address,
+    ]);
+    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
+    expect(await wristables.ownerOf(1)).to.deep.equal(addr3.address);
+    expect(await wristables.ownerOf(2)).to.deep.equal(addr4.address);
+    expect(await wristables.ownerOf(3)).to.deep.equal(addr5.address);
+    expect(await wristables.ownerOf(4)).to.deep.equal(addr6.address);
+    expect(
+      wristables.connect(addr2).batchAirdrop([
+        addr2.address,
+        addr3.address,
+        addr4.address,
+        addr5.address,
+        addr6.address,
+      ])
+    ).to.be.revertedWith("");
+  });
+
+  it("Mint ", async function () {
     await wristables.batchAirdrop([
       addr2.address,
       addr3.address,
