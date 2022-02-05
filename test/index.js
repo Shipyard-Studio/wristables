@@ -72,15 +72,29 @@ describe("Wristables Proxy", function () {
 });
 
 describe("Wristables Contract Unit Tests", function () {
-  beforeEach(proxyDeploy);
+  beforeEach(async function () {
+    await proxyDeploy();
+    await wristables.setAvailableSupply(999);
+  });
 
   it("Should airdrop", async function () {
-    // await wristables.airdrop()
+    await wristables.airdrop(addr2.address, 2);
+    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
+    expect(await wristables.ownerOf(1)).to.deep.equal(addr2.address);
   });
 
   it("Should batch airdrop", async function () {
-    // your test here!
+    await wristables.batchAirdrop([
+      addr2.address,
+      addr3.address,
+      addr4.address,
+      addr5.address,
+      addr6.address,
+    ]);
+    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
+    expect(await wristables.ownerOf(1)).to.deep.equal(addr3.address);
+    expect(await wristables.ownerOf(2)).to.deep.equal(addr4.address);
+    expect(await wristables.ownerOf(3)).to.deep.equal(addr5.address);
+    expect(await wristables.ownerOf(4)).to.deep.equal(addr6.address);
   });
-
-
 });
