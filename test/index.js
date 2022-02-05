@@ -1,5 +1,6 @@
 /* eslint-disable no-prototype-builtins */
 const { expect } = require("chai");
+const exp = require("constants");
 const { ethers, upgrades } = require("hardhat");
 
 let Wristables,
@@ -79,8 +80,11 @@ describe("Wristables Contract Unit Tests", function () {
 
   it("Should airdrop", async function () {
     await wristables.airdrop(addr2.address, 2);
+
     expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
     expect(await wristables.ownerOf(1)).to.deep.equal(addr2.address);
+
+    // only owner check
     expect(
       wristables.connect(addr2).airdrop(addr2.address, 2)
     ).to.be.revertedWith("");
@@ -94,34 +98,69 @@ describe("Wristables Contract Unit Tests", function () {
       addr5.address,
       addr6.address,
     ]);
+
     expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
     expect(await wristables.ownerOf(1)).to.deep.equal(addr3.address);
     expect(await wristables.ownerOf(2)).to.deep.equal(addr4.address);
     expect(await wristables.ownerOf(3)).to.deep.equal(addr5.address);
     expect(await wristables.ownerOf(4)).to.deep.equal(addr6.address);
+
+    // only owner check
     expect(
-      wristables.connect(addr2).batchAirdrop([
-        addr2.address,
-        addr3.address,
-        addr4.address,
-        addr5.address,
-        addr6.address,
-      ])
+      wristables
+        .connect(addr2)
+        .batchAirdrop([
+          addr2.address,
+          addr3.address,
+          addr4.address,
+          addr5.address,
+          addr6.address,
+        ])
     ).to.be.revertedWith("");
   });
 
-  it("Mint ", async function () {
-    await wristables.batchAirdrop([
-      addr2.address,
-      addr3.address,
-      addr4.address,
-      addr5.address,
-      addr6.address,
-    ]);
+  it("Mint for flat price", async function () {
+    // reverts due to saleActive being false
+    expect(
+      wristables.connect(addr2).mint({ value: ethers.utils.parseEther("1") })
+    ).to.be.revertedWith("");
+
+    await wristables.setMintPrice(ethers.utils.parseEther("1"));
+    await wristables.setSaleActive(true);
+
+    await wristables
+      .connect(addr2)
+      .mint({ value: ethers.utils.parseEther("1") });
     expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
-    expect(await wristables.ownerOf(1)).to.deep.equal(addr3.address);
-    expect(await wristables.ownerOf(2)).to.deep.equal(addr4.address);
-    expect(await wristables.ownerOf(3)).to.deep.equal(addr5.address);
-    expect(await wristables.ownerOf(4)).to.deep.equal(addr6.address);
+  });
+
+  it("Mint at Auction", async function () {
+    // reverts due to saleActive being false
+    expect(
+      wristables
+        .connect(addr2)
+        .mintAuction({ value: ethers.utils.parseEther("1") })
+    ).to.be.revertedWith("");
+
+    await wristables.setSaleActive(true);
+
+    // reverts due to toggleAuction being false
+    expect(
+      wristables
+        .connect(addr2)
+        .mintAuction({ value: ethers.utils.parseEther("1") })
+    ).to.be.revertedWith("");
+
+    // function setDutchAuction (
+    // uint256 _startingPrice,
+    // uint256 _floorPrice,
+    // uint256 _startAt,
+    // uint256 _expiresAt,
+    // uint256 _priceDeductionRate
+
+    await wristables
+      .connect(addr2)
+      .mint({ value: ethers.utils.parseEther("1") });
+    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
   });
 });
