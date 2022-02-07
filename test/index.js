@@ -134,33 +134,52 @@ describe("Wristables Contract Unit Tests", function () {
     expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
   });
 
-  it("Mint at Auction", async function () {
-    // reverts due to saleActive being false
-    expect(
-      wristables
-        .connect(addr2)
-        .mintAuction({ value: ethers.utils.parseEther("1") })
-    ).to.be.revertedWith("");
+  // it("Mint at Auction", async function () {
+  //   // reverts due to saleActive being false
+  //   expect(
+  //     wristables
+  //       .connect(addr2)
+  //       .mintAuction({ value: ethers.utils.parseEther("1") })
+  //   ).to.be.revertedWith("");
 
-    await wristables.setSaleActive(true);
+  //   await wristables.setSaleActive(true);
 
-    // reverts due to toggleAuction being false
-    expect(
-      wristables
-        .connect(addr2)
-        .mintAuction({ value: ethers.utils.parseEther("1") })
-    ).to.be.revertedWith("");
+  //   // reverts due to toggleAuction being false
+  //   expect(
+  //     wristables
+  //       .connect(addr2)
+  //       .mintAuction({ value: ethers.utils.parseEther("1") })
+  //   ).to.be.revertedWith("");
 
-    // function setDutchAuction (
-    // uint256 _startingPrice,
-    // uint256 _floorPrice,
-    // uint256 _startAt,
-    // uint256 _expiresAt,
-    // uint256 _priceDeductionRate
+  //   // function setDutchAuction (
+  //   // uint256 _startingPrice,
+  //   // uint256 _floorPrice,
+  //   // uint256 _startAt,
+  //   // uint256 _expiresAt,
+  //   // uint256 _priceDeductionRate
 
-    await wristables
-      .connect(addr2)
-      .mint({ value: ethers.utils.parseEther("1") });
+  //   await wristables.setDutchAuction(
+  //     ethers.utils.parseEther("10"),
+  //     ethers.utils.parseEther("1")
+  //     // time
+  //     // time plus 7 days
+  //   );
+
+  //   // mint auction
+  //   await wristables
+  //     .connect(addr2)
+  //     .mint({ value: ethers.utils.parseEther("1") });
+  //   expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
+  // });
+
+  it("should not be off by one", async function () {
+    expect(wristables.airdrop(addr2.address, 1000)).to.be.revertedWith("");
+
+    await wristables.airdrop(addr2.address, 999);
+
     expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
+    expect(await wristables.ownerOf(998)).to.deep.equal(addr2.address);
+
+    expect(wristables.airdrop(addr2.address, 1)).to.be.revertedWith("");
   });
 });
