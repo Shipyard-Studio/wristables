@@ -52,7 +52,9 @@ async function proxyDeploy() {
 }
 
 describe("Wristables Proxy", function () {
-  beforeEach(proxyDeploy);
+  beforeEach(async function () {
+    await proxyDeploy();
+  });
 
   it("Should deploy as a proxy successfully", async function () {
     expect(await wristables.MAX_SUPPLY()).to.equal(9999); // quick deploy check
@@ -181,5 +183,15 @@ describe("Wristables Contract Unit Tests", function () {
     expect(await wristables.ownerOf(998)).to.deep.equal(addr2.address);
 
     expect(wristables.airdrop(addr2.address, 1)).to.be.revertedWith("");
+  });
+
+  it("should return proper royalty amount", async function () {
+    const royaltyInfo = await wristables.royaltyInfo(
+      0,
+      ethers.utils.parseEther("10")
+    );
+
+    expect(royaltyInfo[0]).to.deep.equal(wristables.address);
+    expect(royaltyInfo[1]).to.deep.equal(ethers.utils.parseEther("0.6"));
   });
 });
