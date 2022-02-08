@@ -134,6 +134,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         _tokenSupply.increment();
     }
 
+    /// @dev ERC2981
     /// @notice Called with the sale price to determine how much royalty
     //          is owed and to whom.
     /// @param _tokenId - the NFT asset queried for royalty information
