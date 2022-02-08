@@ -1,7 +1,6 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import "hardhat/console.sol"; // TODO: Remove this
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol";
@@ -11,11 +10,13 @@ import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 
 /// @dev spec:
 
-/// ERC721(a) contract with 555 unique tokens. 
-///     (first drop is 555, total is 9999, will be released in drops of 555 (so ~18 total drops))
+/// ERC721(a) contract with 9999 unique tokens. 
+///     (first drop is 999, total is 9999, will be released in increments of 999 or more)
 
 /// Dutch Auction style mint. 
-///     Starts at 3 ETH per token dropping by 0.5 ETH every 5 minutes until sell-out (base price of 0.25ETH).
+///     Starts at x ETH per token dropping by y ETH every 5 minutes until sell-out (base price of z ETH).
+
+/// Also supports minting for a flat fee. These two minting styles will be toggled on and off
 
 /// Payout primary sales to addresses based on pre-determined %.
 /// Payout royalties to addresses based on pre-determined %.
@@ -113,13 +114,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 
         uint timeElapsed = block.timestamp - dutchAuction.startAt;
         uint deduction = dutchAuction.priceDeductionRate * (timeElapsed / 5 minutes); // calculate the number of 5 minute intervals & calculates the deduction from the starting price accordingly
-        console.log("block.timestamp: ", block.timestamp);
-        console.log("dutchAuction.startAt: ", dutchAuction.startAt);
-        console.log("deduction: ", deduction);
-        console.log("dutchAuction.priceDeductionRate: ", dutchAuction.priceDeductionRate);
-        console.log("timeElapsed: ", timeElapsed);
         uint price = deduction > (dutchAuction.startingPrice - dutchAuction.floorPrice) ? dutchAuction.floorPrice : dutchAuction.startingPrice - deduction;
-        // uint price = dutchAuction.startingPrice - deduction < dutchAuction.floorPrice ? dutchAuction.floorPrice : dutchAuction.startingPrice - deduction; // calculates the current price + does not allow the price to drop below the floor
 
         require(msg.value >= price, "insufficient funds");
 
@@ -129,6 +124,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         _tokenSupply.increment();
     }
 
+    /// @dev allows users to mint for a flat fee (not a dutch auction)
     function mint () external payable SaleActive {
         require(!toggleAuction, "use `mintAuction`");
         require(msg.value == mintPrice, "incorrect ether sent");
@@ -180,12 +176,12 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         mintPrice = _mintPrice;
     }
 
-    /// @dev set price of each token in the `mint` function
+    /// @dev toggles the mode of sale between flat price and dutch auction. false = flat, true = dutch auction
     function setToggleAuction (bool _toggleAuction) external onlyOwner {
         toggleAuction = _toggleAuction;
     }
 
-    /// @dev set price of each token in the `mint` function
+    /// @dev sets the public sale to active. Both mint functions will revert if this is false.
     function setSaleActive (bool _saleActive) external onlyOwner {
         saleActive = _saleActive;
     }
