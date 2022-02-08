@@ -113,7 +113,13 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 
         uint timeElapsed = block.timestamp - dutchAuction.startAt;
         uint deduction = dutchAuction.priceDeductionRate * (timeElapsed / 5 minutes); // calculate the number of 5 minute intervals & calculates the deduction from the starting price accordingly
-        uint price = dutchAuction.startingPrice - deduction < dutchAuction.floorPrice ? dutchAuction.floorPrice : dutchAuction.startingPrice - deduction; // calculates the current price + does not allow the price to drop below the floor
+        console.log("block.timestamp: ", block.timestamp);
+        console.log("dutchAuction.startAt: ", dutchAuction.startAt);
+        console.log("deduction: ", deduction);
+        console.log("dutchAuction.priceDeductionRate: ", dutchAuction.priceDeductionRate);
+        console.log("timeElapsed: ", timeElapsed);
+        uint price = deduction > (dutchAuction.startingPrice - dutchAuction.floorPrice) ? dutchAuction.floorPrice : dutchAuction.startingPrice - deduction;
+        // uint price = dutchAuction.startingPrice - deduction < dutchAuction.floorPrice ? dutchAuction.floorPrice : dutchAuction.startingPrice - deduction; // calculates the current price + does not allow the price to drop below the floor
 
         require(msg.value >= price, "insufficient funds");
 

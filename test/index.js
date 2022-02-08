@@ -1,6 +1,6 @@
 /* eslint-disable no-prototype-builtins */
 const { expect } = require("chai");
-const exp = require("constants");
+// const exp = require("constants");
 const { ethers, upgrades } = require("hardhat");
 
 let Wristables,
@@ -136,43 +136,81 @@ describe("Wristables Contract Unit Tests", function () {
     expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
   });
 
-  // it("Mint at Auction", async function () {
-  //   // reverts due to saleActive being false
-  //   expect(
-  //     wristables
-  //       .connect(addr2)
-  //       .mintAuction({ value: ethers.utils.parseEther("1") })
-  //   ).to.be.revertedWith("");
+  it("Mint at Auction", async function () {
+    // reverts due to saleActive being false
+    expect(
+      wristables
+        .connect(addr2)
+        .mintAuction({ value: ethers.utils.parseEther("1") })
+    ).to.be.revertedWith("");
 
-  //   await wristables.setSaleActive(true);
+    await wristables.setSaleActive(true);
 
-  //   // reverts due to toggleAuction being false
-  //   expect(
-  //     wristables
-  //       .connect(addr2)
-  //       .mintAuction({ value: ethers.utils.parseEther("1") })
-  //   ).to.be.revertedWith("");
+    // reverts due to toggleAuction being false
+    expect(
+      wristables
+        .connect(addr2)
+        .mintAuction({ value: ethers.utils.parseEther("1") })
+    ).to.be.revertedWith("");
 
-  //   // function setDutchAuction (
-  //   // uint256 _startingPrice,
-  //   // uint256 _floorPrice,
-  //   // uint256 _startAt,
-  //   // uint256 _expiresAt,
-  //   // uint256 _priceDeductionRate
+    await wristables.setToggleAuction(true);
 
-  //   await wristables.setDutchAuction(
-  //     ethers.utils.parseEther("10"),
-  //     ethers.utils.parseEther("1")
-  //     // time
-  //     // time plus 7 days
-  //   );
+    const currentTime = Math.floor(Date.now() / 1000); // current time in s
 
-  //   // mint auction
-  //   await wristables
-  //     .connect(addr2)
-  //     .mint({ value: ethers.utils.parseEther("1") });
-  //   expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
-  // });
+    const oneWeek = 7 * 24 * 60 * 60; // 1 week in s
+    const fiveMinutes = 5 * 60; // 5 mins in s
+
+    await wristables.setDutchAuction(
+      ethers.utils.parseEther("10"),
+      ethers.utils.parseEther("1"),
+      currentTime,
+      currentTime + oneWeek,
+      ethers.utils.parseEther("1")
+    );
+
+    // await hre.ethers.provider.send("evm_setNextBlockTimestamp", [currentTime]);
+    // await hre.ethers.provider.send("evm_mine");
+
+    // mint at starting price
+    await wristables
+      .connect(addr2)
+      .mintAuction({ value: ethers.utils.parseEther("10") });
+    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
+
+    await hre.ethers.provider.send("evm_setNextBlockTimestamp", [
+      currentTime + fiveMinutes,
+    ]);
+    await hre.ethers.provider.send("evm_mine");
+
+    // mint at 1 increment in price deductions
+    await wristables
+      .connect(addr2)
+      .mintAuction({ value: ethers.utils.parseEther("9") });
+    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
+
+    await hre.ethers.provider.send("evm_setNextBlockTimestamp", [
+      currentTime + oneWeek / 7,
+    ]);
+    await hre.ethers.provider.send("evm_mine");
+
+    // mint at floor price
+    await wristables
+      .connect(addr2)
+      .mintAuction({ value: ethers.utils.parseEther("1") });
+    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
+
+    await hre.ethers.provider.send("evm_setNextBlockTimestamp", [
+      currentTime + oneWeek,
+    ]);
+    await hre.ethers.provider.send("evm_mine");
+
+    // mint at floor price
+    expect(
+      wristables
+        .connect(addr2)
+        .mintAuction({ value: ethers.utils.parseEther("1") })
+    ).to.be.revertedWith("");
+  });
 
   it("should not be off by one", async function () {
     expect(wristables.airdrop(addr2.address, 1000)).to.be.revertedWith("");
