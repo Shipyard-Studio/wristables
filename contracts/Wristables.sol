@@ -7,24 +7,6 @@ import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.s
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 
-
-/// @dev spec:
-
-/// ERC721(a) contract with 9999 unique tokens. 
-///     (first drop is 999, total is 9999, will be released in increments of 999 or more)
-
-/// Dutch Auction style mint. 
-///     Starts at x ETH per token dropping by y ETH every 5 minutes until sell-out (base price of z ETH).
-
-/// Also supports minting for a flat fee. These two minting styles will be toggled on and off
-
-/// Payout primary sales to addresses based on pre-determined %.
-/// Payout royalties to addresses based on pre-determined %.
-
-/// ERC2981 compliant.
-
-/// Airdrop function that only the owner can call.
-
 contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable, UUPSUpgradeable  {
     
     //TODO: MERKLE PROOF STATE / FUNCTIONS
