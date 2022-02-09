@@ -16,6 +16,10 @@
 .header h1, h2, p {
     color: white;
 }
+
+.header h1 {
+    font-size: 36px;
+}
   
 .header  b {
     font-size: 20px;
@@ -33,4 +37,28 @@
 
 .header .address:hover {
     cursor: pointer;
+}
+
+.nav-logos {
+    max-width: 30px;
+    max-height: 30px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.nav-logo-flex {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 10px;
+    width: 150px;
+    height: 50px;
+    background-color: #00CED1;
+    margin-top: 30px;
+    margin-right: 40px;
+    position:absolute;
+    top:0;
+    right:0;
+    border-radius: 8px;
 }
