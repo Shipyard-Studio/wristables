@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 import Columns from './Columns';
 import Brands from './Brands';
+import Auction from './Auction';
 import '../style/App.css';
 
 function App() {
@@ -63,10 +64,11 @@ function App() {
 
   return (
     <div className="App" id="outer-container">
-      <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
+      {/* <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> */}
       <Header walletAddress={walletAddress} connect={connectWallet} />
       <Columns />
       <Brands />
+      <Auction />
     </div>
   );
 }
