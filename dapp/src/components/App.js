@@ -5,7 +5,17 @@ import Header from './Header';
 import Columns from './Columns';
 import Brands from './Brands';
 import Auction from './Auction';
+import Section from './Section';
+import Hero from './Hero';
 import '../style/App.css';
+import bg1 from '../../public/WASiteAssets/bg1.png'
+import bg2 from '../../public/WASiteAssets/bg2.png'
+import bg3 from '../../public/WASiteAssets/bg3.png'
+import bg4 from '../../public/WASiteAssets/bg4.png'
+import bg5 from '../../public/WASiteAssets/bg5.png'
+import bg6 from'../../public/WASiteAssets/bg6.png'
+import { ParallaxProvider } from 'react-scroll-parallax';
+
 
 function App() {
 
@@ -63,13 +73,16 @@ function App() {
   }, []); 
 
   return (
-    <div className="App" id="outer-container">
-      {/* <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> */}
-      <Header walletAddress={walletAddress} connect={connectWallet} />
-      <Columns />
-      <Brands />
-      <Auction />
-    </div>
+    <ParallaxProvider>
+
+      <div className="App" id="outer-container">
+        {/* <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> */}
+        <Section bg={} Component={Hero}/>
+        {/* <Columns />
+        <Brands /> */}
+        {/* <Auction /> */}
+      </div>
+    </ParallaxProvider>
   );
 }
 

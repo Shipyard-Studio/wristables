@@ -13,6 +13,10 @@
     border-radius: 8px;
 }
 
+.header {
+
+}
+
 .header h1, h2, p {
     color: white;
 }

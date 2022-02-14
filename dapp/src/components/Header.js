@@ -24,7 +24,7 @@ function Header ({walletAddress, connect}) {
         }</div> */}
 
         </div>
-        <br /><br /><br /><br /><br /><br />
+        {/* <br /><br /><br /><br /><br /><br />
         <div>
             <h2>The official watch maker of the Metaverse.</h2>
             <h3>Minting March 1st 2022 </h3>
@@ -32,7 +32,7 @@ function Header ({walletAddress, connect}) {
         <video autoPlay loop muted id='video'>
             <source type='video/mp4'/>
         </video> 
-        <br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /> */}
   </div>
   );
 };

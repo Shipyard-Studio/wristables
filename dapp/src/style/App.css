@@ -1,5 +1,11 @@
+@font-face {
+  font-family: proximaNova;
+  src: url(../../public/WASiteAssets/ProximaNovaFont.otf);
+}
+
 .App {
   text-align: center;
+  font-family: proximaNova;
 }
 
 body{
