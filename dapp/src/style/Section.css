@@ -1,6 +1,12 @@
 .section {
     width: 100vw;
     height: 100vh;
-    background-size: contain;
+
+}
+
+.react-parallax-bgimage {
+    height: 100vh !important;
+    width: auto !important;
+    background-size: cover;
     background-repeat: no-repeat;
 }

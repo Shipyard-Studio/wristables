@@ -1,14 +1,20 @@
 import React from 'react';
+import { Parallax, Background } from 'react-parallax';
 import '../style/Section.css';
 
 const Section = ({bg, Component}) => {
 
+
     return (
-        <div className='section' style={{
-            backgroundImage: `url("${bg}")`
-        }}>
-            {Component ? <Component /> : <></>}
-        </div>
+        <Parallax strength={300}
+            className='section' 
+            blur={{ min: -5, max: 5 }}
+            bgImage={bg}
+            bgImageAlt="background image"
+            strength={200}
+        >
+                {Component ? <Component /> : <></>}
+        </Parallax>
     )
 
 }

@@ -8,7 +8,7 @@ import Auction from './Auction';
 import Section from './Section';
 import Hero from './Hero';
 import '../style/App.css';
-import { ParallaxProvider } from 'react-scroll-parallax';
+
 
 
 function App() {
@@ -74,8 +74,7 @@ function App() {
   }, []); 
 
   return (
-    <ParallaxProvider>
-
+    
       <div className="App" id="outer-container">
         {/* <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> */}
         <Section bg={bg1} Component={Hero}/>
@@ -88,7 +87,7 @@ function App() {
         <Brands /> */}
         {/* <Auction /> */}
       </div>
-    </ParallaxProvider>
+    
   );
 }
 
