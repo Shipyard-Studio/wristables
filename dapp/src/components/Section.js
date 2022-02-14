@@ -1,10 +1,12 @@
 import React from 'react';
 import '../style/Section.css';
 
-const Section = ({Component}) => {
+const Section = ({bg, Component}) => {
 
     return (
-        <div className='section'>
+        <div className='section' style={{
+            backgroundImage: `url("${bg}")`
+        }}>
             {Component ? <Component /> : <></>}
         </div>
     )

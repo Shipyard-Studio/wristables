@@ -8,16 +8,17 @@ import Auction from './Auction';
 import Section from './Section';
 import Hero from './Hero';
 import '../style/App.css';
-import bg1 from '../../public/WASiteAssets/bg1.png'
-import bg2 from '../../public/WASiteAssets/bg2.png'
-import bg3 from '../../public/WASiteAssets/bg3.png'
-import bg4 from '../../public/WASiteAssets/bg4.png'
-import bg5 from '../../public/WASiteAssets/bg5.png'
-import bg6 from'../../public/WASiteAssets/bg6.png'
 import { ParallaxProvider } from 'react-scroll-parallax';
 
 
 function App() {
+
+  const bg1 = '/WASiteAssets/bg1.png'
+  const bg2 = '/WASiteAssets/bg2.png'
+  const bg3 = '/WASiteAssets/bg3.png'
+  const bg4 = '/WASiteAssets/bg4.png'
+  const bg5 = '/WASiteAssets/bg5.png'
+  const bg6 ='./WASiteAssets/bg6.png'
 
   const [walletAddress, setWallet] = useState("");
 
@@ -77,7 +78,12 @@ function App() {
 
       <div className="App" id="outer-container">
         {/* <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> */}
-        <Section bg={} Component={Hero}/>
+        <Section bg={bg1} Component={Hero}/>
+        <Section bg={bg2} />
+        <Section bg={bg3} />
+        <Section bg={bg4} />
+        <Section bg={bg5} />
+        <Section bg={bg6} />
         {/* <Columns />
         <Brands /> */}
         {/* <Auction /> */}
