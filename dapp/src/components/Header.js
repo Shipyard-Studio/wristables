@@ -8,10 +8,7 @@ function Header ({walletAddress, connect}) {
     <div className="header">
         <div className='nav-container'>
             <div style={{width: 150, height: 50, marginRight: '2%'}}/>
-            <div >
-                <h1>Logo</h1>
-                {/* <p><b>BY</b> WRIST AFICIONADO</p> */}
-            </div> 
+            <img className='wa-logo' src='/WASiteAssets/WALogo.png' alt='wrist afficianado logo'/>
             <div className='nav-logo-flex'>
                 <a href="https://discord.com" target="_blank" alt="discord" rel="noreferrer"><img className="nav-logos" src="/discord.png" /></a>
                 <a href="https://instagram.com/wristaficionado/" target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos" src="/instagram.png" /></a>
