@@ -1,22 +1,30 @@
-import { Wristables } from './../typechain/Wristables.d';
+// import { Wristables } from "../typechain/Wristables";
 // We require the Hardhat Runtime Environment explicitly here. This is optional
 // but useful for running the script in a standalone fashion through `node <script>`.
 //
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 import { ethers } from "hardhat";
+const { ethers, upgrades } = require("hardhat");
 
 async function main() {
-  // Hardhat always runs the compile task when running scripts with its command
-  // line interface.
-  //
-  // If this script is run directly using `node` you may want to call compile
-  // manually to make sure everything is compiled
-  // await hre.run('compile');
-
-  // We get the contract to deploy
   const Wristables = await ethers.getContractFactory("Wristables");
-  const wristables = await Wristables.deploy();
+  // how we would do it if this weren't UUPS
+  // wristables = await Wristables.deploy();
+
+  // how we do it instead
+  const wristables = await upgrades.deployProxy(
+    // contract to deploy as proxy:
+    Wristables,
+    // this array is where arguments given to initializer go:
+    // [
+    //   [shipyardWallet.address, imagineWallet.address, wristablesWallet.address],
+    //   [7, 2, 1],
+    // ],
+    [["0x7Eb696df980734DD592EBDd9dfC39F189aDc5456"], [1]],
+    // Here we indicate this is a UUPS:
+    { kind: "uups" }
+  );
 
   await wristables.deployed();
 

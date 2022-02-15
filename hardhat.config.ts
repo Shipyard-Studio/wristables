@@ -1,5 +1,3 @@
-import * as dotenv from "dotenv";
-
 import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
@@ -9,12 +7,10 @@ import "solidity-coverage";
 
 //
 // for UUPS deployment stuff
-// import '@nomiclabs/hardhat-ethers';
-import '@openzeppelin/hardhat-upgrades';
-//
-//
+import "@nomiclabs/hardhat-ethers";
+import "@openzeppelin/hardhat-upgrades";
 
-dotenv.config();
+require("dotenv").config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -36,13 +32,13 @@ const config: HardhatUserConfig = {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 10000
-      }
-    }
+        runs: 10000,
+      },
+    },
   },
   networks: {
     hardhat: {
-      allowUnlimitedContractSize: true
+      allowUnlimitedContractSize: true,
     },
     ropsten: {
       url: process.env.ROPSTEN_URL || "",
@@ -50,13 +46,8 @@ const config: HardhatUserConfig = {
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
     rinkeby: {
-      url:
-        `https://eth-rinkeby.alchemyapi.io/v2/` +
-          process.env.ALCHEMY_PRIVATE_KEY || "",
-      accounts:
-        process.env.RINKEBY_PRIVATE_KEY !== undefined
-          ? [process.env.RINKEBY_PRIVATE_KEY]
-          : [],
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_PRIVATE_KEY}`,
+      accounts: [`0x${process.env.RINKEBY_PRIVATE_KEY}`],
     },
   },
   gasReporter: {

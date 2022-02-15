@@ -13,6 +13,10 @@
     border-radius: 8px;
 }
 
+.header {
+
+}
+
 .header h1, h2, p {
     color: white;
 }
@@ -39,6 +43,19 @@
     cursor: pointer;
 }
 
+.wa-logo {
+    height: 90px;
+    width: aut0;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    max-width: 100vw;
+    justify-content: space-between;
+    padding-top: 2%;
+}
+
 .nav-logos {
     max-width: 30px;
     max-height: 30px;
@@ -50,15 +67,14 @@
 .nav-logo-flex {
     display: flex;
     justify-content: space-between;
-
+    margin-right: 2%;
     padding: 10px;
     width: 150px;
     height: 50px;
-    background-color: #00CED1;
-    margin-top: 30px;
-    margin-right: 40px;
-    position:absolute;
-    top:0;
-    right:0;
     border-radius: 8px;
+    align-items: center;
+}
+
+.nav-logo-flex img {
+    filter: invert(1);
 }
