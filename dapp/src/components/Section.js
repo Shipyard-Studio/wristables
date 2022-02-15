@@ -11,6 +11,7 @@ const Section = ({bg, Component}) => {
             blur={{ min: -5, max: 5 }}
             bgImage={bg}
             bgImageAlt="background image"
+            bgImageSize="cover"
             strength={200}
         >
                 {Component ? <Component /> : <></>}

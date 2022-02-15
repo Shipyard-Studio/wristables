@@ -5,8 +5,9 @@
 }
 
 .react-parallax-bgimage {
-    height: auto !important;
-    width: 100vw !important;
-    background-size: contain !important;
-    background-repeat: no-repeat;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    /* background-size: contain !important;
+    background-repeat: no-repeat; */
 }
