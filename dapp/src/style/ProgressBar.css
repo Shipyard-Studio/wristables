@@ -1,0 +1,21 @@
+.progress-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 120px;
+    width: 20px;
+}
+
+.circle {
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+}
+
+.circle-inactive{
+    background-color: grey;
+}
+
+.circle-active {
+    background-color: lightgrey;
+}
