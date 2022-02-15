@@ -2,7 +2,7 @@ import React from 'react';
 import { Parallax, Background } from 'react-parallax';
 import '../style/Section.css';
 
-const Section = ({bg, Component}) => {
+const Section = ({bg, Component, num}) => {
 
 
     return (
