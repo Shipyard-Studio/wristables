@@ -15,13 +15,14 @@ body{
 }
 
 .small-text {
-  font-size: 12pt;
+  font-size: 10pt;
 }
 
 .big-text {
-  font-size: 56pt;
+  font-size: 42pt;
   font-weight: 1000;
   line-height: normal;
+  padding-bottom: 10px;
 }
 
 .yellow-text {
@@ -32,3 +33,16 @@ body{
   color: #58ce69;
 }
 
+@media (min-width: 768px) {
+  
+  .big-text {
+    font-size: 56pt;
+    font-weight: 1000;
+    line-height: normal;
+  }
+
+  .small-text {
+    font-size: 12pt;
+  }
+
+}
