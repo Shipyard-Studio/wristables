@@ -6,9 +6,29 @@
 .App {
   text-align: center;
   font-family: proximaNova;
+  color: #ffffff;
+  text-align: left;
 }
 
 body{
   background-color: black;
+}
+
+.small-text {
+  font-size: 12pt;
+}
+
+.big-text {
+  font-size: 56pt;
+  font-weight: 1000;
+  line-height: normal;
+}
+
+.yellow-text {
+  color: #ebe41d;
+}
+
+.green-text {
+  color: #58ce69;
 }
 
