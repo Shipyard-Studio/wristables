@@ -18,7 +18,7 @@
 
 .react-parallax-content {
     width: 100vw !important;
-    /* height: 100vh !important; */ 
+    height: 100vh !important; 
 }
 
 @media only screen and ( max-width: 640px ) {
