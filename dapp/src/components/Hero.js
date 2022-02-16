@@ -14,7 +14,7 @@ const Hero = () => {
                     the <span className='yellow-text'>Metaverse</span><br/>
                     <span className='green-text'>March 5th.</span>
                 </div>
-                <div className='flex'>
+                <div className='flex w-2/5 justify-start'>
                     <div>Discord</div>
                     <div>Mint</div>
                 </div>
