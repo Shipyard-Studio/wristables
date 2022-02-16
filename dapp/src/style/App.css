@@ -15,12 +15,13 @@ body{
 }
 
 .small-text {
-  font-size: 8pt;
+  font-size: 12pt;
 }
 
 .big-text {
-  font-size: 28pt;
-  font-weight: bolder;
+  font-size: 56pt;
+  font-weight: 1000;
+  line-height: normal;
 }
 
 .yellow-text {
