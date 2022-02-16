@@ -8,6 +8,7 @@ import Section from './Section';
 import TextSection from './TextSection';
 import ProgressBar from './ProgressBar';
 import Hero from './Hero';
+import Footer from './Footer';
 import '../style/App.css';
 
 
@@ -96,6 +97,7 @@ function App() {
         {/* <Columns />
         <Brands /> */}
         {/* <Auction /> */}
+        <Footer />
       </div>
     
   );
