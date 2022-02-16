@@ -10,7 +10,7 @@ function Header ({walletAddress, connect}) {
             <div style={{width: 150, height: 50, marginRight: '2%'}}/>
             <img className='wa-logo' src='/WASiteAssets/WALogo.png' alt='wrist afficianado logo'/>
             <div className='nav-logo-flex'>
-                <a href="https://discord.com" target="_blank" alt="discord" rel="noreferrer"><img className="nav-logos" src="/discord.png" /></a>
+                <a href="https://discord.gg/pcfaMQSFfW" target="_blank" alt="discord" rel="noreferrer"><img className="nav-logos" src="/discord.png" /></a>
                 <a href="https://instagram.com/wristaficionado/" target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos" src="/instagram.png" /></a>
                 <a href="https://twitter.com/wristaficionado/" target="_blank" alt="twitter" rel="noreferrer"><img className="nav-logos" src="/twitter.png" /></a>
             </div>
