@@ -5,10 +5,13 @@
 }
 
 .react-parallax-bgimage {
-    position: relative;
+    object-fit: cover !important;
+    object-position: 50% 50%;
+    position: fixed;
     /* width: 100vw;
     height: 100vh; */
     background-size: 100% !important;
+    overflow: hidden;
     /* background-size: cover !important; */
     background-repeat: no-repeat;
 }
