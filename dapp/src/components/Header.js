@@ -8,11 +8,11 @@ function Header ({walletAddress, connect}) {
     <div className="header">
         <div className='nav-container'>
             <div style={{width: 150, height: 50, marginRight: '2%'}}/>
-            <img className='wa-logo' src='/WASiteAssets/WALogo.png' alt='wrist afficianado logo'/>
+            <img className='wa-logo' src={process.env.PUBLIC_URL + '/WASiteAssets/WALogo.png'} alt='wrist afficianado logo'/>
             <div className='nav-logo-flex'>
-                <a href="https://discord.gg/pcfaMQSFfW" target="_blank" alt="discord" rel="noreferrer"><img className="nav-logos" src="/discord.png" /></a>
-                <a href="https://instagram.com/wristaficionado/" target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos" src="/instagram.png" /></a>
-                <a href="https://twitter.com/wristaficionado/" target="_blank" alt="twitter" rel="noreferrer"><img className="nav-logos" src="/twitter.png" /></a>
+                {/* <a href="https://opensea.io" className='' target="_blank" alt="discord" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/WASiteAssets/Openseaicon.png'} /></a> */}
+                <a href="https://instagram.com/wristaficionado/" target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/WASiteAssets/InstagramLogo.png'} /></a>
+                <a href="https://twitter.com/wristaficionado/" target="_blank" alt="twitter" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/WASiteAssets/TwitterLogo.png'} /></a>
             </div>
 
             {/* <div onClick={connect} className='address'>
