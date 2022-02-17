@@ -1,14 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.1bf7601f.css",
-    "main.js": "/static/js/main.56bb5340.js",
+    "main.js": "/static/js/main.3a8347ca.js",
+    "static/media/WAlogo.png": "/static/media/WAlogo.44151ae757710c0bbb1c.png",
     "static/media/ProximaNovaFont.otf": "/static/media/ProximaNovaFont.7bc9ce404c297c24f210.otf",
     "index.html": "/index.html",
     "main.1bf7601f.css.map": "/static/css/main.1bf7601f.css.map",
-    "main.56bb5340.js.map": "/static/js/main.56bb5340.js.map"
+    "main.3a8347ca.js.map": "/static/js/main.3a8347ca.js.map"
   },
   "entrypoints": [
     "static/css/main.1bf7601f.css",
-    "static/js/main.56bb5340.js"
+    "static/js/main.3a8347ca.js"
   ]
 }
