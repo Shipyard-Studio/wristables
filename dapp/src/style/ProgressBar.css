@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: center;
     top: 50%;
-    left: 95%;
+    left: 90%;
     z-index: 1;
 }
 
@@ -21,13 +21,16 @@
 
 .circle-inactive{
     background-color: grey;
+    transition: background-color 0.5s linear;
 }
 
 .circle-active {
-    background-color: lightgrey;
-    -webkit-transition: opacity 2s ease-in;
-    -moz-transition: opacity 2s ease-in;
-    -o-transition: opacity 2s ease-in;
-    -ms-transition: opacity 2s ease-in;
-    transition: opacity 2s ease-in;
+    background-color: white;
+    transition: background-color 0.5s linear;
+}
+
+@media (min-width: 640px) {
+    .progress-bar {
+        left: 95%;
+    }
 }
