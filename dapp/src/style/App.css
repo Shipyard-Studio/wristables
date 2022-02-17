@@ -23,7 +23,7 @@ body{
   font-weight: 700;
   font-style: normal;
   font-size: 36pt;
-  line-height: 48pt;
+  line-height: 36pt;
   padding-bottom: 10px;
 }
 
@@ -40,8 +40,9 @@ body{
   .big-text {
     font-size: 56pt;
     font-style: normal;
+    line-height: 48pt;
   }
-
+  
   .small-text {
     font-size: 12pt;
   }

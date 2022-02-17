@@ -12,9 +12,9 @@ const Hero = () => {
                 <div className='big-text'>
                     Watch maker of
                     {console.log(window.innerWidth)}
-                    {window.innerWidth < 640 ? <> </> : <br/>}
+                    {window.innerWidth < 800 ? <> </> : <br/>}
                     the <span className='yellow-text'>Metaverse</span>
-                    {window.innerWidth < 640 ? <> </> : <br/>}
+                    <br/>
                     <span className='green-text'>March 5th.</span>
                 </div>
                 <div className='flex w-4/12 md:w-2/12 justify-between'>
