@@ -11,7 +11,7 @@ function Header ({walletAddress, connect}) {
             <div style={{width: 150, height: 50, marginRight: '2%'}}/>
             <img className='wa-logo' src={WALogo} alt='wrist afficianado logo'/>
             <div className='nav-logo-flex'>
-                <a href="https://opensea.io" className='' target="_blank" alt="discord" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/WASiteAssets/Openseaicon.png'} /></a>
+                <a href="https://www.tiktok.com/@wristaficionado" className='' target="_blank" alt="tiktok" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/TikTok-Logo.png'} /></a>
                 <a href="https://instagram.com/wristaficionado/" target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/WASiteAssets/InstagramLogo.png'} /></a>
                 <a href="https://twitter.com/wristaficionado/" target="_blank" alt="twitter" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/WASiteAssets/TwitterLogo.png'} /></a>
             </div>
