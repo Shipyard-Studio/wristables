@@ -8,7 +8,7 @@ function Header ({walletAddress, connect}) {
   return (
     <div className="header">
         <div className='nav-container'>
-            <div style={{width: 150, height: 50, marginRight: '2%'}}/>
+            <div className='ease-in ease-out duration-300 ml-8 px-4 py-2 border-2 border-blue-600 rounded-full hover:bg-blue-600 hover:cursor-pointer'>Visit Boutique</div>
             <img className='wa-logo' src={WALogo} alt='wrist afficianado logo'/>
             <div className='nav-logo-flex'>
                 <a href="https://www.tiktok.com/@wristaficionado" className='' target="_blank" alt="tiktok" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/TikTok-Logo.png'} /></a>
