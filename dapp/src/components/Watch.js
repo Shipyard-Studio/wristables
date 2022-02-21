@@ -13,10 +13,10 @@ const Watch = () => {
 
 
   return (
-    <div className='w-10/12 h-1/2 mx-auto'>
+    <div className='w-full h-full mx-auto absolute z-auto'>
     <Canvas 
         shadows dpr={[1, 2]} 
-        camera={{ fov: 75, near: 0.1, far: 2000, position: [700, -100, 200] }}
+        camera={{ fov: 75, near: 0.1, far: 10000, position: [700, -100, 200] }}
         onCreated={(state) => (state.gl.shadowMap.autoUpdate = false)}
     >
       <ambientLight intensity={4} />
@@ -35,14 +35,14 @@ const Watch = () => {
         {/* <BakeShadows /> */}
       </Suspense>
       <OrbitControls 
-        // zoomSpeed={0.1}
-        // autoRotate
-        // autoRotateSpeed={0.0}
-        // rotateSpeed={2}
-        // dampingFactor={0.5}
-        // minPolarAngle={-Math.PI / 2}
-        // maxPolarAngle={Math.PI / 1.7}
-        // makeDefault 
+        zoomSpeed={0.1}
+        autoRotate
+        autoRotateSpeed={0.5}
+        rotateSpeed={2}
+        dampingFactor={0.5}
+        minPolarAngle={-Math.PI / 2}
+        maxPolarAngle={Math.PI / 1.7}
+        makeDefault 
         />
     </Canvas>
     </div>
