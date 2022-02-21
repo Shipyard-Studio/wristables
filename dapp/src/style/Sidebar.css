@@ -39,7 +39,7 @@
   
   /* General sidebar styles */
   .bm-menu {
-    background:	#00CED1;
+    background:	slategray;
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
   }
@@ -53,6 +53,10 @@
   .bm-item-list {
     color: #b8b7ad;
     padding: 0.8em;
+    display: flex;
+    flex-direction: column;
+    height: 50% !important;
+    margin: auto;
   }
   
 /* Individual item */
@@ -60,7 +64,7 @@
     display: inline-block;
     color: black;
     margin-bottom: 10px;
-    text-align: left;
+    text-align: center;
     text-decoration: none;
     transition: color 0.2s;
   }
