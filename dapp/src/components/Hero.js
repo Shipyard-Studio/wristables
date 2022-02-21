@@ -1,5 +1,8 @@
 import React from 'react';
 import Header from './Header';
+import Watch from './Watch'
+
+
 import '../style/Hero.css'
 
 const Hero = () => {
@@ -21,6 +24,9 @@ const Hero = () => {
                     <a href='https://discord.gg/pcfaMQSFfW' target='_blank' alt='discord link'>
                         <img className='md:mt-5 bg-cover' src='/WASiteAssets/DiscordButton.png' alt='discord button' />
                     </a>
+
+                    <Watch />
+                    
                     {/* <div>Mint</div> */}
                 </div>
             </div>
