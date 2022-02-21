@@ -16,7 +16,7 @@ const Watch = () => {
     <div className='w-full h-full mx-auto absolute z-auto'>
     <Canvas 
         shadows dpr={[1, 2]} 
-        camera={{ fov: 75, near: 0.1, far: 10000, position: [700, -100, 200] }}
+        camera={{ fov: 75, near: 0.1, far: 10000, position: [700, -100, 400] }}
         onCreated={(state) => (state.gl.shadowMap.autoUpdate = false)}
     >
       <ambientLight intensity={4} />

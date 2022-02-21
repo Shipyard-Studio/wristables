@@ -17,12 +17,10 @@ const Hero = () => {
                     Wrist Aficionado<br/>Watch Club.
                 </div>
                     {/* <Watch /> */}
-                <div className='flex w-10/12 md:w-10/12 justify-between mx-auto z-10'>
-                    <a href='https://discord.gg/pcfaMQSFfW' className='w-1/3' target='_blank' alt='discord link'>
-                        <div className='w-1/3 md:mt-5 bg-cover text-center' src='/WASiteAssets/DiscordButton.png' alt='discord button' >Discord</div>
-                    </a>
-                        <div className='w-1/3 md:mt-5 bg-cover text-center' src='/WASiteAssets/DiscordButton.png' alt='discord button' >Connect Wallet</div>
-                    <div className='w-1/3 md:mt-5 bg-cover text-center' src='/WASiteAssets/DiscordButton.png' alt='discord button' >Piece Unique Studio</div>
+                <div className='flex w-10/12 md:w-10/12 justify-between mx-auto z-10 pb-10'>
+                    <a href='https://discord.gg/pcfaMQSFfW' className='w-1/5 md:mt-5 bg-cover text-center bg-zinc-600 text-center rounded-full py-5 hover:cursor-pointer' target='_blank' alt='discord link'>Discord</a>
+                        <div className='w-1/5 md:mt-5 bg-cover text-center bg-lime-500 text-center rounded-full py-5 hover:cursor-pointer' src='/WASiteAssets/DiscordButton.png' alt='discord button' >Connect Wallet</div>
+                    <div className='w-1/5 md:mt-5 bg-cover text-center bg-zinc-600 text-center rounded-full py-5 hover:cursor-pointer' src='/WASiteAssets/DiscordButton.png' alt='discord button' >Piece Unique Studio</div>
 
                     {/* <div>Mint</div> */}
                 </div>
