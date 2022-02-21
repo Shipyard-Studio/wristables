@@ -86,7 +86,7 @@ function App() {
   return (
     
       <div className="App" id="outer-container">
-        <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
+        {window.innerWidth < 800 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
         <ProgressBar num={sectionInFocus}/>
         <Section bg={null} Component={Hero} />
         <Section bg={bg2} Component={TextSection} componentProps={{header: "About", body: "<div>Every Wrist Aficionado NFT time piece is customized and built in a unique colour and finish. With the first 10,000 pieces created using parts from a hypercar engine, that all have their function inside of the time piece itself. View our roadmap below to see what you will be able to do with your Wristable.</div>" }}/>
