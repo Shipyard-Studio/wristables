@@ -16,7 +16,7 @@ const Section = ({bg, Component, componentProps}) => {
         <Parallax strength={300}
             className={classes}
             blur={{ min: -5, max: 5 }}
-            bgImage={bg}
+            bgImage={bg ? bg : null}
             bgImageAlt="background image"
             bgImageSize="100%"
             strength={200}
