@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Sidebar from './Sidebar';
 import Modal from 'react-modal';
+import ModalForm from './ModalForm';
 import Header from './Header';
 import Columns from './Columns';
 import Brands from './Brands';
@@ -31,6 +32,8 @@ function App() {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      borderRadius: '20px',
+      zIndex: 20
     },
   }
 
@@ -113,23 +116,14 @@ function App() {
   return (
     
       <div className="App" id="outer-container">
-              <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={modalStyles}
-        contentLabel="Example Modal"
-      >
-        <h2>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
+        <Modal
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={modalStyles}
+          contentLabel="Example Modal"
+        >
+          <ModalForm closeModal={closeModal}/>
       </Modal>
 
         {window.innerWidth < 800 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }

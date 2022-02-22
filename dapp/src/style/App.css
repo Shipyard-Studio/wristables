@@ -13,6 +13,10 @@
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+.ReactModal__Overlay {
+  z-index: 20;
+}
+
 .App {
   text-align: center;
   font-family: proximaNova;
@@ -35,6 +39,18 @@ body{
   font-size: 30pt;
   line-height: 36pt;
   padding-bottom: 10px;
+}
+.medium-text {
+  font-family: proxima-nova, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24pt;
+  line-height: 24pt;
+  padding-bottom: 10px;
+}
+
+.small-caps {
+  font-variant: small-caps;
 }
 
 .yellow-text {
