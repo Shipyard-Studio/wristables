@@ -23,8 +23,34 @@ function App() {
   const bg5 = '/WASiteAssets/bg5.png'
   const bg6 ='./WASiteAssets/bg6.png'
 
+  const modalStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  }
+
+  Modal.setAppElement('#root');
+
   const [walletAddress, setWallet] = useState("")
   const [sectionInFocus, setSectionInFocus] = useState(0)
+  const [modalIsOpen, setIsOpen] = useState(false)
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   async function connectWallet() {
       if (window.ethereum) {
@@ -87,10 +113,28 @@ function App() {
   return (
     
       <div className="App" id="outer-container">
+              <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={modalStyles}
+        contentLabel="Example Modal"
+      >
+        <h2>Hello</h2>
+        <button onClick={closeModal}>close</button>
+        <div>I am a modal</div>
+        <form>
+          <input />
+          <button>tab navigation</button>
+          <button>stays</button>
+          <button>inside</button>
+          <button>the modal</button>
+        </form>
+      </Modal>
+
         {window.innerWidth < 800 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
         <ProgressBar num={sectionInFocus}/>
-        {console.log(walletAddress)}
-        <Section bg={null} size={1} Component={Hero} componentProps={{walletAddress: walletAddress, connect: connectWallet}}/>
+        <Section bg={null} size={1} Component={Hero} componentProps={{walletAddress: walletAddress, connect: connectWallet, openModal: openModal}}/>
         <Section bg={bg2} size={1} Component={TextSection} componentProps={{header: "About", body: "<div>Every Wrist Aficionado NFT time piece is customized and built in a unique colour and finish. With the first 1,000 pieces created using moving parts from a hypercard engine, no two releases will be the same. View our roadmap below to see what you will be able to do with your time piece as we build out our project.</div>" }}/>
         <Section bg={bg3} size={1} Component={TextSection} componentProps={{header: "Community", body: "<div>Our owners become a part of a community of watch collectors and enthusiasts that can hold onto their time piece as it appreciates, or trade it and pass along the benefits to another collector. Join our Discord to be apart of our community.</div>"}}/>
         <Section bg={bg4} size={1} Component={TextSection} componentProps={{header: "Events", body: "<div>Early owners will have VIP access to the Wrist Aficionado Convention in Miami on April 7th, with a chance to win a one off custom NFT time piece that you will customize in person at the convention.  Several owners will also have the opportunity to win private dinners in New York City or Miami with the owners of Wrist Aficionado.</div>"}}/>
