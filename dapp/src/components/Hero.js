@@ -17,7 +17,11 @@ const Hero = ({props}) => {
                 </div>
                 <div className='flex flex-col lg:flex-row w-10/12 md:w-1/2 justify-between mx-auto z-10 pb-0 lg:pb-10'>
                     <a href='https://discord.gg/pcfaMQSFfW' className='ease-in ease-out duration-300 hover:bg-blue-600  mx-auto lg:mx-2 mt-5 lg:mt-0 m-auto lg:m-none  w-3/5 lg:w-2/5 md:mt-5 bg-cover text-center bg-zinc-600 text-center rounded-full py-2 lg:py-5 hover:cursor-pointer' target='_blank' alt='discord link'>Discord</a>
-                    <div onClick={props.connect} className='ease-in ease-out duration-300 m-auto mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none w-3/5 lg:w-2/5 md:mt-5 bg-cover text-center bg-lime-600 hover:bg-lime-400 text-center rounded-full py-2 lg:py-5 hover:cursor-pointer' src='/WASiteAssets/DiscordButton.png' alt='discord button' >
+                    <div 
+                    onClick={null} // disabled
+                    // onClick={props.connect} //for live site
+                    // className='cursor-not-allowed ease-in ease-out duration-300 m-auto mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none w-3/5 lg:w-2/5 md:mt-5 bg-cover text-center bg-lime-600 hover:bg-lime-400 text-center rounded-full py-2 lg:py-5 hover:cursor-pointer' src='/WASiteAssets/DiscordButton.png' alt='discord button' >
+                    className='hover:cursor-not-allowed ease-in ease-out duration-300 m-auto mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none w-3/5 lg:w-2/5 md:mt-5 bg-cover text-center bg-lime-600 hover:bg-neutral-400 text-center rounded-full py-2 lg:py-5' src='/WASiteAssets/DiscordButton.png' alt='discord button' >
                         {props.walletAddress.length > 0 ? `${props.walletAddress.slice(0,6)}...${props.walletAddress.slice(-4)}` : 'Connect Wallet'}
                         </div>
                     <div onClick={props.openModal} className='hover:bg-blue-600 ease-in ease-out duration-300 m-auto  mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none mb-10 lg:mb-0 w-3/5 lg:w-2/5 md:mt-5 bg-cover text-center bg-zinc-600 text-center rounded-full py-2 lg:py-5 hover:cursor-pointer' src='/WASiteAssets/DiscordButton.png' alt='discord button' >Piece Unique Studio</div>
