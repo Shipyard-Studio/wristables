@@ -4,6 +4,12 @@
     position: relative;
 }
 
+.tall-section {
+    width: 100vw;
+    height: 200vh;
+    position: relative;
+}
+
 .react-parallax-bgimage {
     object-fit: cover !important;
     object-position: 50% 50%;

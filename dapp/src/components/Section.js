@@ -3,9 +3,16 @@ import { Parallax, Background } from 'react-parallax';
 import Hero from './Hero'
 import '../style/Section.css';
 
-const Section = ({bg, Component, componentProps}) => {
+const Section = ({bg, size, Component, componentProps}) => {
 
-    let classes = `section ${
+    let classes = `
+    ${
+        size === 1 ? 
+        'section'
+        :
+        'tall-section'
+    }
+    ${
         Component === Hero ? 
         ''
         :
