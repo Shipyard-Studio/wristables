@@ -7,7 +7,7 @@ import { Canvas } from "@react-three/fiber"
 const Watch = () => {
 
     function Model() {
-        const { scene } = useGLTF("1.gltf")
+        const { scene } = useGLTF("watch.glb")
         return <primitive object={scene} />;
     }
 
@@ -19,7 +19,7 @@ const Watch = () => {
         camera={{ fov: 75, near: 0.1, far: 10000, position: [700, -100, 400] }}
         onCreated={(state) => (state.gl.shadowMap.autoUpdate = false)}
     >
-      <ambientLight intensity={4} />
+      <ambientLight intensity={0.25} />
       {/* <spotLight position={[1, 5, 3]} angle={0.2} penumbra={1} intensity={3} castShadow shadow-mapSize={[2048, 2048]} /> */}
       {/* <spotLight position={[0, 10, -10]} intensity={2} angle={0.04} penumbra={2} castShadow shadow-mapSize={[1024, 1024]} /> */}
       <Suspense fallback={null}>

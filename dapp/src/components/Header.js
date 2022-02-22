@@ -15,6 +15,10 @@ function Header ({walletAddress, connect}) {
              <img className='wa-logo z-10 mt-5 lg:mt-0' src={WALogo} alt='wrist afficianado logo'/>
             {window.innerWidth > 800? 
             <div className='nav-logo-flex z-10'>
+                {/* <div onClick={connect} className='ease-in ease-out duration-300 ml-8 px-4 py-2 border-2 border-blue-600 rounded-full hover:bg-blue-600 hover:cursor-pointer z-10'>
+                {walletAddress.length > 0 ? `${walletAddress.slice(0,6)}...${walletAddress.slice(-4)}` :
+                'CONNECT'
+                }</div> */}
                 <a href="https://www.tiktok.com/@wristaficionado" className='z-10' target="_blank" alt="tiktok" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/TikTok-Logo.png'} /></a>
                 <a href="https://instagram.com/wristaficionado/" className='z-10' target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/WASiteAssets/InstagramLogo.png'} /></a>
                 <a href="https://twitter.com/wristaficionado/" className='z-10' target="_blank" alt="twitter" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/WASiteAssets/TwitterLogo.png'} /></a>
@@ -22,10 +26,6 @@ function Header ({walletAddress, connect}) {
             :
             <div></div>
             }
-            {/* <div onClick={connect} className='address'>
-            {walletAddress.length > 0 ? `${walletAddress.slice(0,6)}...${walletAddress.slice(-4)}` :
-            'CONNECT'
-        }</div> */}
 
         </div>
         {/* <br /><br /><br /><br /><br /><br />
