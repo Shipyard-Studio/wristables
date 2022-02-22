@@ -43,6 +43,7 @@ const Watch = () => {
         minPolarAngle={-Math.PI / 2}
         maxPolarAngle={Math.PI / 1.7}
         makeDefault 
+        enableZoom={false}
         />
     </Canvas>
     </div>

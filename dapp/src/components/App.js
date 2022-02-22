@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Sidebar from './Sidebar';
+import Modal from 'react-modal';
 import Header from './Header';
 import Columns from './Columns';
 import Brands from './Brands';
