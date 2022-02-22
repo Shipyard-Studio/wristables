@@ -26,7 +26,7 @@ const Section = ({bg, size, Component, componentProps}) => {
             bgImage={bg ? bg : null}
             bgImageAlt="background image"
             bgImageSize="100%"
-            strength={200}
+            strength={-100}
         >
                 {Component ? <Component props={componentProps}/> : <></>}
         </Parallax>
