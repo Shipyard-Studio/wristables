@@ -19,7 +19,7 @@ const TextSection = ({props}) => {
                 <div className='big-text noselect'>{props.header}</div>
                 <div className='small-text'>{body}</div>
                 {props.emailCapture ?
-                <div className='w-1/2 flex align-center justify-between pt-2'>
+                <div className='w-1/12 flex align-center justify-between pt-2'>
                     <form>
                         <input id='email-input' className='p-3 text-neutral-300 bg-neutral-800' placeholder="join our mailing list" style={{outline: 'none'}}/>
                     </form>
