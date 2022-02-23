@@ -9,14 +9,14 @@ const TextSection = ({props}) => {
     function ValidateEmail(e) {
         let input = document.getElementById('email-input')
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
-            return (true)
+            postEmail(input.value)
         }
         alert("You have entered an invalid email address!")
         return (false)
     }
 
-    console.log(process.env.EMAIL_TOKEN)
     async function postEmail (email) {
+        console.log(process.env.EMAIL_TOKEN)
 
         const data = {
             members: [
