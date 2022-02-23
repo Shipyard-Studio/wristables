@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.26.0",
     "ethers": "^5.5.4",
     "react": "^16.13.1",
     "react-background-video-player": "^1.1.8",

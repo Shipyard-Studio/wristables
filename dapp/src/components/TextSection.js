@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactHtmlParser from "react-html-parser";
+import axios from 'axios';
 
 const TextSection = ({props}) => {
 
@@ -12,6 +13,35 @@ const TextSection = ({props}) => {
         }
         alert("You have entered an invalid email address!")
         return (false)
+    }
+
+    console.log(process.env.EMAIL_TOKEN)
+    async function postEmail (email) {
+
+        const data = {
+            members: [
+                {
+                    email_address: email,
+                    status: 'subscribed'
+                }
+            ]
+        }
+
+        const postData = JSON.stringify(data)
+
+        try {
+            await axios.post(
+                'https://us14.api.mailchimp.com/3.0/lists/4f1a7fee0c',
+                {
+                    headers: {
+                        'Authorization': `auth ${process.env.EMAIL_TOKEN}`
+                    },
+                    body: postData
+                })
+            }
+        catch (err) {
+            
+        }
     }
 
     return (
