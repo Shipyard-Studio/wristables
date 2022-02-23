@@ -6,10 +6,10 @@ const TextSection = ({props}) => {
 
     let body = ReactHtmlParser(props.body)
 
-    function ValidateEmail(e) {
+    async function ValidateEmail(e) {
         let input = document.getElementById('email-input')
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
-            postEmail(input.value)
+            await postEmail(input.value)
         }
         alert("You have entered an invalid email address!")
         return (false)
@@ -34,14 +34,16 @@ const TextSection = ({props}) => {
                 'https://us14.api.mailchimp.com/3.0/lists/4f1a7fee0c',
                 {
                     headers: {
-                        'Authorization': `auth ${process.env.EMAIL_TOKEN}`
+                        'Authorization': `auth /*${process.env.REACT_APP_EMAIL_TOKEN}`
                     },
                     body: postData
                 })
                 console.log(req)
+                return true
             }
         catch (err) {
             console.error(err)
+            return false
         }
     }
 
