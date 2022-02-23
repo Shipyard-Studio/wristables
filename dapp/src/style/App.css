@@ -61,6 +61,15 @@ body{
   color: #58ce69;
 }
 
+.ReactModal__Content {
+  margin-right: 0 !important;
+}
+
+.ReactModal__Content--after-open {
+  margin-right: 0 !important;
+
+}
+
 @media (min-width: 768px) {
   
   .big-text {
