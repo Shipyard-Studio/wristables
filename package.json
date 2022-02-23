@@ -13,7 +13,6 @@
     "@typescript-eslint/parser": "^4.33.0",
     "autoprefixer": "^10.4.2",
     "chai": "^4.3.5",
-    "dotenv": "^10.0.0",
     "erc721a": "^1.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -41,6 +40,10 @@
     "@openzeppelin/contracts": "^4.4.2",
     "@openzeppelin/contracts-upgradeable": "^4.4.2",
     "@openzeppelin/hardhat-upgrades": "^1.14.0",
+    "dotenv": "^16.0.0",
     "react-parallax": "^3.3.0"
+  },
+  "scripts": {
+    "build": "npm --prefix ./dapp npm install & npm --prefix ./dapp run build"
   }
 }
