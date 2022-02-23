@@ -10,6 +10,10 @@
     position: relative;
 }
 
+.tall-section .react-parallax-content {
+    height: 200vh !important; 
+}
+
 .react-parallax-bgimage {
     object-fit: cover !important;
     object-position: 50% 50%;
@@ -17,6 +21,8 @@
     /* width: 100vw;
     height: 100vh; */
     background-size: 100% !important;
+    margin: 0;
+    padding: 0;      
     overflow: hidden;
     /* background-size: cover !important; */
     background-repeat: no-repeat;
@@ -35,5 +41,9 @@
         background-size: 100%
         /* background-size: contain !important;
         background-repeat: no-repeat; */
+    }
+
+    .tall-section .react-parallax-bgimage {
+        height: 200vh !important; 
     }
   }
