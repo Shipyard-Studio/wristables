@@ -44,6 +44,6 @@
     "react-parallax": "^3.3.0"
   },
   "scripts": {
-    "build": "npm --prefix ./dapp install && npm --prefix ./dapp run build"
+    "build": "postcss dapp/src/style/tailwind.css -o dapp/src/style/tailwind.generated.css ./ cd ./dapp && npm install && npm --prefix ./dapp run build"
   }
 }
