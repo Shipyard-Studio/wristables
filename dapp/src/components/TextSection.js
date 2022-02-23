@@ -30,7 +30,7 @@ const TextSection = ({props}) => {
         const postData = JSON.stringify(data)
 
         try {
-            await axios.post(
+            let req = await axios.post(
                 'https://us14.api.mailchimp.com/3.0/lists/4f1a7fee0c',
                 {
                     headers: {
@@ -38,9 +38,10 @@ const TextSection = ({props}) => {
                     },
                     body: postData
                 })
+                console.log(req)
             }
         catch (err) {
-            
+            console.error(err)
         }
     }
 
