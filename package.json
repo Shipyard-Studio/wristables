@@ -25,13 +25,10 @@
     "ethers": "^5.5.3",
     "hardhat": "^2.8.3",
     "hardhat-gas-reporter": "^1.0.7",
-    "postcss": "^8.4.6",
-    "postcss-cli": "^9.1.0",
     "prettier": "^2.5.1",
     "prettier-plugin-solidity": "^1.0.0-beta.13",
     "solhint": "^3.3.6",
     "solidity-coverage": "^0.7.18",
-    "tailwindcss": "^3.0.23",
     "ts-node": "^10.4.0",
     "typechain": "^5.2.0",
     "typescript": "^4.5.5"
@@ -44,6 +41,6 @@
     "react-parallax": "^3.3.0"
   },
   "scripts": {
-    "build": "postcss dapp/src/style/tailwind.css -o dapp/src/style/tailwind.generated.css ./ cd ./dapp && npm install && npm --prefix ./dapp run build"
+    "build": "cd ./dapp && npm install && npm run css && npm run build"
   }
 }

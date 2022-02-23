@@ -10,6 +10,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.0",
     "ethers": "^5.5.4",
+    "postcss": "^8.4.6",
+    "postcss-cli": "^9.1.0",
     "react": "^16.13.1",
     "react-background-video-player": "^1.1.8",
     "react-burger-menu": "^2.7.1",
@@ -18,11 +20,13 @@
     "react-player": "^2.9.0",
     "react-scripts": "5.0.0",
     "react-spring": "^9.4.3",
+    "tailwindcss": "^3.0.23",
     "three": "^0.137.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "css": "postcss src/style/tailwind.css -o src/style/tailwind.generated.css --watch",
+    "css": "postcss src/style/tailwind.css -o src/style/tailwind.generated.css",
+    "css-watch": "postcss src/style/tailwind.css -o src/style/tailwind.generated.css --watch",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
