@@ -11,7 +11,7 @@ const TextSection = ({props}) => {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
             await postEmail(input.value)
         }
-        alert("You have entered an invalid email address!")
+        // alert("You have entered an invalid email address!")
         return (false)
     }
 
