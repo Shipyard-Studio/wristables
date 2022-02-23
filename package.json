@@ -44,6 +44,6 @@
     "react-parallax": "^3.3.0"
   },
   "scripts": {
-    "build": "npm --prefix ./dapp install & npm --prefix ./dapp run build"
+    "build": "npm --prefix ./dapp install && npm --prefix ./dapp run build"
   }
 }
