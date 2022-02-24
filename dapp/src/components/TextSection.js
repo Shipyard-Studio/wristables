@@ -6,39 +6,20 @@ const TextSection = ({props}) => {
 
     let body = ReactHtmlParser(props.body)
 
-    async function ValidateEmail(e) {
+    async function postEmail () {
         let input = document.getElementById('email-input')
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.value)) {
-            await postEmail(input.value)
-        }
-        // alert("You have entered an invalid email address!")
-        return (false)
-    }
-
-    async function postEmail (email) {
-        console.log(process.env.EMAIL_TOKEN)
 
         const data = {
-            members: [
-                {
-                    email_address: email,
-                    status: 'subscribed'
+                    email: input.value,
                 }
-            ]
-        }
 
-        const postData = JSON.stringify(data)
 
         try {
             let req = await axios.post(
-                'https://us14.api.mailchimp.com/3.0/lists/4f1a7fee0c',
+                'http://localhost:5555/signup',
                 {
-                    headers: {
-                        'Authorization': `auth /*${process.env.REACT_APP_EMAIL_TOKEN}`
-                    },
-                    body: postData
+                    email: input.value
                 })
-                console.log(req)
                 return true
             }
         catch (err) {
@@ -56,7 +37,7 @@ const TextSection = ({props}) => {
                     <form>
                         <input id='email-input' className='p-3 text-neutral-300 bg-neutral-800' placeholder="join our mailing list" style={{outline: 'none'}}/>
                     </form>
-                    <div onClick={ValidateEmail} className='p-2 px-5 bg-amber-400 text-black text-xl hover:cursor-pointer'>→</div>
+                    <div onClick={postEmail} className='p-2 px-5 bg-amber-400 text-black text-xl hover:cursor-pointer'>→</div>
                 </div>
                 :
                 <></>
