@@ -16,7 +16,7 @@ const TextSection = ({props}) => {
 
         try {
             let req = await axios.post(
-                'http://localhost:5555/signup',
+                'https://wawc-server.herokuapp.com/signup',
                 {
                     email: input.value
                 })
