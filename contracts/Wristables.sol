@@ -6,6 +6,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 
 contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable, UUPSUpgradeable  {
     
@@ -57,6 +58,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         __Ownable_init();
          __ERC721_init("Wristables", "WRST");
         __PaymentSplitter_init( payees, shares_);
+        __ReentrancyGuard_init()
         
         // initial values must be set in initialize(), so proxy can set them too.
         MAX_SUPPLY = 9999;
@@ -69,7 +71,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     }
 
     /// @dev sends the next token to the `to` address for free + gas
-    function airdrop (address to, uint256 quantity) public onlyOwner {
+    function airdrop (address to, uint256 quantity) public onlyOwner nonReentrant {
         uint mintIndex = _tokenSupply.current();
         require(mintIndex + quantity <= availableSupply, "exceeds available supply");
         for (uint256 i = 0; i < quantity; i++) {
@@ -79,7 +81,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     }
 
     /// @dev sends one token to each address in the `to` array
-    function batchAirdrop (address[] memory to) public onlyOwner {
+    function batchAirdrop (address[] memory to) public onlyOwner nonReentrant {
         uint mintIndex = _tokenSupply.current();
         require(mintIndex + to.length <= availableSupply, "exceeds token supply");
         for (uint256 i = 0; i < to.length; i++) {
@@ -89,7 +91,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     }
 
     /// @dev dutch auction mint
-    function mintAuction () external payable SaleActive {
+    function mintAuction () external payable SaleActive nonReentrant {
         require(toggleAuction, "use `mint`");
         require(block.timestamp > dutchAuction.startAt , "auction has not started yet" );
         require(block.timestamp < dutchAuction.expiresAt, "auction expired");
@@ -107,7 +109,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     }
 
     /// @dev allows users to mint for a flat fee (not a dutch auction)
-    function mint () external payable SaleActive {
+    function mint () external payable SaleActive nonReentrant {
         require(!toggleAuction, "use `mintAuction`");
         require(msg.value == mintPrice, "incorrect ether sent");
         uint mintIndex = _tokenSupply.current();
