@@ -8,7 +8,7 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 
-contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable, UUPSUpgradeable  {
+contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable, UUPSUpgradeable, ReentrancyGuardUpgradeable  {
     
     //TODO: MERKLE PROOF STATE / FUNCTIONS
 
@@ -58,7 +58,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         __Ownable_init();
          __ERC721_init("Wristables", "WRST");
         __PaymentSplitter_init( payees, shares_);
-        __ReentrancyGuard_init()
+        __ReentrancyGuard_init();
         
         // initial values must be set in initialize(), so proxy can set them too.
         MAX_SUPPLY = 9999;

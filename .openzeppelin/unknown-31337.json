@@ -578,54 +578,54 @@
     },
     {
       "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-      "txHash": "0x9d97ed818fc5c8721908caaa4e2dc1355ecdc9ce7e404b7ed9f275c6cc492fc8",
+      "txHash": "0x2d2ca2f340b2a27fb12ac2f46747ef43ce016f6d94bdbc053ae76a2badbe73e6",
       "kind": "uups"
     },
     {
       "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-      "txHash": "0x6af49689f3c1d9be0d5574029934bd34496ca47e8588c1d833bd4c4662c0be97",
+      "txHash": "0x3d68cfe104a7fc277ed53cfc3371b7c22a1dc3d172788509e02d3d0f8696ddbb",
       "kind": "uups"
     },
     {
       "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0x491336e89f77f9f5266c3ac598df9b75dde400f1b23f1c77aded9a0534305313",
+      "txHash": "0x9a6e212456ef541a0b48e3c2ea82cd8d97e109640e84ad6fcfe03d98138b472c",
       "kind": "uups"
     },
     {
       "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
-      "txHash": "0x417e624cedbcdc6676a37f975beadac9fa5fa042882b4c78c0673c91a6747082",
+      "txHash": "0x7496e4e0a220c76ab1037e10e8d4b7b15833971f9741e1706ef635c0c65b4ba8",
       "kind": "uups"
     },
     {
       "address": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
-      "txHash": "0x0514dda523bb411a03bb54d9f5e3422fe8ace583e8f3e99600049cdc6c15fefe",
+      "txHash": "0x4b9f8dc1dc1a8b3703abce10849326e06f68e6a4ea4fe9565836bfb38244fd2d",
       "kind": "uups"
     },
     {
       "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
-      "txHash": "0xc12dbb49ec6464965c87c717d35392bc241e819d19e6a32590ee24303d208dcc",
+      "txHash": "0x9cddec6fb9c802d2df6c4fc3ac584d30cc23a7ee4c5c62967fae186ac7cb4940",
       "kind": "uups"
     },
     {
       "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
-      "txHash": "0xfc457772940df79a43687b935ea296c5f25962a9567e0bedbabee01f20ed7f7f",
+      "txHash": "0x1b7d9953c6a2db68a3d0d9e6227895a32b6b3b8c25da60cbbe5c75219c595189",
       "kind": "uups"
     },
     {
       "address": "0x59b670e9fA9D0A427751Af201D676719a970857b",
-      "txHash": "0x4f84eb17511d7a326ca9d08430da0b40de8777e51121c510bb12321da64f8c7b",
+      "txHash": "0xead98cf2759829168f9b76eaa7e807ef86d100a4f662c8cdee746f90063f411d",
       "kind": "uups"
     },
     {
       "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
-      "txHash": "0x4168bd1910d9d10ba51c7694c1b803775d63f1471f921c24e94618ca90e63fbf",
+      "txHash": "0xa82742ba3d1cf422f8ab7794f45ec6cc0f532617fe43a14c7d883bb91ee4efdf",
       "kind": "uups"
     }
   ],
   "impls": {
-    "10952a0f5b71aa6983915c0c9f354d5f5bef9e89798c6858091b6572215c7a62": {
+    "930712f0dfe12eb659608af1ea5a4c8d7bafa39430695f3edfc0dc9b42281e40": {
       "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      "txHash": "0x04c3502841ec1cb64a4b39cf7579bafb5ea19f5bf571c55806e5b1127dfea053",
+      "txHash": "0x3273f19b7c13f38079a0a186eb56f978b41c76e349f4bb6dda33e8bffacc549f",
       "layout": {
         "storage": [
           {
@@ -739,13 +739,13 @@
           {
             "contract": "PaymentSplitterUpgradeable",
             "label": "_erc20TotalReleased",
-            "type": "t_mapping(t_contract(IERC20Upgradeable)1266,t_uint256)",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)1324,t_uint256)",
             "src": "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol:41"
           },
           {
             "contract": "PaymentSplitterUpgradeable",
             "label": "_erc20Released",
-            "type": "t_mapping(t_contract(IERC20Upgradeable)1266,t_mapping(t_address,t_uint256))",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)1324,t_mapping(t_address,t_uint256))",
             "src": "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol:42"
           },
           {
@@ -767,56 +767,68 @@
             "src": "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol:81"
           },
           {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "_status",
+            "type": "t_uint256",
+            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:38"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:68"
+          },
+          {
             "contract": "Wristables",
             "label": "dutchAuction",
-            "type": "t_struct(DutchAuction)3259_storage",
-            "src": "contracts/Wristables.sol:18"
+            "type": "t_struct(DutchAuction)3320_storage",
+            "src": "contracts/Wristables.sol:19"
           },
           {
             "contract": "Wristables",
             "label": "_tokenSupply",
-            "type": "t_struct(Counter)2807_storage",
-            "src": "contracts/Wristables.sol:19"
+            "type": "t_struct(Counter)2865_storage",
+            "src": "contracts/Wristables.sol:20"
           },
           {
             "contract": "Wristables",
             "label": "_baseTokenURI",
             "type": "t_string_storage",
-            "src": "contracts/Wristables.sol:20"
+            "src": "contracts/Wristables.sol:21"
           },
           {
             "contract": "Wristables",
             "label": "availableSupply",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:21"
+            "src": "contracts/Wristables.sol:22"
           },
           {
             "contract": "Wristables",
             "label": "MAX_SUPPLY",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:22"
+            "src": "contracts/Wristables.sol:23"
           },
           {
             "contract": "Wristables",
             "label": "mintPrice",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:23"
+            "src": "contracts/Wristables.sol:24"
           },
           {
             "contract": "Wristables",
             "label": "toggleAuction",
             "type": "t_bool",
-            "src": "contracts/Wristables.sol:24"
+            "src": "contracts/Wristables.sol:25"
           },
           {
             "contract": "Wristables",
             "label": "saleActive",
             "type": "t_bool",
-            "src": "contracts/Wristables.sol:25"
+            "src": "contracts/Wristables.sol:26"
           }
         ],
         "types": {
-          "t_struct(DutchAuction)3259_storage": {
+          "t_struct(DutchAuction)3320_storage": {
             "label": "struct Wristables.DutchAuction",
             "members": [
               {
@@ -844,7 +856,7 @@
           "t_uint256": {
             "label": "uint256"
           },
-          "t_struct(Counter)2807_storage": {
+          "t_struct(Counter)2865_storage": {
             "label": "struct CountersUpgradeable.Counter",
             "members": [
               {
@@ -859,6 +871,9 @@
           "t_bool": {
             "label": "bool"
           },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
           "t_array(t_uint256)50_storage": {
             "label": "uint256[50]"
           },
@@ -871,20 +886,17 @@
           "t_array(t_address)dyn_storage": {
             "label": "address[]"
           },
-          "t_mapping(t_contract(IERC20Upgradeable)1266,t_uint256)": {
+          "t_mapping(t_contract(IERC20Upgradeable)1324,t_uint256)": {
             "label": "mapping(contract IERC20Upgradeable => uint256)"
           },
-          "t_contract(IERC20Upgradeable)1266": {
+          "t_contract(IERC20Upgradeable)1324": {
             "label": "contract IERC20Upgradeable"
           },
-          "t_mapping(t_contract(IERC20Upgradeable)1266,t_mapping(t_address,t_uint256))": {
+          "t_mapping(t_contract(IERC20Upgradeable)1324,t_mapping(t_address,t_uint256))": {
             "label": "mapping(contract IERC20Upgradeable => mapping(address => uint256))"
           },
           "t_array(t_uint256)43_storage": {
             "label": "uint256[43]"
-          },
-          "t_array(t_uint256)49_storage": {
-            "label": "uint256[49]"
           },
           "t_mapping(t_uint256,t_address)": {
             "label": "mapping(uint256 => address)"
@@ -901,9 +913,9 @@
         }
       }
     },
-    "591b14bef8d0edd924dd2abb4f00e0ca7fcaa2f87118c5eb61de85ac0656ecbc": {
+    "08a2efb790530176d1593b9c650a2439a193958a7b716e2220ddbb31d66cd7b2": {
       "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0xdb5cd1e742d6b6ce347b4c7ad7e7695a88a1450d6d1bb37267f38460ececb1cf",
+      "txHash": "0x0a6e74b6f4c9cf380940b24fad33fff47c140feaf8cb8a8d4149a9757a73bafd",
       "layout": {
         "storage": [
           {
@@ -1017,13 +1029,13 @@
           {
             "contract": "PaymentSplitterUpgradeable",
             "label": "_erc20TotalReleased",
-            "type": "t_mapping(t_contract(IERC20Upgradeable)1266,t_uint256)",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)1324,t_uint256)",
             "src": "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol:41"
           },
           {
             "contract": "PaymentSplitterUpgradeable",
             "label": "_erc20Released",
-            "type": "t_mapping(t_contract(IERC20Upgradeable)1266,t_mapping(t_address,t_uint256))",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)1324,t_mapping(t_address,t_uint256))",
             "src": "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol:42"
           },
           {
@@ -1045,56 +1057,68 @@
             "src": "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol:81"
           },
           {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "_status",
+            "type": "t_uint256",
+            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:38"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:68"
+          },
+          {
             "contract": "Wristables",
             "label": "dutchAuction",
-            "type": "t_struct(DutchAuction)3259_storage",
-            "src": "contracts/Wristables.sol:18"
+            "type": "t_struct(DutchAuction)3320_storage",
+            "src": "contracts/Wristables.sol:19"
           },
           {
             "contract": "Wristables",
             "label": "_tokenSupply",
-            "type": "t_struct(Counter)2807_storage",
-            "src": "contracts/Wristables.sol:19"
+            "type": "t_struct(Counter)2865_storage",
+            "src": "contracts/Wristables.sol:20"
           },
           {
             "contract": "Wristables",
             "label": "_baseTokenURI",
             "type": "t_string_storage",
-            "src": "contracts/Wristables.sol:20"
+            "src": "contracts/Wristables.sol:21"
           },
           {
             "contract": "Wristables",
             "label": "availableSupply",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:21"
+            "src": "contracts/Wristables.sol:22"
           },
           {
             "contract": "Wristables",
             "label": "MAX_SUPPLY",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:22"
+            "src": "contracts/Wristables.sol:23"
           },
           {
             "contract": "Wristables",
             "label": "mintPrice",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:23"
+            "src": "contracts/Wristables.sol:24"
           },
           {
             "contract": "Wristables",
             "label": "toggleAuction",
             "type": "t_bool",
-            "src": "contracts/Wristables.sol:24"
+            "src": "contracts/Wristables.sol:25"
           },
           {
             "contract": "Wristables",
             "label": "saleActive",
             "type": "t_bool",
-            "src": "contracts/Wristables.sol:25"
+            "src": "contracts/Wristables.sol:26"
           }
         ],
         "types": {
-          "t_struct(DutchAuction)3259_storage": {
+          "t_struct(DutchAuction)3320_storage": {
             "label": "struct Wristables.DutchAuction",
             "members": [
               {
@@ -1122,7 +1146,7 @@
           "t_uint256": {
             "label": "uint256"
           },
-          "t_struct(Counter)2807_storage": {
+          "t_struct(Counter)2865_storage": {
             "label": "struct CountersUpgradeable.Counter",
             "members": [
               {
@@ -1137,6 +1161,9 @@
           "t_bool": {
             "label": "bool"
           },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
           "t_array(t_uint256)50_storage": {
             "label": "uint256[50]"
           },
@@ -1149,20 +1176,17 @@
           "t_array(t_address)dyn_storage": {
             "label": "address[]"
           },
-          "t_mapping(t_contract(IERC20Upgradeable)1266,t_uint256)": {
+          "t_mapping(t_contract(IERC20Upgradeable)1324,t_uint256)": {
             "label": "mapping(contract IERC20Upgradeable => uint256)"
           },
-          "t_contract(IERC20Upgradeable)1266": {
+          "t_contract(IERC20Upgradeable)1324": {
             "label": "contract IERC20Upgradeable"
           },
-          "t_mapping(t_contract(IERC20Upgradeable)1266,t_mapping(t_address,t_uint256))": {
+          "t_mapping(t_contract(IERC20Upgradeable)1324,t_mapping(t_address,t_uint256))": {
             "label": "mapping(contract IERC20Upgradeable => mapping(address => uint256))"
           },
           "t_array(t_uint256)43_storage": {
             "label": "uint256[43]"
-          },
-          "t_array(t_uint256)49_storage": {
-            "label": "uint256[49]"
           },
           "t_mapping(t_uint256,t_address)": {
             "label": "mapping(uint256 => address)"
