@@ -43,6 +43,7 @@ async function proxyDeploy() {
     [
       [shipyardWallet.address, imagineWallet.address, wristablesWallet.address],
       [7, 2, 1],
+      // root goes here
     ],
     // Here we indicate this is a UUPS:
     { kind: "uups" }

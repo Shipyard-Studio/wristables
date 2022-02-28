@@ -23,6 +23,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     uint256 public availableSupply; // max number of tokens currently available for mint
     uint256 public MAX_SUPPLY;
     uint256 private mintPrice; // price of each token in the `mint` functions
+    bytes32 public root; // merkle root set in initializer
     bool private toggleAuction; // true = dutch auction active, false = mint for flat price active
     bool private saleActive; // if false, mint functions will revert
 
@@ -53,7 +54,8 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     /// @dev See `PaymentSplitter.sol` for documentation on `payees` and `shares_`.
     function initialize( 
         address[] memory payees, 
-        uint256[] memory shares_
+        uint256[] memory shares_,
+        bytes32 _root
     ) public initializer {
         // console.log(payees[0], shares_[0]);
         __Ownable_init();
@@ -63,6 +65,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         
         // initial values must be set in initialize(), so proxy can set them too.
         MAX_SUPPLY = 9999;
+        root = _root;
 
         supportsInterface(0x2a55205a); // required for ERC2981 (royalty) standard
     }
@@ -103,19 +106,28 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 
         require(msg.value >= price, "insufficient funds");
 
-        uint mintIndex = _tokenSupply.current();
-        require(mintIndex <= availableSupply, "exceeds token supply");
-        _safeMint(msg.sender, mintIndex);
-        _tokenSupply.increment();
+        issueToken(msg.sender);
     }
 
     /// @dev allows users to mint for a flat fee (not a dutch auction)
     function mint () external payable SaleActive nonReentrant {
         require(!toggleAuction, "use `mintAuction`");
         require(msg.value == mintPrice, "incorrect ether sent");
+
+        issueToken(msg.sender);
+    }
+
+    function redeem(bytes32[] calldata proof) external payable {
+        require(_verify(_leaf(msg.sender), proof), "Invalid merkle proof");
+        require(msg.value == mintPrice, "incorrect ether sent");
+
+        issueToken(msg.sender);
+    }    
+
+    function issueToken (address recipient) private {
         uint mintIndex = _tokenSupply.current();
         require(mintIndex <= availableSupply, "exceeds token supply");
-        _safeMint(msg.sender, mintIndex);
+        _safeMint(recipient, mintIndex);
         _tokenSupply.increment();
     }
 
@@ -183,6 +195,14 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         string memory json = ".json";
         string memory baseURI = _baseTokenURI;
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), json)) : "";
+    }
+
+    function _leaf(address account) internal pure returns (bytes32) {
+        return keccak256(abi.encodePacked(account));
+    }
+
+    function _verify(bytes32 leaf, bytes32[] memory proof) internal view returns (bool) {
+        return MerkleProofUpgradeable.verify(proof, root, leaf);
     }
 
 }
