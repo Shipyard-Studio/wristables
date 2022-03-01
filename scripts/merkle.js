@@ -1,42 +1,37 @@
 const { MerkleTree } = require("merkletreejs");
-const { ethers } = require("ethers");
+
 const keccak256 = require("keccak256");
 
-// allocation, startDate, paid, cliff, account
-const SCHEMA = "address".split(" ");
+let tree
 
 exports.generateMerkleTree = function generateMerkleTree(
   rawData,
   options = {}
 ) {
-  // Split up into two steps for easier debugging
-  const dataPacked = rawData.map((row) =>
-    ethers.utils.solidityPack(SCHEMA, row)
-  );
-  if (options.debug) console.log("Packed data:", dataPacked);
-
-  const leaves = dataPacked.map(keccak256);
+  const leaves = rawData.map((x) => keccak256(x));
   if (options.debug)
     console.log(
       "Leaves:",
       leaves.map((buffer) => "0x" + buffer.toString("hex"))
     );
 
-  const tree = new MerkleTree(leaves, keccak256, { sort: true });
-  const root = tree.getHexRoot();
+  tree = new MerkleTree(leaves, keccak256);
+  const root = tree.getRoot().toString("hex");
   if (options.debug) console.log("Root:", root);
   if (options.debug) console.log("Tree:\n" + tree.toString());
 
   return {
     root,
     getProof(rawDataRow) {
-      const leaf = keccak256(ethers.utils.solidityPack(SCHEMA, rawDataRow));
-      return tree.getHexProof(leaf);
+      const leaf = keccak256(rawDataRow);
+      const proof = tree.getProof(leaf);
+      return proof;
     },
   };
 };
 
 exports.verifyInTree = function (root, rawDataRow, proof) {
-  const leaf = keccak256(ethers.utils.solidityPack(SCHEMA, rawDataRow));
-  return MerkleTree.verify(proof, leaf, root, keccak256);
+  const leaf = keccak256(rawDataRow);
+  console.log(rawDataRow, leaf);
+  return tree.verify(proof, leaf, root);
 };
