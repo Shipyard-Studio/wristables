@@ -3,7 +3,7 @@ const { ethers } = require("ethers");
 const keccak256 = require("keccak256");
 
 // allocation, startDate, paid, cliff, account
-const SCHEMA = "uint256 uint32 uint32 bool bool address".split(" ");
+const SCHEMA = "address".split(" ");
 
 exports.generateMerkleTree = function generateMerkleTree(
   rawData,
