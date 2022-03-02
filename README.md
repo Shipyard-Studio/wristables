@@ -1,5 +1,14 @@
 ## Wristables NFT
 
+Front end located in ./dapp
+    for front end, all of the normal CRA stuff applies. `npm i`, `npm run start` and `npm run css` to run locally
+
+Contract located in ./contracts
+
+Tests located in ./test
+
+Deploy script is TBD
+
 ERC721 contract with 9999 unique tokens. 
     (first drop is 999, total supply is 9999, the rest will be released in increments of 999 or more).
     Contract is designed to use the counters library instead of ERC721Enumerable for gas savings
