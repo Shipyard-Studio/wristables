@@ -578,54 +578,59 @@
     },
     {
       "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-      "txHash": "0x2d2ca2f340b2a27fb12ac2f46747ef43ce016f6d94bdbc053ae76a2badbe73e6",
+      "txHash": "0x7a9926e4ec6e8bed4ee15272ec03d235cfdfd151b2a552ff2103e3a83e441a09",
       "kind": "uups"
     },
     {
       "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-      "txHash": "0x3d68cfe104a7fc277ed53cfc3371b7c22a1dc3d172788509e02d3d0f8696ddbb",
+      "txHash": "0xf619fe64f6c167ddea9f806ecd8be4c3062fba6fcb835c829883723c40ef36bc",
       "kind": "uups"
     },
     {
       "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0x9a6e212456ef541a0b48e3c2ea82cd8d97e109640e84ad6fcfe03d98138b472c",
+      "txHash": "0x4ed6dac06ba63e568c21cff11be285a45ba0241ce713f71c45114f9cc9f70721",
       "kind": "uups"
     },
     {
       "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
-      "txHash": "0x7496e4e0a220c76ab1037e10e8d4b7b15833971f9741e1706ef635c0c65b4ba8",
+      "txHash": "0x0e7e4e1514988dcad82d1e812d4d372cc5fc54fe004d4cf6aa7f92800e14b84f",
       "kind": "uups"
     },
     {
       "address": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
-      "txHash": "0x4b9f8dc1dc1a8b3703abce10849326e06f68e6a4ea4fe9565836bfb38244fd2d",
+      "txHash": "0xfbdc20b77fd5c51ca7a09d1b45f531a729c4018fb909d6de96019a3095c43413",
       "kind": "uups"
     },
     {
       "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
-      "txHash": "0x9cddec6fb9c802d2df6c4fc3ac584d30cc23a7ee4c5c62967fae186ac7cb4940",
+      "txHash": "0x36e6179830dd4c82c435fe27ee8131921ad1cc49eeb3ee21d5448b1e5821d8b0",
       "kind": "uups"
     },
     {
       "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
-      "txHash": "0x1b7d9953c6a2db68a3d0d9e6227895a32b6b3b8c25da60cbbe5c75219c595189",
+      "txHash": "0xd052175a168e4b930d4aca567b3a5bace28af5844a7cb374d69b17d49fda6c34",
       "kind": "uups"
     },
     {
       "address": "0x59b670e9fA9D0A427751Af201D676719a970857b",
-      "txHash": "0xead98cf2759829168f9b76eaa7e807ef86d100a4f662c8cdee746f90063f411d",
+      "txHash": "0x3e3e35e5da707f0817edc338bf4c09be3c9ac1a7500f20164c201b537da4a399",
       "kind": "uups"
     },
     {
       "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
-      "txHash": "0xa82742ba3d1cf422f8ab7794f45ec6cc0f532617fe43a14c7d883bb91ee4efdf",
+      "txHash": "0x58360f15e6446e04aa38152a1b650557734d375cb7ec9106dc728200b4337264",
+      "kind": "uups"
+    },
+    {
+      "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+      "txHash": "0x832fb4b87c7d99c0c97c21b49bb8d3f2822607e87632737dbf42b05ad302f269",
       "kind": "uups"
     }
   ],
   "impls": {
-    "08a2efb790530176d1593b9c650a2439a193958a7b716e2220ddbb31d66cd7b2": {
-      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0x0a6e74b6f4c9cf380940b24fad33fff47c140feaf8cb8a8d4149a9757a73bafd",
+    "58326b13befa1344c06c1f331b73f8da0eb142d58e61711ca8cc1069ba50192d": {
+      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "txHash": "0xfb3ee0015ea3372562bc4683cfa6d5cb79c7e8dc297cd4b9b4b4a467e7e16ea9",
       "layout": {
         "storage": [
           {
@@ -781,54 +786,60 @@
           {
             "contract": "Wristables",
             "label": "dutchAuction",
-            "type": "t_struct(DutchAuction)3320_storage",
-            "src": "contracts/Wristables.sol:19"
+            "type": "t_struct(DutchAuction)3412_storage",
+            "src": "contracts/Wristables.sol:21"
           },
           {
             "contract": "Wristables",
             "label": "_tokenSupply",
             "type": "t_struct(Counter)2865_storage",
-            "src": "contracts/Wristables.sol:20"
+            "src": "contracts/Wristables.sol:22"
           },
           {
             "contract": "Wristables",
             "label": "_baseTokenURI",
             "type": "t_string_storage",
-            "src": "contracts/Wristables.sol:21"
+            "src": "contracts/Wristables.sol:23"
           },
           {
             "contract": "Wristables",
             "label": "availableSupply",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:22"
+            "src": "contracts/Wristables.sol:24"
           },
           {
             "contract": "Wristables",
             "label": "MAX_SUPPLY",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:23"
+            "src": "contracts/Wristables.sol:25"
           },
           {
             "contract": "Wristables",
             "label": "mintPrice",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:24"
+            "src": "contracts/Wristables.sol:26"
+          },
+          {
+            "contract": "Wristables",
+            "label": "root",
+            "type": "t_bytes32",
+            "src": "contracts/Wristables.sol:27"
           },
           {
             "contract": "Wristables",
             "label": "toggleAuction",
             "type": "t_bool",
-            "src": "contracts/Wristables.sol:25"
+            "src": "contracts/Wristables.sol:28"
           },
           {
             "contract": "Wristables",
             "label": "saleActive",
             "type": "t_bool",
-            "src": "contracts/Wristables.sol:26"
+            "src": "contracts/Wristables.sol:29"
           }
         ],
         "types": {
-          "t_struct(DutchAuction)3320_storage": {
+          "t_struct(DutchAuction)3412_storage": {
             "label": "struct Wristables.DutchAuction",
             "members": [
               {
@@ -867,6 +878,9 @@
           },
           "t_string_storage": {
             "label": "string"
+          },
+          "t_bytes32": {
+            "label": "bytes32"
           },
           "t_bool": {
             "label": "bool"
@@ -913,9 +927,9 @@
         }
       }
     },
-    "a7542e3fc3e44df193fd309d01eb9bc5687f674d89ef5ea404581735a014fe77": {
-      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      "txHash": "0x36993e0e73efdb87210225d973f88aca96242555e64dd079326e11f6086bebaa",
+    "fdbdb996609138d3b6392821c083b56544a64bea7bccd256685dcaea3d394643": {
+      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "txHash": "0x7292ac3911ca11e04d1479d1f9c8ff970211bedfc647b4ba20be129fcafc5db8",
       "layout": {
         "storage": [
           {
@@ -1071,60 +1085,60 @@
           {
             "contract": "Wristables",
             "label": "dutchAuction",
-            "type": "t_struct(DutchAuction)3411_storage",
-            "src": "contracts/Wristables.sol:20"
+            "type": "t_struct(DutchAuction)3412_storage",
+            "src": "contracts/Wristables.sol:21"
           },
           {
             "contract": "Wristables",
             "label": "_tokenSupply",
             "type": "t_struct(Counter)2865_storage",
-            "src": "contracts/Wristables.sol:21"
+            "src": "contracts/Wristables.sol:22"
           },
           {
             "contract": "Wristables",
             "label": "_baseTokenURI",
             "type": "t_string_storage",
-            "src": "contracts/Wristables.sol:22"
+            "src": "contracts/Wristables.sol:23"
           },
           {
             "contract": "Wristables",
             "label": "availableSupply",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:23"
+            "src": "contracts/Wristables.sol:24"
           },
           {
             "contract": "Wristables",
             "label": "MAX_SUPPLY",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:24"
+            "src": "contracts/Wristables.sol:25"
           },
           {
             "contract": "Wristables",
             "label": "mintPrice",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:25"
+            "src": "contracts/Wristables.sol:26"
           },
           {
             "contract": "Wristables",
             "label": "root",
             "type": "t_bytes32",
-            "src": "contracts/Wristables.sol:26"
+            "src": "contracts/Wristables.sol:27"
           },
           {
             "contract": "Wristables",
             "label": "toggleAuction",
             "type": "t_bool",
-            "src": "contracts/Wristables.sol:27"
+            "src": "contracts/Wristables.sol:28"
           },
           {
             "contract": "Wristables",
             "label": "saleActive",
             "type": "t_bool",
-            "src": "contracts/Wristables.sol:28"
+            "src": "contracts/Wristables.sol:29"
           }
         ],
         "types": {
-          "t_struct(DutchAuction)3411_storage": {
+          "t_struct(DutchAuction)3412_storage": {
             "label": "struct Wristables.DutchAuction",
             "members": [
               {

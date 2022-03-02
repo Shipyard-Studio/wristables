@@ -3,6 +3,24 @@ const { expect } = require("chai");
 // const exp = require("constants");
 const { ethers, upgrades } = require("hardhat");
 
+const { MerkleTree } = require("merkletreejs");
+const keccak256 = require("keccak256");
+
+function hashToken(account) {
+  return Buffer.from(keccak256(account));
+}
+
+const dataRaw = [
+  "0xbeefbeefbeefbeefbeefbeefbeefbeefbeefbeef",
+  "0xfeedfeedfeedfeedfeedfeedfeedfeedfeedfeed",
+  "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+  "0x7Eb696df980734DD592EBDd9dfC39F189aDc5456",
+];
+
+const leaves = dataRaw.map((x) => keccak256(x));
+
+const merkleTree = new MerkleTree(leaves, keccak256, { sortPairs: true });
+
 let Wristables,
   wristables,
   WristablesV2,
@@ -43,7 +61,7 @@ async function proxyDeploy() {
     [
       [shipyardWallet.address, imagineWallet.address, wristablesWallet.address],
       [7, 2, 1],
-      // root goes here
+      merkleTree.getHexRoot(),
     ],
     // Here we indicate this is a UUPS:
     { kind: "uups" }
@@ -79,6 +97,10 @@ describe("Wristables Contract Unit Tests", function () {
   beforeEach(async function () {
     await proxyDeploy();
     await wristables.setAvailableSupply(999);
+    await hre.network.provider.request({
+      method: "hardhat_impersonateAccount",
+      params: ["0x7Eb696df980734DD592EBDd9dfC39F189aDc5456"],
+    });
   });
 
   it("Should airdrop", async function () {
@@ -232,5 +254,44 @@ describe("Wristables Contract Unit Tests", function () {
 
     expect(royaltyInfo[0]).to.deep.equal(wristables.address);
     expect(royaltyInfo[1]).to.deep.equal(ethers.utils.parseEther("0.6"));
+  });
+
+  it("should allow whitelisted addresses to claim", async function () {
+    await wristables.setMintPrice(ethers.utils.parseEther("1"));
+    await wristables.setSaleActive(true);
+
+    await addr2.sendTransaction({
+      to: "0x7Eb696df980734DD592EBDd9dfC39F189aDc5456",
+      value: ethers.utils.parseEther("3"),
+    });
+
+    const wlUserAddress = "0x7Eb696df980734DD592EBDd9dfC39F189aDc5456";
+
+    const wlUser = await ethers.provider.getSigner(
+      "0x7Eb696df980734DD592EBDd9dfC39F189aDc5456"
+    );
+
+    const proof = merkleTree.getHexProof(keccak256(wlUserAddress));
+
+    // console.log(merkleTree.toString());
+    // console.log("address", wlUserAddress, "proof: ", proof);
+
+    // console.log(
+    //   merkleTree.verify(
+    //     proof,
+    //     keccak256(wlUserAddress),
+    //     merkleTree.getHexRoot()
+    //   )
+    // );
+
+    await wristables
+      .connect(wlUser)
+      .redeem(proof, { value: ethers.utils.parseEther("1") });
+
+    expect(await wristables.balanceOf(wlUserAddress)).to.deep.equal(1);
+
+    expect(
+      wristables.redeem(proof, { value: ethers.utils.parseEther("1") })
+    ).to.be.revertedWith("");
   });
 });

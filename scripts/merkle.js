@@ -16,7 +16,7 @@ exports.generateMerkleTree = function generateMerkleTree(
     );
 
   tree = new MerkleTree(leaves, keccak256);
-  const root = tree.getRoot().toString("hex");
+  const root = tree.getHexRoot();
   if (options.debug) console.log("Root:", root);
   if (options.debug) console.log("Tree:\n" + tree.toString());
 
