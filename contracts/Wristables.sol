@@ -18,6 +18,8 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     using StringsUpgradeable for uint256;
     using CountersUpgradeable for CountersUpgradeable.Counter;
 
+    mapping(address => uint32[]) public claimedWL; // stores addresses that have claimed whitelisted tokens - 0 = false, 1 = true
+
     DutchAuction public dutchAuction; 
     CountersUpgradeable.Counter private _tokenSupply;
     string private _baseTokenURI;
@@ -25,6 +27,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     uint256 public MAX_SUPPLY;
     uint256 private mintPrice; // price of each token in the `mint` functions
     bytes32 public root; // merkle root set in initializer
+    uint32 public indexWL; // index for for drop #, allows us to check claimedWL for the correct bool
     bool private toggleAuction; // true = dutch auction active, false = mint for flat price active
     bool private saleActive; // if false, mint functions will revert
 
@@ -76,7 +79,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     }
 
     /// @dev sends the next token to the `to` address for free + gas
-    function airdrop (address to, uint256 quantity) public onlyOwner nonReentrant {
+    function airdrop (address to, uint256 quantity) public payable onlyOwner nonReentrant {
         uint mintIndex = _tokenSupply.current();
         require(mintIndex + quantity <= availableSupply, "exceeds available supply");
         for (uint256 i = 0; i < quantity; i++) {
@@ -86,7 +89,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     }
 
     /// @dev sends one token to each address in the `to` array
-    function batchAirdrop (address[] memory to) public onlyOwner nonReentrant {
+    function batchAirdrop (address[] memory to) public payable onlyOwner nonReentrant {
         uint mintIndex = _tokenSupply.current();
         require(mintIndex + to.length <= availableSupply, "exceeds token supply");
         for (uint256 i = 0; i < to.length; i++) {
@@ -122,7 +125,8 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         require(_verify(_leaf(msg.sender), proof), "Invalid merkle proof");
         require(!toggleAuction, "use `mintAuction`");
         require(msg.value == mintPrice, "incorrect ether sent");
-        
+        require(claimedWL[msg.sender][indexWL] == 0, "claimed");
+        claimedWL[msg.sender][indexWL] = 1;
         issueToken(msg.sender);
     }    
 
@@ -160,35 +164,41 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         uint256 _startAt,
         uint256 _expiresAt,
         uint256 _priceDeductionRate
-        ) external onlyOwner {
+        ) external payable onlyOwner {
         dutchAuction = DutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
         emit NewDutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
     }
 
     /// @dev set available token supply
-    function setAvailableSupply (uint256 availableSupplyIncrease) external onlyOwner {
+    function setAvailableSupply (uint256 availableSupplyIncrease) external payable onlyOwner {
         require(availableSupply + availableSupplyIncrease <= MAX_SUPPLY, "cannot be greater than 9999");
         availableSupply += availableSupplyIncrease;
     }
 
     /// @dev set price of each token in the `mint` function
-    function setMintPrice (uint256 _mintPrice) external onlyOwner {
+    function setMintPrice (uint256 _mintPrice) external payable onlyOwner {
         mintPrice = _mintPrice;
     }
 
     /// @dev toggles the mode of sale between flat price and dutch auction. false = flat, true = dutch auction
-    function setToggleAuction (bool _toggleAuction) external onlyOwner {
+    function setToggleAuction (bool _toggleAuction) external payable onlyOwner {
         toggleAuction = _toggleAuction;
     }
 
     /// @dev sets the public sale to active. Both mint functions will revert if this is false.
-    function setSaleActive (bool _saleActive) external onlyOwner {
+    function setSaleActive (bool _saleActive) external payable onlyOwner {
         saleActive = _saleActive;
     }
 
     /// @dev allows owner to reset base uri when updating metadata
-    function setBaseURI(string memory baseURI) external onlyOwner {
+    function setBaseURI(string memory baseURI) external payable onlyOwner {
         _baseTokenURI = baseURI;
+    }
+
+    /// @dev allows owner to reset base uri when updating metadata
+    function setIndexWL (uint32 _indexWL) external payable onlyOwner {
+        require(_indexWL > indexWL, "less than current index");
+        indexWL = _indexWL;
     }
 
     /// @dev override token uri to append .json to string
