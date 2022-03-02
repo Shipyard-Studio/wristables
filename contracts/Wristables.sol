@@ -221,6 +221,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 
 }
 
+/// @dev dummy contract for testing upgradeability
 contract WristablesV2 is Wristables {
     function version() pure public returns (string memory) {
         return "V2";

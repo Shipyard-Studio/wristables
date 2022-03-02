@@ -6,10 +6,6 @@ const { ethers, upgrades } = require("hardhat");
 const { MerkleTree } = require("merkletreejs");
 const keccak256 = require("keccak256");
 
-function hashToken(account) {
-  return Buffer.from(keccak256(account));
-}
-
 const dataRaw = [
   "0xbeefbeefbeefbeefbeefbeefbeefbeefbeefbeef",
   "0xfeedfeedfeedfeedfeedfeedfeedfeedfeedfeed",
