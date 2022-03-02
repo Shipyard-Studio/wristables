@@ -18,7 +18,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     using StringsUpgradeable for uint256;
     using CountersUpgradeable for CountersUpgradeable.Counter;
 
-    mapping(address => uint32[]) public claimedWL; // stores addresses that have claimed whitelisted tokens - 0 = false, 1 = true
+    mapping(address => bool[10]) public claimedWL; // stores addresses that have claimed whitelisted tokens
 
     DutchAuction public dutchAuction; 
     CountersUpgradeable.Counter private _tokenSupply;
@@ -26,10 +26,10 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     uint256 public availableSupply; // max number of tokens currently available for mint
     uint256 public MAX_SUPPLY;
     uint256 private mintPrice; // price of each token in the `mint` functions
-    bytes32 public root; // merkle root set in initializer
-    uint32 public indexWL; // index for for drop #, allows us to check claimedWL for the correct bool
+    uint256 public indexWL; // index for for drop #, allows us to check claimedWL for the correct bool
     bool private toggleAuction; // true = dutch auction active, false = mint for flat price active
     bool private saleActive; // if false, mint functions will revert
+    bytes32 public root; // merkle root set in initializer
 
 
 
@@ -125,8 +125,8 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         require(_verify(_leaf(msg.sender), proof), "Invalid merkle proof");
         require(!toggleAuction, "use `mintAuction`");
         require(msg.value == mintPrice, "incorrect ether sent");
-        require(claimedWL[msg.sender][indexWL] == 0, "claimed");
-        claimedWL[msg.sender][indexWL] = 1;
+        require(!claimedWL[msg.sender][indexWL], "claimed");
+        claimedWL[msg.sender][indexWL] = true;
         issueToken(msg.sender);
     }    
 
@@ -199,6 +199,10 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     function setIndexWL (uint32 _indexWL) external payable onlyOwner {
         require(_indexWL > indexWL, "less than current index");
         indexWL = _indexWL;
+    }
+
+    function getClaimedWL (address account) external view returns (bool[10] memory) {
+        return claimedWL[account];
     }
 
     /// @dev override token uri to append .json to string

@@ -284,7 +284,7 @@ describe("Wristables Contract Unit Tests", function () {
     //   )
     // );
 
-    await wristables
+    await wristables // good proof correct user
       .connect(wlUser)
       .redeem(proof, { value: ethers.utils.parseEther("1") });
 
@@ -292,7 +292,15 @@ describe("Wristables Contract Unit Tests", function () {
     expect(await wristables.ownerOf(0)).to.deep.equal(wlUserAddress);
 
     expect(
+      // good proof wrong user
       wristables.redeem(proof, { value: ethers.utils.parseEther("1") })
+    ).to.be.revertedWith("");
+
+    expect(
+      // good proof good user, can't claim more than once
+      wristables // good proof correct user
+        .connect(wlUser)
+        .redeem(proof, { value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
   });
 });
