@@ -578,59 +578,59 @@
     },
     {
       "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-      "txHash": "0xd07fb45e13a793b6954a0007d831080e7da1207b88166f3b955d483ef47b1108",
+      "txHash": "0xac64ff78e0d48e7dee1e641e0adeab0c2c4c4ecbbb628179317bbf04795278c7",
       "kind": "uups"
     },
     {
       "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-      "txHash": "0x0ad52640aaed72ee6fc72d36570ce27bd1c919e43eb96be71cebd885e1d32411",
+      "txHash": "0x76e8152b576fa96eec49e5fa49e77de86bb911c3d59eefeda58e64f42653e749",
       "kind": "uups"
     },
     {
       "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0x215a44f7841120c9cc24e32fecdcccbd6c30aa3504f2eb9d77890ed412aceb0b",
+      "txHash": "0x35bbaac170ca67673f35021df9ae7ae16bc0e0515c284601bb2266a1e2b730ba",
       "kind": "uups"
     },
     {
       "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
-      "txHash": "0xaed4e65bcaa0a05f07ba81ac0b381094a77f9078998a76a2d42130db666a7a7e",
+      "txHash": "0x61264baa2bc0eb89ad23f2d542e7008282598278c29ad2530f17793f4dbedb41",
       "kind": "uups"
     },
     {
       "address": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
-      "txHash": "0x372896327815945944abb7d1b43047259ee2c1c05d7e2892a6c9525e8c0f074e",
+      "txHash": "0xd1f287833a3eb1a9669f2a897d392db1d6ec6d7458aee50a93a45d1751428f84",
       "kind": "uups"
     },
     {
       "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
-      "txHash": "0x74e5d4f4805a612f8c9436aa1f1f24ae6144453a60a04d4762701cf6fa2d3c2b",
+      "txHash": "0x5302f9e893b97ed082f324d7eb6d45162a786b2ae44fe6876a11222be591b4b7",
       "kind": "uups"
     },
     {
       "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
-      "txHash": "0x78f245bfa327463adf01e9c9cb8e1e62d2f99a14a4ba2b11fb45a1a592d0f785",
+      "txHash": "0xd8e44087abcc467b828f98b57044663a1445870b338e791bdf6bc6b41fc9558e",
       "kind": "uups"
     },
     {
       "address": "0x59b670e9fA9D0A427751Af201D676719a970857b",
-      "txHash": "0x8042748db1f849fbd708c215ef71b5cc37494bef949b5a7525dc8c4e44ce4765",
+      "txHash": "0xf51d818452c6f02ada78c7f5b40983d4e7c4715f8e7eebb039143ec333cd165a",
       "kind": "uups"
     },
     {
       "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
-      "txHash": "0x2928693d172ee63ee5208b5eac7a1863198b4cd14ee97be5b0d7fc9f2a47f3b4",
+      "txHash": "0x3735390d9a6ad6fa6d62045e92190fbb193e96ea61de172e424b05e7525ab390",
       "kind": "uups"
     },
     {
       "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-      "txHash": "0xce44c460e4f681462a5ee1b7cc65b8a295497a7832d95906e6b99deeef3de12c",
+      "txHash": "0x26cbbe758eee873637bd19c9ce4cc3ff04e35cd492525a1777c57b12b17603ca",
       "kind": "uups"
     }
   ],
   "impls": {
-    "6c3b0271f9d13a68f29373ed94667dabd02da712da3ed547e2dd81aac8e1ed72": {
+    "d1c406f24758647e2e5641bb9ee6842442a53ea206ceb71f1261b9075bb5059a": {
       "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      "txHash": "0x4d855866caf82fb7b2595a737ee93698e7eacf154b21fa8cd54834b97edbfd1a",
+      "txHash": "0xbf8c748561f1d1882d685d5ecadb393c8c332178428a89349f9c87ef66371227",
       "layout": {
         "storage": [
           {
@@ -828,7 +828,7 @@
           {
             "contract": "Wristables",
             "label": "indexWL",
-            "type": "t_uint256",
+            "type": "t_uint32",
             "src": "contracts/Wristables.sol:29"
           },
           {
@@ -902,6 +902,9 @@
           },
           "t_string_storage": {
             "label": "string"
+          },
+          "t_uint32": {
+            "label": "uint32"
           },
           "t_bytes32": {
             "label": "bytes32"
@@ -945,9 +948,9 @@
         }
       }
     },
-    "96957768790f7ded6b4370ea2323dfc602deed279e8ce38c3b3307f31cd26fa1": {
+    "2e0cf717c8b7d86d327695c7485d8467493a07596e074b7e81cfaff9ebfcaea2": {
       "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0x80dd9d3f639769f8b1be5723275848814d28e016df072a3905d9f13d52c2d3d6",
+      "txHash": "0x2cc74d834cf04e84ca7ca103a8e36890b90e7043f8e58dc9eb5e034c28cbf732",
       "layout": {
         "storage": [
           {
@@ -1145,7 +1148,7 @@
           {
             "contract": "Wristables",
             "label": "indexWL",
-            "type": "t_uint256",
+            "type": "t_uint32",
             "src": "contracts/Wristables.sol:29"
           },
           {
@@ -1219,6 +1222,9 @@
           },
           "t_string_storage": {
             "label": "string"
+          },
+          "t_uint32": {
+            "label": "uint32"
           },
           "t_bytes32": {
             "label": "bytes32"
