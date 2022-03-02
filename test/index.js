@@ -289,6 +289,7 @@ describe("Wristables Contract Unit Tests", function () {
       .redeem(proof, { value: ethers.utils.parseEther("1") });
 
     expect(await wristables.balanceOf(wlUserAddress)).to.deep.equal(1);
+    expect(await wristables.ownerOf(0)).to.deep.equal(wlUserAddress);
 
     expect(
       wristables.redeem(proof, { value: ethers.utils.parseEther("1") })
