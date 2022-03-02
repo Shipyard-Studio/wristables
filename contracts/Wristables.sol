@@ -121,6 +121,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         issueToken(msg.sender);
     }
 
+    /// @dev allows whitelisted users to claim their guarenteed token
     function redeem(bytes32[] calldata proof) external payable {
         require(_verify(_leaf(msg.sender), proof), "Invalid merkle proof");
         require(!toggleAuction, "use `mintAuction`");
@@ -130,6 +131,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
         issueToken(msg.sender);
     }    
 
+    /// @dev issues token to recipient
     function issueToken (address recipient) private {
         uint mintIndex = _tokenSupply.current();
         require(mintIndex <= availableSupply, "exceeds token supply");
@@ -199,10 +201,6 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     function setIndexWL (uint32 _indexWL) external payable onlyOwner {
         require(_indexWL > indexWL, "less than current index");
         indexWL = _indexWL;
-    }
-
-    function getClaimedWL (address account) external view returns (bool[10] memory) {
-        return claimedWL[account];
     }
 
     /// @dev override token uri to append .json to string
