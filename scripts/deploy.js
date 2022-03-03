@@ -1,34 +1,29 @@
-// import { Wristables } from "../typechain/Wristables";
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// When running the script with `npx hardhat run <script>` you'll find the Hardhat
-// Runtime Environment's members available in the global scope.
-import { ethers } from "hardhat";
 const { ethers, upgrades } = require("hardhat");
+const { merkleTree } = require("./merkle-tree");
 
 async function main() {
-  const Wristables = await ethers.getContractFactory("Wristables");
-  // how we would do it if this weren't UUPS
-  // wristables = await Wristables.deploy();
+  const WAWC = await ethers.getContractFactory("WristAficionadoWatchClub");
 
-  // how we do it instead
-  const wristables = await upgrades.deployProxy(
+  const wawc = await upgrades.deployProxy(
     // contract to deploy as proxy:
-    Wristables,
+    WAWC,
     // this array is where arguments given to initializer go:
-    // [
-    //   [shipyardWallet.address, imagineWallet.address, wristablesWallet.address],
-    //   [7, 2, 1],
-    // ],
-    [["0x7Eb696df980734DD592EBDd9dfC39F189aDc5456"], [1]],
+    [
+      [
+        "0x7Eb696df980734DD592EBDd9dfC39F189aDc5456",
+        "0x6b845d7dF55Ff9D91c686Df94C8C80a8a6CF339a",
+        "0x36142d591D9B920f97E8e6fFA831436CfA17B822",
+      ],
+      [7, 2, 1],
+      merkleTree.getHexRoot(),
+    ],
     // Here we indicate this is a UUPS:
     { kind: "uups" }
   );
 
-  await wristables.deployed();
+  await wawc.deployed();
 
-  console.log("wristables deployed to:", wristables.address);
+  console.log("wawc deployed to:", wawc.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

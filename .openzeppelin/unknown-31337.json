@@ -578,59 +578,59 @@
     },
     {
       "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-      "txHash": "0xac64ff78e0d48e7dee1e641e0adeab0c2c4c4ecbbb628179317bbf04795278c7",
+      "txHash": "0x0732d80841df75ed95f27ed04804f4ae2fa29cadbc4c710c28bb367892e17e45",
       "kind": "uups"
     },
     {
       "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-      "txHash": "0x76e8152b576fa96eec49e5fa49e77de86bb911c3d59eefeda58e64f42653e749",
+      "txHash": "0x7317ba26027cbd511225c4efe2d36a120960ce701ba57e4e07d135864fe24220",
       "kind": "uups"
     },
     {
       "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0x35bbaac170ca67673f35021df9ae7ae16bc0e0515c284601bb2266a1e2b730ba",
+      "txHash": "0x6e08e64dda43b88153009176bc6cfc50a7cb08ac86124843f0087569cff83d89",
       "kind": "uups"
     },
     {
       "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
-      "txHash": "0x61264baa2bc0eb89ad23f2d542e7008282598278c29ad2530f17793f4dbedb41",
+      "txHash": "0x38c7d1ec3f03e84855708a4ffc8f58ec7087d5f51b2d1e5b2b14e189d6f6619c",
       "kind": "uups"
     },
     {
       "address": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
-      "txHash": "0xd1f287833a3eb1a9669f2a897d392db1d6ec6d7458aee50a93a45d1751428f84",
+      "txHash": "0x1e192a9110c89b9a93762bc7a1edf200801a79fac0e803098740394bd1d5bfba",
       "kind": "uups"
     },
     {
       "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
-      "txHash": "0x5302f9e893b97ed082f324d7eb6d45162a786b2ae44fe6876a11222be591b4b7",
+      "txHash": "0x9cffde98eb89c84c85faba7b190bfae8d740df3bb01ab1a07c550fada76c2afb",
       "kind": "uups"
     },
     {
       "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
-      "txHash": "0xd8e44087abcc467b828f98b57044663a1445870b338e791bdf6bc6b41fc9558e",
+      "txHash": "0x27408204dd3b69757451c748434ca2742ecdbd8b9e2db8e432ec1053bad24ede",
       "kind": "uups"
     },
     {
       "address": "0x59b670e9fA9D0A427751Af201D676719a970857b",
-      "txHash": "0xf51d818452c6f02ada78c7f5b40983d4e7c4715f8e7eebb039143ec333cd165a",
+      "txHash": "0xde61d08246397ed2fc20c08cb4d115ea86c82e2dccce1a86c4b5009383c7bc48",
       "kind": "uups"
     },
     {
       "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
-      "txHash": "0x3735390d9a6ad6fa6d62045e92190fbb193e96ea61de172e424b05e7525ab390",
+      "txHash": "0xf9ea1257fcaf69d76339972f191bc973e5f72cdb1ec6bf3de4fb05e000f4db42",
       "kind": "uups"
     },
     {
       "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-      "txHash": "0x26cbbe758eee873637bd19c9ce4cc3ff04e35cd492525a1777c57b12b17603ca",
+      "txHash": "0xde5f6869891f39168ffb78f80f80657fc83480c6c54bdf1031d5285de55b91be",
       "kind": "uups"
     }
   ],
   "impls": {
-    "d1c406f24758647e2e5641bb9ee6842442a53ea206ceb71f1261b9075bb5059a": {
+    "678bc74b25fc308ee4405c46e7b116984b4a22aaefd2e79e8bf39d52b7a2d253": {
       "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      "txHash": "0xbf8c748561f1d1882d685d5ecadb393c8c332178428a89349f9c87ef66371227",
+      "txHash": "0xa501ff15340c4f32d7af7eae932ce90a3b249276a66ec738c8f551b495147c9e",
       "layout": {
         "storage": [
           {
@@ -784,69 +784,69 @@
             "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:68"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "claimedWL",
             "type": "t_mapping(t_address,t_array(t_bool)10_storage)",
             "src": "contracts/Wristables.sol:21"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "dutchAuction",
             "type": "t_struct(DutchAuction)3420_storage",
             "src": "contracts/Wristables.sol:23"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "_tokenSupply",
             "type": "t_struct(Counter)2865_storage",
             "src": "contracts/Wristables.sol:24"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "_baseTokenURI",
             "type": "t_string_storage",
             "src": "contracts/Wristables.sol:25"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "availableSupply",
             "type": "t_uint256",
             "src": "contracts/Wristables.sol:26"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "MAX_SUPPLY",
             "type": "t_uint256",
             "src": "contracts/Wristables.sol:27"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "mintPrice",
             "type": "t_uint256",
             "src": "contracts/Wristables.sol:28"
           },
           {
-            "contract": "Wristables",
-            "label": "indexWL",
-            "type": "t_uint32",
+            "contract": "WristAficionadoWatchClub",
+            "label": "toggleAuction",
+            "type": "t_bool",
             "src": "contracts/Wristables.sol:29"
           },
           {
-            "contract": "Wristables",
-            "label": "toggleAuction",
+            "contract": "WristAficionadoWatchClub",
+            "label": "saleActive",
             "type": "t_bool",
             "src": "contracts/Wristables.sol:30"
           },
           {
-            "contract": "Wristables",
-            "label": "saleActive",
-            "type": "t_bool",
+            "contract": "WristAficionadoWatchClub",
+            "label": "root",
+            "type": "t_bytes32",
             "src": "contracts/Wristables.sol:31"
           },
           {
-            "contract": "Wristables",
-            "label": "root",
-            "type": "t_bytes32",
+            "contract": "WristAficionadoWatchClub",
+            "label": "indexWL",
+            "type": "t_uint32",
             "src": "contracts/Wristables.sol:32"
           }
         ],
@@ -864,7 +864,7 @@
             "label": "bool"
           },
           "t_struct(DutchAuction)3420_storage": {
-            "label": "struct Wristables.DutchAuction",
+            "label": "struct WristAficionadoWatchClub.DutchAuction",
             "members": [
               {
                 "label": "startingPrice",
@@ -903,11 +903,11 @@
           "t_string_storage": {
             "label": "string"
           },
-          "t_uint32": {
-            "label": "uint32"
-          },
           "t_bytes32": {
             "label": "bytes32"
+          },
+          "t_uint32": {
+            "label": "uint32"
           },
           "t_array(t_uint256)49_storage": {
             "label": "uint256[49]"
@@ -948,9 +948,9 @@
         }
       }
     },
-    "2e0cf717c8b7d86d327695c7485d8467493a07596e074b7e81cfaff9ebfcaea2": {
+    "12bd402b082a0934d4c3a9d03a4d197800331c0f95cf241c664fd12e59d99466": {
       "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0x2cc74d834cf04e84ca7ca103a8e36890b90e7043f8e58dc9eb5e034c28cbf732",
+      "txHash": "0x333b3fb9c5655acf200557f922b7779d1b497c49c013cde889df1c048bc057df",
       "layout": {
         "storage": [
           {
@@ -1104,69 +1104,69 @@
             "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:68"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "claimedWL",
             "type": "t_mapping(t_address,t_array(t_bool)10_storage)",
             "src": "contracts/Wristables.sol:21"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "dutchAuction",
             "type": "t_struct(DutchAuction)3420_storage",
             "src": "contracts/Wristables.sol:23"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "_tokenSupply",
             "type": "t_struct(Counter)2865_storage",
             "src": "contracts/Wristables.sol:24"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "_baseTokenURI",
             "type": "t_string_storage",
             "src": "contracts/Wristables.sol:25"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "availableSupply",
             "type": "t_uint256",
             "src": "contracts/Wristables.sol:26"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "MAX_SUPPLY",
             "type": "t_uint256",
             "src": "contracts/Wristables.sol:27"
           },
           {
-            "contract": "Wristables",
+            "contract": "WristAficionadoWatchClub",
             "label": "mintPrice",
             "type": "t_uint256",
             "src": "contracts/Wristables.sol:28"
           },
           {
-            "contract": "Wristables",
-            "label": "indexWL",
-            "type": "t_uint32",
+            "contract": "WristAficionadoWatchClub",
+            "label": "toggleAuction",
+            "type": "t_bool",
             "src": "contracts/Wristables.sol:29"
           },
           {
-            "contract": "Wristables",
-            "label": "toggleAuction",
+            "contract": "WristAficionadoWatchClub",
+            "label": "saleActive",
             "type": "t_bool",
             "src": "contracts/Wristables.sol:30"
           },
           {
-            "contract": "Wristables",
-            "label": "saleActive",
-            "type": "t_bool",
+            "contract": "WristAficionadoWatchClub",
+            "label": "root",
+            "type": "t_bytes32",
             "src": "contracts/Wristables.sol:31"
           },
           {
-            "contract": "Wristables",
-            "label": "root",
-            "type": "t_bytes32",
+            "contract": "WristAficionadoWatchClub",
+            "label": "indexWL",
+            "type": "t_uint32",
             "src": "contracts/Wristables.sol:32"
           }
         ],
@@ -1184,7 +1184,7 @@
             "label": "bool"
           },
           "t_struct(DutchAuction)3420_storage": {
-            "label": "struct Wristables.DutchAuction",
+            "label": "struct WristAficionadoWatchClub.DutchAuction",
             "members": [
               {
                 "label": "startingPrice",
@@ -1223,11 +1223,11 @@
           "t_string_storage": {
             "label": "string"
           },
-          "t_uint32": {
-            "label": "uint32"
-          },
           "t_bytes32": {
             "label": "bytes32"
+          },
+          "t_uint32": {
+            "label": "uint32"
           },
           "t_array(t_uint256)49_storage": {
             "label": "uint256[49]"

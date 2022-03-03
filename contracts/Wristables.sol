@@ -10,7 +10,7 @@ import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/MerkleProofUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 
-contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable, UUPSUpgradeable, ReentrancyGuardUpgradeable  {
+contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable, UUPSUpgradeable, ReentrancyGuardUpgradeable  {
     
     //TODO: MERKLE PROOF STATE / FUNCTIONS
 
@@ -63,7 +63,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
     ) public initializer {
         // console.log(payees[0], shares_[0]);
         __Ownable_init();
-         __ERC721_init("Wristables", "WRST");
+         __ERC721_init("Wrist Aficionado Watch Club", "WAWC");
         __PaymentSplitter_init( payees, shares_);
         __ReentrancyGuard_init();
         
@@ -222,7 +222,7 @@ contract Wristables is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpg
 }
 
 /// @dev dummy contract for testing upgradeability
-contract WristablesV2 is Wristables {
+contract WristablesV2 is WristAficionadoWatchClub {
     function version() pure public returns (string memory) {
         return "V2";
     }

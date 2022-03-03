@@ -17,8 +17,8 @@ const leaves = dataRaw.map((x) => keccak256(x));
 
 const merkleTree = new MerkleTree(leaves, keccak256, { sortPairs: true });
 
-let Wristables,
-  wristables,
+let WAWC,
+  wawc,
   WristablesV2,
   wristablesV2,
   shipyardWallet,
@@ -44,15 +44,15 @@ async function proxyDeploy() {
     ...addrs
   ] = await ethers.getSigners();
 
-  Wristables = await ethers.getContractFactory("Wristables");
+  WAWC = await ethers.getContractFactory("WristAficionadoWatchClub");
   WristablesV2 = await ethers.getContractFactory("WristablesV2");
   // how we would do it if this weren't UUPS
   // wristables = await Wristables.deploy();
 
   // how we do it instead
-  wristables = await upgrades.deployProxy(
+  wawc = await upgrades.deployProxy(
     // contract to deploy as proxy:
-    Wristables,
+    WAWC,
     // this array is where arguments given to initializer go:
     [
       [shipyardWallet.address, imagineWallet.address, wristablesWallet.address],
@@ -63,7 +63,7 @@ async function proxyDeploy() {
     { kind: "uups" }
   );
 
-  await wristables.deployed();
+  await wawc.deployed();
 }
 
 describe("Wristables Proxy", function () {
@@ -72,12 +72,12 @@ describe("Wristables Proxy", function () {
   });
 
   it("Should deploy as a proxy successfully", async function () {
-    expect(await wristables.MAX_SUPPLY()).to.equal(9999); // quick deploy check
+    expect(await wawc.MAX_SUPPLY()).to.equal(9999); // quick deploy check
   });
 
   it("Should be upgradeable", async function () {
-    expect(wristables.functions.hasOwnProperty("version")).to.deep.equal(false);
-    wristablesV2 = await upgrades.upgradeProxy(wristables, WristablesV2);
+    expect(wawc.functions.hasOwnProperty("version")).to.deep.equal(false);
+    wristablesV2 = await upgrades.upgradeProxy(wawc, WristablesV2);
     expect(wristablesV2.functions.hasOwnProperty("version")).to.deep.equal(
       true
     );
@@ -85,14 +85,14 @@ describe("Wristables Proxy", function () {
   });
 
   it("Should have an owner", async function () {
-    expect(await wristables.owner()).to.deep.equal(shipyardWallet.address);
+    expect(await wawc.owner()).to.deep.equal(shipyardWallet.address);
   });
 });
 
 describe("Wristables Contract Unit Tests", function () {
   beforeEach(async function () {
     await proxyDeploy();
-    await wristables.setAvailableSupply(999);
+    await wawc.setAvailableSupply(999);
     await hre.network.provider.request({
       method: "hardhat_impersonateAccount",
       params: ["0x7Eb696df980734DD592EBDd9dfC39F189aDc5456"],
@@ -100,19 +100,19 @@ describe("Wristables Contract Unit Tests", function () {
   });
 
   it("Should airdrop", async function () {
-    await wristables.airdrop(addr2.address, 2);
+    await wawc.airdrop(addr2.address, 2);
 
-    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
-    expect(await wristables.ownerOf(1)).to.deep.equal(addr2.address);
+    expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
+    expect(await wawc.ownerOf(1)).to.deep.equal(addr2.address);
 
     // only owner check
     expect(
-      wristables.connect(addr2).airdrop(addr2.address, 2)
+      wawc.connect(addr2).airdrop(addr2.address, 2)
     ).to.be.revertedWith("");
   });
 
   it("Should batch airdrop", async function () {
-    await wristables.batchAirdrop([
+    await wawc.batchAirdrop([
       addr2.address,
       addr3.address,
       addr4.address,
@@ -120,15 +120,15 @@ describe("Wristables Contract Unit Tests", function () {
       addr6.address,
     ]);
 
-    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
-    expect(await wristables.ownerOf(1)).to.deep.equal(addr3.address);
-    expect(await wristables.ownerOf(2)).to.deep.equal(addr4.address);
-    expect(await wristables.ownerOf(3)).to.deep.equal(addr5.address);
-    expect(await wristables.ownerOf(4)).to.deep.equal(addr6.address);
+    expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
+    expect(await wawc.ownerOf(1)).to.deep.equal(addr3.address);
+    expect(await wawc.ownerOf(2)).to.deep.equal(addr4.address);
+    expect(await wawc.ownerOf(3)).to.deep.equal(addr5.address);
+    expect(await wawc.ownerOf(4)).to.deep.equal(addr6.address);
 
     // only owner check
     expect(
-      wristables
+      wawc
         .connect(addr2)
         .batchAirdrop([
           addr2.address,
@@ -143,43 +143,43 @@ describe("Wristables Contract Unit Tests", function () {
   it("Mint for flat price", async function () {
     // reverts due to saleActive being false
     expect(
-      wristables.connect(addr2).mint({ value: ethers.utils.parseEther("1") })
+      wawc.connect(addr2).mint({ value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
 
-    await wristables.setMintPrice(ethers.utils.parseEther("1"));
-    await wristables.setSaleActive(true);
+    await wawc.setMintPrice(ethers.utils.parseEther("1"));
+    await wawc.setSaleActive(true);
 
-    await wristables
+    await wawc
       .connect(addr2)
       .mint({ value: ethers.utils.parseEther("1") });
-    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
+    expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
   });
 
   it("Mint at Auction", async function () {
     // reverts due to saleActive being false
     expect(
-      wristables
+      wawc
         .connect(addr2)
         .mintAuction({ value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
 
-    await wristables.setSaleActive(true);
+    await wawc.setSaleActive(true);
 
     // reverts due to toggleAuction being false
     expect(
-      wristables
+      wawc
         .connect(addr2)
         .mintAuction({ value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
 
-    await wristables.setToggleAuction(true);
+    await wawc.setToggleAuction(true);
 
     const currentTime = Math.floor(Date.now() / 1000); // current time in s
 
     const oneWeek = 7 * 24 * 60 * 60; // 1 week in s
     const fiveMinutes = 5 * 60; // 5 mins in s
 
-    await wristables.setDutchAuction(
+    await wawc.setDutchAuction(
       ethers.utils.parseEther("10"),
       ethers.utils.parseEther("1"),
       currentTime,
@@ -191,10 +191,10 @@ describe("Wristables Contract Unit Tests", function () {
     // await hre.ethers.provider.send("evm_mine");
 
     // mint at starting price
-    await wristables
+    await wawc
       .connect(addr2)
       .mintAuction({ value: ethers.utils.parseEther("10") });
-    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
+    expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
 
     await hre.ethers.provider.send("evm_setNextBlockTimestamp", [
       currentTime + fiveMinutes,
@@ -202,10 +202,10 @@ describe("Wristables Contract Unit Tests", function () {
     await hre.ethers.provider.send("evm_mine");
 
     // mint at 1 increment in price deductions
-    await wristables
+    await wawc
       .connect(addr2)
       .mintAuction({ value: ethers.utils.parseEther("9") });
-    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
+    expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
 
     await hre.ethers.provider.send("evm_setNextBlockTimestamp", [
       currentTime + oneWeek / 7,
@@ -213,10 +213,10 @@ describe("Wristables Contract Unit Tests", function () {
     await hre.ethers.provider.send("evm_mine");
 
     // mint at floor price
-    await wristables
+    await wawc
       .connect(addr2)
       .mintAuction({ value: ethers.utils.parseEther("1") });
-    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
+    expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
 
     await hre.ethers.provider.send("evm_setNextBlockTimestamp", [
       currentTime + oneWeek,
@@ -225,36 +225,36 @@ describe("Wristables Contract Unit Tests", function () {
 
     // mint at floor price
     expect(
-      wristables
+      wawc
         .connect(addr2)
         .mintAuction({ value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
   });
 
   it("should not be off by one", async function () {
-    expect(wristables.airdrop(addr2.address, 1000)).to.be.revertedWith("");
+    expect(wawc.airdrop(addr2.address, 1000)).to.be.revertedWith("");
 
-    await wristables.airdrop(addr2.address, 999);
+    await wawc.airdrop(addr2.address, 999);
 
-    expect(await wristables.ownerOf(0)).to.deep.equal(addr2.address);
-    expect(await wristables.ownerOf(998)).to.deep.equal(addr2.address);
+    expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
+    expect(await wawc.ownerOf(998)).to.deep.equal(addr2.address);
 
-    expect(wristables.airdrop(addr2.address, 1)).to.be.revertedWith("");
+    expect(wawc.airdrop(addr2.address, 1)).to.be.revertedWith("");
   });
 
   it("should return proper royalty amount", async function () {
-    const royaltyInfo = await wristables.royaltyInfo(
+    const royaltyInfo = await wawc.royaltyInfo(
       0,
       ethers.utils.parseEther("10")
     );
 
-    expect(royaltyInfo[0]).to.deep.equal(wristables.address);
+    expect(royaltyInfo[0]).to.deep.equal(wawc.address);
     expect(royaltyInfo[1]).to.deep.equal(ethers.utils.parseEther("0.6"));
   });
 
   it("should allow whitelisted addresses to claim", async function () {
-    await wristables.setMintPrice(ethers.utils.parseEther("1"));
-    await wristables.setSaleActive(true);
+    await wawc.setMintPrice(ethers.utils.parseEther("1"));
+    await wawc.setSaleActive(true);
 
     await addr2.sendTransaction({
       to: "0x7Eb696df980734DD592EBDd9dfC39F189aDc5456",
@@ -280,21 +280,21 @@ describe("Wristables Contract Unit Tests", function () {
     //   )
     // );
 
-    await wristables // good proof correct user
+    await wawc // good proof correct user
       .connect(wlUser)
       .redeem(proof, { value: ethers.utils.parseEther("1") });
 
-    expect(await wristables.balanceOf(wlUserAddress)).to.deep.equal(1);
-    expect(await wristables.ownerOf(0)).to.deep.equal(wlUserAddress);
+    expect(await wawc.balanceOf(wlUserAddress)).to.deep.equal(1);
+    expect(await wawc.ownerOf(0)).to.deep.equal(wlUserAddress);
 
     expect(
       // good proof wrong user
-      wristables.redeem(proof, { value: ethers.utils.parseEther("1") })
+      wawc.redeem(proof, { value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
 
     expect(
       // good proof good user, can't claim more than once
-      wristables // good proof correct user
+      wawc // good proof correct user
         .connect(wlUser)
         .redeem(proof, { value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
