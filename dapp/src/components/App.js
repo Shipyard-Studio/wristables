@@ -43,6 +43,8 @@ function App() {
   const [sectionInFocus, setSectionInFocus] = useState(0)
   const [modalIsOpen, setIsOpen] = useState(false)
 
+  // const wallet = useWallet()
+
   function openModal() {
     setIsOpen(true);
   }
@@ -108,7 +110,7 @@ function App() {
   }
   
   useEffect(() => {
-    getCurrentWalletConnected();
+    // getCurrentWalletConnected();
     addWalletListener(); 
     window.addEventListener("scroll", getInFocusSection)
   }, []); 
