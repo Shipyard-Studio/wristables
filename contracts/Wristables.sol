@@ -11,8 +11,6 @@ import "@openzeppelin/contracts-upgradeable/utils/cryptography/MerkleProofUpgrad
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 
 contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable, UUPSUpgradeable, ReentrancyGuardUpgradeable  {
-    
-    //TODO: MERKLE PROOF STATE / FUNCTIONS
 
     using AddressUpgradeable for address;
     using StringsUpgradeable for uint256;
