@@ -7,9 +7,18 @@ import '../style/Hero.css'
 
 const Hero = ({props}) => {
 
+    async function mint () {
+        await window.contract.connect(window.signer).mint({value: window.ethers.utils.parseEther('0.01')})
+    }
+
+    async function redeem () {
+        // get merkle proof
+        await window.contract.connect(window.signer).redeem({value: window.ethers.utils.parseEther('0.01')})
+    }
+
     async function handleClick () {
         if (props.walletAddress.length > 0) {
-            await window.contract.connect(window.signer).mint({value: window.ethers.utils.parseEther('0.01')})
+            
         } else {
             props.connect()
         }
