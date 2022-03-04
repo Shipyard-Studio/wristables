@@ -65,7 +65,7 @@ const Hero = ({props}) => {
                 <div className='big-text text-center z-10 noselect'>
                     Wrist Aficionado<br/>Watch Club.
                 </div>
-                <div>
+                <div className='z-10'>
                     <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-10 pb-0 lg:pb-10'>
                     <div className='m-auto'>0/1000</div>
                     </div>
