@@ -11,11 +11,24 @@ import TextSection from './TextSection';
 import ProgressBar from './ProgressBar';
 import Hero from './Hero';
 import Footer from './Footer';
+import { ethers } from "ethers"
+import WAWCJSON from '../utils/WAWC.json'
 import '../style/App.css';
 
 
 
 function App() {
+
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
+  const signer = provider.getSigner()
+
+  const WAWCAddr = '0x61AB2708bB3c8EB3BB957b1a09CF5E31B9101ac0'
+  const contract = new ethers.Contract(WAWCAddr, WAWCJSON.abi, provider);
+
+  window.ethers = ethers
+  window.provider = provider
+  window.signer = signer
+  window.contract = contract
 
   const bg1 = '/WASiteAssets/bg1.png'
   const bg2 = '/WASiteAssets/bg2.png'
@@ -58,9 +71,10 @@ function App() {
   async function connectWallet() {
       if (window.ethereum) {
         try {
-          const addressArray = await window.ethereum.request({
-            method: "eth_requestAccounts",
-          });
+          const addressArray = await provider.send("eth_requestAccounts", [])
+          // const addressArray = await window.ethereum.request({
+          //   method: "eth_requestAccounts",
+          // });
           setWallet(addressArray[0]);
         } catch {
           setWallet("");
@@ -108,7 +122,7 @@ function App() {
   }
   
   useEffect(() => {
-    getCurrentWalletConnected();
+    // getCurrentWalletConnected();
     addWalletListener(); 
     window.addEventListener("scroll", getInFocusSection)
   }, []); 

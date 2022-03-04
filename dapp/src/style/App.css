@@ -1,6 +1,7 @@
 @font-face {
   font-family: proximaNova;
-  src: url(../../public/WASiteAssets/ProximaNovaFont.otf);
+  /* src: local('proximaNova'), url(./ProximaNovaFont.otf) format('otf'); */
+  src: url(./ProximaNovaFont.otf);
 }
 
 .noselect {
