@@ -1,8 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Watch from './Watch'
-
-
+import {getProof} from '../utils/merkle-tree'
 import '../style/Hero.css'
 
 const Hero = ({props}) => {
@@ -12,13 +11,15 @@ const Hero = ({props}) => {
     }
 
     async function redeem () {
+        let proof = getProof(props.walletAddress)
+        console.log(proof)
         // get merkle proof
-        await window.contract.connect(window.signer).redeem({value: window.ethers.utils.parseEther('0.01')})
+        await window.contract.connect(window.signer).redeem(proof, {value: window.ethers.utils.parseEther('0.01')})
     }
 
     async function handleClick () {
         if (props.walletAddress.length > 0) {
-            
+            redeem()
         } else {
             props.connect()
         }
