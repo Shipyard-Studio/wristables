@@ -1,27 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Watch from './Watch'
-import {getProof} from '../utils/merkle-tree'
+import {getProof, verify} from '../utils/merkle-tree'
 import '../style/Hero.css'
 
 const Hero = ({props}) => {
+
+    const [verified, setVerified] = useState(undefined)
 
     async function mint () {
         await window.contract.connect(window.signer).mint({value: window.ethers.utils.parseEther('0.01')})
     }
 
+    function verifyWallet () {
+        let proof = getProof(props.walletAddress)
+        let v = verify(proof, props.walletAddress)
+        console.log(v)
+        setVerified(v)
+    }
+
     async function redeem () {
         let proof = getProof(props.walletAddress)
         console.log(proof)
-        // get merkle proof
+
         await window.contract.connect(window.signer).redeem(proof, {value: window.ethers.utils.parseEther('0.01')})
     }
 
     async function handleClick () {
         if (props.walletAddress.length > 0) {
-            redeem()
+            if (verified === undefined) {
+                verifyWallet()
+            }
+            if (verified === true) {
+                await redeem() 
+                // await mint() //switch to mint when the public mint goes live
+            }
+            if (verified === false) {
+                // display error
+            }
         } else {
             props.connect()
+        }
+    }
+
+    function mintText () {
+        if (verified === undefined) {
+            return 'Verify WL'
+        }
+        if (verified === true) {
+            return 'Claim'
+        }
+        if (verified === false) {
+            return 'Not on WL :('
         }
     }
 
@@ -38,7 +68,7 @@ const Hero = ({props}) => {
                     <div 
                     onClick={handleClick}
                     className='whitespace-nowrap hover:cursor-pointer ease-in ease-out duration-300 m-auto mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center bg-lime-600 hover:bg-lime-500 text-center rounded-full py-2 lg:py-5' src='/WASiteAssets/DiscordButton.png' alt='discord button' >
-                        {props.walletAddress.length > 0 ? `Mint` : 'Connect Wallet'}
+                        {props.walletAddress.length > 0 ? mintText() : 'Connect Wallet'}
                         </div>
                     <div onClick={props.openModal} className='whitespace-nowrap hover:bg-blue-600 ease-in ease-out duration-300 m-auto  mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none mb-10 lg:mb-0 w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center bg-zinc-600 text-center rounded-full py-2 lg:py-5 hover:cursor-pointer' src='/WASiteAssets/DiscordButton.png' alt='discord button' >Piece Unique Studio</div>
                 </div>
