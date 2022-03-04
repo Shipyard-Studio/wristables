@@ -16,6 +16,11 @@ const getProof = (leaf) => {
   return merkleTree.getHexProof(keccak256(leaf))
 }
 
+const verify = (proof, leaf) => {
+  return merkleTree.verify(proof, keccak256(leaf), merkleTree.getRoot())
+}
+
 module.exports = {
   getProof,
+  verify
 };
