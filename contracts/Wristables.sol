@@ -19,7 +19,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     mapping(address => bool[10]) public claimedWL; // stores addresses that have claimed whitelisted tokens, set to fixed array because a dynamic array inside of a mapping does not fill with falsey values by default. There won't be more than 10 drops so this is safe for us to assume.
 
     DutchAuction public dutchAuction; 
-    CountersUpgradeable.Counter public _tokenSupply;
+    CountersUpgradeable.Counter private _tokenSupply;
     string private _baseTokenURI;
     uint256 public availableSupply; // max number of tokens currently available for mint
     uint256 public MAX_SUPPLY;
@@ -195,7 +195,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         _baseTokenURI = baseURI;
     }
 
-    /// @dev allows owner to reset base uri when updating metadata
+    /// @dev sets the index of the whitelist drop in claimedWL
     function setIndexWL (uint32 _indexWL) external payable onlyOwner {
         require(_indexWL > indexWL, "less than current index");
         indexWL = _indexWL;

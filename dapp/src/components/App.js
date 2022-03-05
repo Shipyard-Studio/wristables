@@ -22,7 +22,7 @@ function App() {
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const signer = provider.getSigner()
 
-  const WAWCAddr = '0x61AB2708bB3c8EB3BB957b1a09CF5E31B9101ac0'
+  const WAWCAddr = '0xBCf58E5933Db9DFcfCf6901d98BAd8b2822c7800'
   const contract = new ethers.Contract(WAWCAddr, WAWCJSON.abi, provider);
 
   window.ethers = ethers
