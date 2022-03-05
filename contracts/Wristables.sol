@@ -217,6 +217,9 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         return MerkleProofUpgradeable.verify(proof, root, leaf);
     }
 
+    function getCurrentSupply () external view returns (uint) {
+        return _tokenSupply.current();
+    }
 }
 
 /// @dev dummy contract for testing upgradeability
