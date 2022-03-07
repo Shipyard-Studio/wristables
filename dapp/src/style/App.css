@@ -50,6 +50,15 @@ body{
   padding-bottom: 10px;
 }
 
+.bigger-medium-text {
+  font-family: proxima-nova, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 28pt;
+  line-height: 24pt;
+  padding-bottom: 10px;
+}
+
 .small-caps {
   font-variant: small-caps;
 }
