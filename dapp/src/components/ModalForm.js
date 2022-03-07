@@ -4,7 +4,7 @@ const ModalForm = ({closeModal}) => {
 
     return (
         <div className='z-20'>
-            <div className='z-20 text-right text-neutral-400 pt-2 pr-5 w-full' onClick={closeModal}>ⓧ</div>
+            <div className='z-20 text-right text-neutral-400 pt-2 pr-5 w-full hover:cursor-pointer' onClick={closeModal}>ⓧ</div>
             <img src='/Fingerprint.png' className='z-20 pt-0 mx-auto' alt='fingerprint' />
             <h2 className='z-20 text-center text-blue-600 medium-text pt-10'>Piece Unique Studio</h2>
             <p className='z-20 text-center text-neutral-600 small-caps'>coming soon</p>
