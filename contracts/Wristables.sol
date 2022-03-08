@@ -70,7 +70,6 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         MAX_SUPPLY = 9999;
         root = _root;
 
-        supportsInterface(0x2a55205a); // required for ERC2981 (royalty) standard
     }
 
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {
