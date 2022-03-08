@@ -9,6 +9,7 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/MerkleProofUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/interfaces/IERC2981Upgradeable.sol";
 
 contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable, UUPSUpgradeable, ReentrancyGuardUpgradeable  {
 
@@ -168,8 +169,8 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
 
     /// @dev set available token supply
     function addAvailableSupply (uint256 availableSupplyIncrease) external payable onlyOwner {
-        require(availableSupply + availableSupplyIncrease <= MAX_SUPPLY, "cannot be greater than 9999");
         availableSupply += availableSupplyIncrease;
+        require(availableSupply <= MAX_SUPPLY, "cannot be greater than 9999");
     }
 
     /// @dev set price of each token in the `mint` function
@@ -216,6 +217,10 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
 
     function getCurrentSupply () external view returns (uint) {
         return _tokenSupply.current();
+    }
+
+    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
+        return interfaceId == type(IERC2981Upgradeable).interfaceId || super.supportsInterface(interfaceId);
     }
 }
 
