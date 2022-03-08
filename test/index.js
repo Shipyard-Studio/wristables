@@ -289,4 +289,8 @@ describe("Wristables Contract Unit Tests", function () {
         .redeem(proof, { value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
   });
+
+  it("should support interface 2981", async function () {
+    expect(await wawc.supportsInterface(0x2a55205a)).to.deep.equal(true);
+  });
 });
