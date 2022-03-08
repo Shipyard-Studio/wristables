@@ -112,7 +112,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     }
 
     /// @dev allows whitelisted users to claim their guarenteed token
-    function redeem(bytes32[] calldata proof) external payable {
+    function redeem(bytes32[] calldata proof) external payable nonReentrant {
         require(_verify(_leaf(msg.sender), proof), "Invalid merkle proof");
         require(!toggleAuction, "use `mintAuction`");
         require(msg.value == mintPrice, "incorrect ether sent");
@@ -157,6 +157,11 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         uint256 _expiresAt,
         uint256 _priceDeductionRate
         ) external payable onlyOwner {
+        require(_startingPrice > 0);
+        require(_floorPrice > 0);
+        require(_startAt > 0);
+        require(_startAt < _expiresAt);
+        require(_priceDeductionRate > 0);
         dutchAuction = DutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
         emit NewDutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
     }
