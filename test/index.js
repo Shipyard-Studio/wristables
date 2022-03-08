@@ -92,7 +92,7 @@ describe("Wristables Proxy", function () {
 describe("Wristables Contract Unit Tests", function () {
   beforeEach(async function () {
     await proxyDeploy();
-    await wawc.setAvailableSupply(999);
+    await wawc.addAvailableSupply(999);
     await hre.network.provider.request({
       method: "hardhat_impersonateAccount",
       params: ["0x7Eb696df980734DD592EBDd9dfC39F189aDc5456"],

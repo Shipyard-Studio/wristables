@@ -13,7 +13,7 @@ const setUp = async () => {
   console.log("set mint price");
   await contract.connect(signer).setSaleActive(true);
   console.log("set sale active");
-  await contract.connect(signer).setAvailableSupply(999);
+  await contract.connect(signer).addAvailableSupply(999);
   console.log("set available supply 999");
 };
 
