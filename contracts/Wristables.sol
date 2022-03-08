@@ -75,17 +75,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {
         // 
     }
-
-    /// @dev sends the next token to the `to` address for free + gas
-    function airdrop (address to, uint256 quantity) public payable onlyOwner nonReentrant {
-        uint mintIndex = _tokenSupply.current();
-        require(mintIndex + quantity <= availableSupply, "exceeds available supply");
-        for (uint256 i = 0; i < quantity; i++) {
-            _safeMint(to, mintIndex + i);
-            _tokenSupply.increment();
-        }
-    }
-
+    
     /// @dev sends one token to each address in the `to` array
     function batchAirdrop (address[] calldata to, uint[] calldata quantity) public payable onlyOwner nonReentrant {
         for (uint256 i = 0; i < to.length; i++) {
