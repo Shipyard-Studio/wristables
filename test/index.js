@@ -169,16 +169,18 @@ describe("Wristables Contract Unit Tests", function () {
     const oneWeek = 7 * 24 * 60 * 60; // 1 week in s
     const fiveMinutes = 5 * 60; // 5 mins in s
 
+    const oneWeekFromNow = currentTime + oneWeek;
+
     await wawc.setDutchAuction(
       ethers.utils.parseEther("10"),
       ethers.utils.parseEther("1"),
-      currentTime,
-      currentTime + oneWeek,
+      oneWeekFromNow,
+      oneWeekFromNow + oneWeek,
       ethers.utils.parseEther("1")
     );
 
-    // await hre.ethers.provider.send("evm_setNextBlockTimestamp", [currentTime]);
-    // await hre.ethers.provider.send("evm_mine");
+    await hre.ethers.provider.send("evm_setNextBlockTimestamp", [oneWeekFromNow]);
+    await hre.ethers.provider.send("evm_mine");
 
     // mint at starting price
     await wawc
@@ -187,7 +189,7 @@ describe("Wristables Contract Unit Tests", function () {
     expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
 
     await hre.ethers.provider.send("evm_setNextBlockTimestamp", [
-      currentTime + fiveMinutes,
+      oneWeekFromNow + fiveMinutes,
     ]);
     await hre.ethers.provider.send("evm_mine");
 
@@ -198,7 +200,7 @@ describe("Wristables Contract Unit Tests", function () {
     expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
 
     await hre.ethers.provider.send("evm_setNextBlockTimestamp", [
-      currentTime + oneWeek / 7,
+      oneWeekFromNow + oneWeek / 7,
     ]);
     await hre.ethers.provider.send("evm_mine");
 
@@ -209,7 +211,7 @@ describe("Wristables Contract Unit Tests", function () {
     expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
 
     await hre.ethers.provider.send("evm_setNextBlockTimestamp", [
-      currentTime + oneWeek,
+      oneWeekFromNow + oneWeek,
     ]);
     await hre.ethers.provider.send("evm_mine");
 

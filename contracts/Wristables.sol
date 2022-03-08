@@ -82,8 +82,8 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
                 uint mintIndex = _tokenSupply.current();
                 require(mintIndex + quantity[i] <= availableSupply, "exceeds token supply");
             for (uint256 j = 0; j < quantity[i]; j++) {
-                _safeMint(to[i], mintIndex + j);
                 _tokenSupply.increment();
+                _safeMint(to[i], mintIndex + j);
             }
         }
     }
@@ -125,8 +125,8 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     function issueToken (address recipient) private {
         uint mintIndex = _tokenSupply.current();
         require(mintIndex <= availableSupply, "exceeds token supply");
-        _safeMint(recipient, mintIndex);
         _tokenSupply.increment();
+        _safeMint(recipient, mintIndex);
     }
 
     /// @dev ERC2981
@@ -159,7 +159,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         ) external payable onlyOwner {
         require(_startingPrice > 0);
         require(_floorPrice > 0);
-        require(_startAt > 0);
+        require(_startAt > block.timestamp);
         require(_startAt < _expiresAt);
         require(_priceDeductionRate > 0);
         dutchAuction = DutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
