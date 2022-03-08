@@ -140,7 +140,7 @@ function App() {
           <ModalForm closeModal={closeModal}/>
       </Modal>
 
-        {window.innerWidth < 800 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
+        {window.innerWidth < 900 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
         <ProgressBar num={sectionInFocus}/>
         <Section bg={null} size={1} Component={Hero} componentProps={{walletAddress: walletAddress, connect: connectWallet, openModal: openModal}}/>
         <Section bg={bg2} size={1} Component={TextSection} componentProps={{header: "About", body: "<div>Every Wrist Aficionado Mint is customized and built in a unique colour and finish. With the first 1,000 pieces created using moving parts from a Hypercar Engine, no two releases will be the same. All our Custom Pieces come with an all World Access Pass. View our roadmap below to see what you will be able to do with your time piece as we build out our project.</div>" }}/>

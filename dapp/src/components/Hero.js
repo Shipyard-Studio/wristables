@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import Watch from './Watch'
+import MintConfirmation from './MintConfirmation'
 import {getProof, verify} from '../utils/merkle-tree'
 import '../style/Hero.css'
 
 const Hero = ({props}) => {
 
+    const [mintPending, setMintPending] = useState(undefined)
     const [verified, setVerified] = useState(undefined)
     const [supply, setSupply] = useState(undefined)
 
@@ -87,7 +89,9 @@ const Hero = ({props}) => {
                         <div 
                         onClick={handleClick}
                         className='whitespace-nowrap hover:cursor-pointer ease-in ease-out duration-300 m-auto mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center bg-lime-600 hover:bg-lime-500 text-center rounded-full py-2 lg:py-5' src='/WASiteAssets/DiscordButton.png' alt='discord button' >
-                            {props.walletAddress.length > 0 ? mintText() : 'Connect Wallet'}
+                            {
+                            mintPending ? <MintConfirmation /> :
+                            props.walletAddress.length > 0 ? mintText() : 'Connect Wallet'}
                             </div>
                         <div onClick={props.openModal} className='whitespace-nowrap hover:bg-blue-600 ease-in ease-out duration-300 m-auto  mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none mb-10 lg:mb-0 w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center bg-zinc-600 text-center rounded-full py-2 lg:py-5 hover:cursor-pointer' src='/WASiteAssets/DiscordButton.png' alt='discord button' >Piece Unique Studio</div>
                     </div>
