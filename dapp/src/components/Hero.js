@@ -7,25 +7,25 @@ import '../style/Hero.css'
 
 const Hero = ({props}) => {
 
+    const [error, setError] = useState(undefined)
+    const [txHash, setTxHash] = useState(undefined)
+    const [reciept, setReceipt] = useState(undefined)
     const [mintPending, setMintPending] = useState(undefined)
     const [verified, setVerified] = useState(undefined)
     const [supply, setSupply] = useState(undefined)
 
     async function mint () {
-        await window.contract.connect(window.signer).mint({value: window.ethers.utils.parseEther('0.01')})
+        return await window.contract.connect(window.signer).mint({value: window.ethers.utils.parseEther('0.01')})
     }
 
     function verifyWallet () {
         let proof = getProof(props.walletAddress)
         let v = verify(proof, props.walletAddress)
-        console.log(v)
         setVerified(v)
     }
 
     async function redeem () {
         let proof = getProof(props.walletAddress)
-        console.log(proof)
-
         await window.contract.connect(window.signer).redeem(proof, {value: window.ethers.utils.parseEther('0.01')})
     }
 
@@ -35,9 +35,21 @@ const Hero = ({props}) => {
                 verifyWallet()
             }
             if (verified === true) {
-                setMintPending(true)
-                // await redeem() 
-                await mint() //switch to mint when the public mint goes live
+
+                if (!txHash && !error) {
+
+                    setMintPending(true)
+                    try {
+                        let tx = await redeem() 
+                        // let tx = await mint() //switch to mint when the public mint goes live
+                        setTxHash(tx.hash);
+                        
+                        const _receipt = await tx.wait();
+                        setReceipt(_receipt)
+                    } catch (err) {
+                        setError(err)
+                    }
+                }
             }
             if (verified === false) {
                 // display error
@@ -60,9 +72,7 @@ const Hero = ({props}) => {
     }
 
     async function getCurrentSupply () {
-        console.log('contract: ', window.contract)
        let _supply = await window.contract.getCurrentSupply()
-       console.log('supply: ',_supply)
        _supply = _supply.toString()
        for (let i = _supply.length; i < 4; i++) {
            _supply = '0' + _supply
@@ -92,9 +102,8 @@ const Hero = ({props}) => {
                         <div 
                         onClick={handleClick}
                         className='whitespace-nowrap hover:cursor-pointer ease-in ease-out duration-300 m-auto mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center bg-lime-600 hover:bg-lime-500 text-center rounded-full py-2 lg:py-5' src='/WASiteAssets/DiscordButton.png' alt='discord button' >
-                            {console.log(mintPending)}
                             { 
-                            mintPending ? <MintConfirmation /> :
+                            mintPending ? <MintConfirmation error={error} txHash={txHash} reciept={reciept} /> :
                             <div>
                             {props.walletAddress.length > 0 ? mintText() : 'Connect Wallet'}
                             </div>
