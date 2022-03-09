@@ -7,7 +7,7 @@ console.log('meow')
 
   return (
     <div className="">
-        hello world
+        <img className='' src='/spinny.gif' alt='spinner' />
     </div>
   );
 }

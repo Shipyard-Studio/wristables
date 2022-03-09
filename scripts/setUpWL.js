@@ -1,7 +1,7 @@
 const { ethers } = require("hardhat");
 const WAWCJSON = require("../artifacts/contracts/Wristables.sol/WristablesV2.json");
 
-const WAWCAddr = "0x6f8DA0590600572C31C9960156A8111dCD05EA67";
+const WAWCAddr = "0xf7DE696145B527C004669Fb07B66591e2dD53E58";
 const contract = new ethers.Contract(WAWCAddr, WAWCJSON.abi);
 const provider = new ethers.providers.JsonRpcProvider(
   `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_PRIVATE_KEY}`

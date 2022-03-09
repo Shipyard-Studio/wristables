@@ -293,4 +293,9 @@ describe("Wristables Contract Unit Tests", function () {
   it("should support interface 2981", async function () {
     expect(await wawc.supportsInterface(0x2a55205a)).to.deep.equal(true);
   });
+
+  it("should get current supply", async function () {
+    let supply = await wawc.getCurrentSupply()
+    console.log(supply);
+  })
 });
