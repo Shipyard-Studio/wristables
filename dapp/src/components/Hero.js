@@ -73,12 +73,15 @@ const Hero = ({props}) => {
     }
 
     async function getCurrentSupply () {
-       let _supply = await window.contract.getCurrentSupply()
-       _supply = _supply.toString()
-       for (let i = _supply.length; i < 4; i++) {
-           _supply = '0' + _supply
-       }
-       setSupply(_supply)
+        if (props.walletAddress.length > 0 && props.chainId === 4) {
+
+            let _supply = await window.contract.getCurrentSupply()
+            _supply = _supply.toString()
+            for (let i = _supply.length; i < 4; i++) {
+                _supply = '0' + _supply
+            }
+            setSupply(_supply)
+        }
     }
 
     getCurrentSupply()
@@ -92,12 +95,21 @@ const Hero = ({props}) => {
                     Wrist Aficionado<br/>Watch Club.
                 </div>
                 <div className='z-10'>
+                {props.walletAddress.length > 0 && props.chainId === 4 ?
                     <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-10 pb-0 lg:pb-10'>
-                    <div className='m-auto'>
-                        <span className='text-lime-600 bigger-medium-text'>{supply ? `${supply }` : '0000'}</span>
-                        <span className='bigger-medium-text'> / 1000</span>
+                        <div className='m-auto'>
+                            <span className='text-lime-600 bigger-medium-text'>{supply ? `${supply }` : '0000'}</span>
+                            <span className='bigger-medium-text'> / 1000</span>
+                        </div>
                     </div>
+                :
+                <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-10 pb-0 lg:pb-10'>
+                <div className='m-auto'>
+                    <span className='text-lime-600 bigger-medium-text'></span>
+                    <span className='bigger-medium-text'></span>
                 </div>
+            </div>
+                }
                     <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-10 pb-0 lg:pb-10'>
                         <a href='https://discord.gg/pcfaMQSFfW' className='whitespace-nowrap ease-in ease-out duration-300 hover:bg-blue-600  mx-auto lg:mx-2 mt-5 lg:mt-0 m-auto lg:m-none  w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center bg-zinc-600 text-center rounded-full py-2 lg:py-5 hover:cursor-pointer' target='_blank' alt='discord link'>Discord</a>
                         <div 

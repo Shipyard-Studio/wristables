@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Sidebar from './Sidebar';
 import Modal from 'react-modal';
 import ModalForm from './ModalForm';
+import ModalChainID from './ModalChainId'
 import Header from './Header';
 import Columns from './Columns';
 import Brands from './Brands';
@@ -53,8 +54,10 @@ function App() {
   Modal.setAppElement('#root');
 
   const [walletAddress, setWallet] = useState("")
+  const [chainId, setChainId] = useState(provider?._network?.chainId)
   const [sectionInFocus, setSectionInFocus] = useState(0)
   const [modalIsOpen, setIsOpen] = useState(false)
+  const [chainModalIsOpen, setChainModalIsOpen] = useState(false)
 
   function openModal() {
     setIsOpen(true);
@@ -67,7 +70,14 @@ function App() {
   function closeModal() {
     setIsOpen(false);
   }
+  function openChainModal() {
+    setChainModalIsOpen(true);
+  }
 
+  function closeChainModal() {
+    setChainModalIsOpen(false);
+  }
+  
   async function connectWallet() {
       if (window.ethereum) {
         try {
@@ -75,7 +85,14 @@ function App() {
           // const addressArray = await window.ethereum.request({
           //   method: "eth_requestAccounts",
           // });
+          console.log('meow: ', window.provider._network.chainId)
+          setChainId(window.provider._network.chainId)
           setWallet(addressArray[0]);
+          if (chainId !== 4) {
+            openChainModal()
+          } else {
+            closeChainModal()
+          }
         } catch {
           setWallet("");
         }
@@ -112,7 +129,19 @@ function App() {
           setWallet("");
         }
       })
-    } 
+      window.ethereum.on('chainChanged', (chain) => {
+        console.log('network changed')
+        if(chain === '0x4') {
+          chain = 4
+        }
+        setChainId(chain)
+        if (chainId !== 4) {
+          openChainModal()
+        } else {
+          closeChainModal()
+        }
+      })
+    }
   }
 
   function getInFocusSection() {
@@ -127,6 +156,7 @@ function App() {
     window.addEventListener("scroll", getInFocusSection)
   }, []); 
 
+
   return (
     
       <div className="App" id="outer-container">
@@ -140,9 +170,20 @@ function App() {
           <ModalForm closeModal={closeModal}/>
       </Modal>
 
+        <Modal
+        
+        isOpen={chainModalIsOpen}
+        onAfterOpen={afterOpenModal}
+        style={modalStyles}
+        contentLabel="Example Modal"
+      >
+        <ModalChainID chainId={chainId} closeModal={closeChainModal}/>
+    </Modal>
+
+
         {window.innerWidth < 900 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
         <ProgressBar num={sectionInFocus}/>
-        <Section bg={null} size={1} Component={Hero} componentProps={{walletAddress: walletAddress, connect: connectWallet, openModal: openModal}}/>
+        <Section bg={null} size={1} Component={Hero} componentProps={{walletAddress: walletAddress, connect: connectWallet, openModal: openModal, chainId: chainId}}/>
         <Section bg={bg2} size={1} Component={TextSection} componentProps={{header: "About", body: "<div>Every Wrist Aficionado Mint is customized and built in a unique colour and finish. With the first 1,000 pieces created using moving parts from a Hypercar Engine, no two releases will be the same. All our Custom Pieces come with an all World Access Pass. View our roadmap below to see what you will be able to do with your time piece as we build out our project.</div>" }}/>
         <Section bg={bg3} size={1} Component={TextSection} componentProps={{header: "Community", body: "<div>Our members become a part of a community of watch collectors and enthusiasts that can hold onto their time piece as it appreciates, or trade it and pass along the benefits to another collector. Join our Discord to be apart of our community.</div>", emailCapture: true}}/>
         <Section bg={bg4} size={1} Component={TextSection} componentProps={{header: "Events", body: "<div>Early members will have VIP access to the Wrist Aficionado Convention in Miami on April 7th, with a chance to win a one off Piece Unique that you will customize in person at the convention. Several members will also have the opportunity to win private dinners in New York City or Miami with the members of Wrist Aficionado.</div>"}}/>
