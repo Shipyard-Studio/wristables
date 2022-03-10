@@ -17,7 +17,7 @@ function MintConfirmation ({error, txHash, reciept}) {
 // console.log(txs)
 
   return (
-    <div className="flex m-auto justify-center z-30">
+    <div className="flex m-auto justify-center items-center z-30">
         {
         error ?
         <>

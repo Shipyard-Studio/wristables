@@ -23,11 +23,15 @@ function App() {
   const desiredChain = 4
   const desiredHexChain = '0x4'
 
-  const provider = new ethers.providers.Web3Provider(window.ethereum)
-  const signer = provider.getSigner()
+  let provider, signer, WAWCAddr, contract
 
-  const WAWCAddr = '0xf7DE696145B527C004669Fb07B66591e2dD53E58'
-  const contract = new ethers.Contract(WAWCAddr, WAWCJSON.abi, provider);
+  if (window.ethereum) {
+    provider = new ethers.providers.Web3Provider(window.ethereum)
+    signer = provider?.getSigner()
+    WAWCAddr = '0xf7DE696145B527C004669Fb07B66591e2dD53E58'
+    contract = new ethers.Contract(WAWCAddr, WAWCJSON.abi, provider);
+  }
+
 
   window.ethers = ethers
   window.provider = provider
@@ -84,11 +88,11 @@ function App() {
   async function connectWallet() {
       if (window.ethereum) {
         try {
-          const addressArray = await provider.send("eth_requestAccounts", [])
+          const addressArray = await provider?.send("eth_requestAccounts", [])
           // const addressArray = await window.ethereum.request({
           //   method: "eth_requestAccounts",
           // });
-          setChainId(window.provider._network.chainId)
+          setChainId(window.provider?._network?.chainId)
           setWallet(addressArray[0]);
           if (chainId !== desiredChain) {
             openChainModal()
