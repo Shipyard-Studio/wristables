@@ -30,8 +30,6 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     bytes32 public root; // merkle root set in initializer
     uint32 public indexWL; // index for for drop #, allows us to check claimedWL for the correct bool
 
-
-
     modifier SaleActive () {
         require(saleActive, "sale paused");
         _;
@@ -204,6 +202,10 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         string memory json = ".json";
         string memory baseURI = _baseTokenURI;
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), json)) : "";
+    }
+
+    function setMerkleRoot(bytes32 _root) external onlyOwner {
+        root = _root;
     }
 
     function _leaf(address account) internal pure returns (bytes32) {
