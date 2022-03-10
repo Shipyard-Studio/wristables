@@ -6,6 +6,7 @@ const dataRaw = [
   "0xfeedfeedfeedfeedfeedfeedfeedfeedfeedfeed",
   "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
   "0x7Eb696df980734DD592EBDd9dfC39F189aDc5456",
+  "0x8b5B9497e096ee6FfD6041D1Db37a2ac2b41AB0d"
 ];
 
 const leaves = dataRaw.map((x) => keccak256(x));
