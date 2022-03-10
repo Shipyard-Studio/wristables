@@ -20,6 +20,9 @@ import '../style/App.css';
 
 function App() {
 
+  const desiredChain = 4
+  const desiredHexChain = '0x4'
+
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const signer = provider.getSigner()
 
@@ -85,10 +88,9 @@ function App() {
           // const addressArray = await window.ethereum.request({
           //   method: "eth_requestAccounts",
           // });
-          console.log('meow: ', window.provider._network.chainId)
           setChainId(window.provider._network.chainId)
           setWallet(addressArray[0]);
-          if (chainId !== 4) {
+          if (chainId !== desiredChain) {
             openChainModal()
           } else {
             closeChainModal()
@@ -130,12 +132,11 @@ function App() {
         }
       })
       window.ethereum.on('chainChanged', (chain) => {
-        console.log('network changed')
-        if(chain === '0x4') {
-          chain = 4
+        if(chain === desiredHexChain) {
+          chain = desiredChain
         }
         setChainId(chain)
-        if (chainId !== 4) {
+        if (chainId !== desiredChain) {
           openChainModal()
         } else {
           closeChainModal()

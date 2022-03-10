@@ -9,8 +9,6 @@ const ModalForm = ({chainId, closeModal}) => {
         });
     }
 
-    console.log('meow: ', chainId)
-
     useEffect(() => {
         chainReq()  
             if (chainId === 4) {
