@@ -16,6 +16,7 @@ const TextSection = ({props}) => {
     let body = ReactHtmlParser(props.body)
 
     async function postEmail () {
+        
         let input = document.getElementById('email-input')
 
         const data = {
