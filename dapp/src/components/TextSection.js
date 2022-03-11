@@ -4,6 +4,13 @@ import axios from 'axios';
 
 const TextSection = ({props}) => {
 
+    function validateEmail(email) 
+    {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+    
+
     let emailText = (status) => {
         let input = document.getElementById('email-input')
         
@@ -17,6 +24,9 @@ const TextSection = ({props}) => {
 
     async function postEmail () {
         let input = document.getElementById('email-input')
+
+        let regex = validateEmail(input);
+        console.log(regex)
 
         const data = {
                     email: input.value,
