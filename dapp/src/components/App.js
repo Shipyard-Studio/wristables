@@ -108,7 +108,7 @@ function App() {
   }
   
   useEffect(() => {
-    getCurrentWalletConnected();
+    // getCurrentWalletConnected();
     addWalletListener(); 
     window.addEventListener("scroll", getInFocusSection)
   }, []); 
