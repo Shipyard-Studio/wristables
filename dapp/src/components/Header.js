@@ -7,13 +7,13 @@ function Header ({walletAddress, connect}) {
   return (
     <div className="header z-10">
         <div className='nav-container z-10'>
-            {window.innerWidth > 800? 
-            <a href="https://wristaficionado.com/" target='_blank' className='ease-in ease-out duration-300 ml-8 px-4 py-2 border-2 border-blue-600 rounded-full hover:bg-blue-600 hover:cursor-pointer z-10'>Visit Boutique</a>
+            {window.innerWidth > 900? 
+            <a href="https://wristaficionado.com/" target='_blank' rel="noreferrer" className='ease-in ease-out duration-300 ml-8 px-4 py-2 border-2 border-blue-600 rounded-full hover:bg-blue-600 hover:cursor-pointer z-10'>Visit Boutique</a>
             :
             <div></div>
             }
              <img className='wa-logo z-10 mt-5 lg:mt-0' src={WALogo} alt='wrist afficianado logo'/>
-            {window.innerWidth > 800? 
+            {window.innerWidth > 900? 
             <div className='nav-logo-flex z-10'>
                 {/* <div onClick={connect} className='ease-in ease-out duration-300 ml-8 px-4 py-2 border-2 border-blue-600 rounded-full hover:bg-blue-600 hover:cursor-pointer z-10'>
                 {walletAddress.length > 0 ? `${walletAddress.slice(0,6)}...${walletAddress.slice(-4)}` :
