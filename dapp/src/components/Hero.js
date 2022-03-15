@@ -31,29 +31,45 @@ const Hero = ({props}) => {
 
     async function handleClick () {
         if (props.walletAddress.length > 0) {
+            if (verified === undefined) {
+                verifyWallet()
+            }
+            if (verified === true) {
 
                 if (!txHash && !error) {
 
                     setMintPending(true)
                     try {
-                        // let tx = await redeem() 
-                        let tx = await mint() //switch to mint when the public mint goes live
+                        let tx = await redeem() 
+                        // let tx = await mint() //switch to mint when the public mint goes live
                         setTxHash(tx.hash);
                         
                         const _receipt = await tx.wait();
                         setReceipt(_receipt)
                     } catch (err) {
-                        console.error(err)
+                        console.error('code: ', err.code)
                         setError(err)
                     }
                 }
-            } else {
-            props.connect()
+            }
+            if (verified === false) {
+                // display error
+            }
+        } else {
+            await props.connect()
         }
     }
 
     function mintText () {
-            return 'Mint'
+        if (verified === undefined) {
+            return 'Verify WL'
+        }
+        if (verified === true) {
+            return 'Claim'
+        }
+        if (verified === false) {
+            return 'Not on WL :('
+        }
     }
 
     async function getCurrentSupply () {
