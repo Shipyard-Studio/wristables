@@ -15,7 +15,7 @@ const Hero = ({props}) => {
     const [supply, setSupply] = useState(undefined)
 
     async function mint () {
-        return await window.contract.connect(window.signer).mint({value: window.ethers.utils.parseEther('0.01')})
+        return await props.contract.connect(props.signer).mint({value: props.ethers.utils.parseEther('0.01')})
     }
 
     function verifyWallet () {
@@ -26,7 +26,7 @@ const Hero = ({props}) => {
 
     async function redeem () {
         let proof = getProof(props.walletAddress)
-        await window.contract.connect(window.signer).redeem(proof, {value: window.ethers.utils.parseEther('0.01')})
+        await props.contract.connect(props.signer).redeem(proof, {value: props.ethers.utils.parseEther('0.01')})
     }
 
     async function handleClick () {
@@ -56,7 +56,7 @@ const Hero = ({props}) => {
                 // display error
             }
         } else {
-            props.connect()
+            await props.connect()
         }
     }
 
@@ -75,7 +75,7 @@ const Hero = ({props}) => {
     async function getCurrentSupply () {
         if (props.walletAddress.length > 0 && props.chainId === 4) {
 
-            let _supply = await window.contract.getCurrentSupply()
+            let _supply = await props.contract.getCurrentSupply()
             _supply = _supply.toString()
             for (let i = _supply.length; i < 4; i++) {
                 _supply = '0' + _supply

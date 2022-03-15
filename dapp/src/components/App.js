@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Sidebar from './Sidebar';
 import Modal from 'react-modal';
 import ModalForm from './ModalForm';
@@ -75,7 +75,7 @@ const web3Modal = new Web3Modal({
   const [signer, setSigner] = useState(undefined)
   const [provider, setProvider] = useState(undefined)
   const [walletAddress, setWallet] = useState("")
-  const [chainId, setChainId] = useState(provider?._network?.chainId)
+  const [chainId, setChainId] = useState("")
   const [sectionInFocus, setSectionInFocus] = useState(0)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [chainModalIsOpen, setChainModalIsOpen] = useState(false)
@@ -100,9 +100,9 @@ const web3Modal = new Web3Modal({
   }
 
   async function walletConnect () {
-      web3Modal.connect().then(async (instance) => {
-
+      const instance = await web3Modal.connect()
         const p = new ethers.providers.Web3Provider(instance);
+        await p.ready;
         setProvider(p)
         const s = p.getSigner();
         setSigner(s)
@@ -110,47 +110,50 @@ const web3Modal = new Web3Modal({
         const c = new ethers.Contract(WAWCAddr, WAWCJSON.abi, p);
         setContract(c)
 
-        // console.log(p)
+        console.log(s)
         // window.ethers = ethers
         // window.provider = provider
         // window.signer = signer
         // window.contract = contract
 
         const addressArray = await p.send("eth_requestAccounts", [])
-        setWallet(addressArray[0]);
-        // setChainId(p._network?.chainId)
-        // if (chainId !== desiredChain) {
-        //   openChainModal()
-        // } else {
-        //   closeChainModal()
-        // }
+        setWallet(addressArray[0])
 
-      })
-      
+        checkChain(p)
   }
-  
-  async function connectWallet() {
-      if (window.ethereum) {
-        try {
-          const addressArray = await provider?.send("eth_requestAccounts", [])
-          // const addressArray = await window.ethereum.request({
-          //   method: "eth_requestAccounts",
-          // });
-          setChainId(window.provider?._network?.chainId)
-          setWallet(addressArray[0]);
-          if (chainId !== desiredChain) {
-            openChainModal()
-          } else {
-            closeChainModal()
-          }
-        } catch {
-          setWallet("");
+
+  function checkChain(provider) {
+    console.log(provider)
+        setChainId(provider._network.chainId)
+        if (chainId !== desiredChain) {
+          openChainModal()
+        } else {
+          closeChainModal()
         }
-      } else {
-        setWallet("");
-        alert("Please install a wallet in your browser!");
-      }
   }
+
+  // async function connectWallet() {
+  //     if (window.ethereum) {
+  //       try {
+  //         const addressArray = await provider?.send("eth_requestAccounts", [])
+  //         // const addressArray = await window.ethereum.request({
+  //         //   method: "eth_requestAccounts",
+  //         // });
+  //         setChainId(window.provider?._network?.chainId)
+  //         setWallet(addressArray[0]);
+  //         if (chainId !== desiredChain) {
+  //           openChainModal()
+  //         } else {
+  //           closeChainModal()
+  //         }
+  //       } catch {
+  //         setWallet("");
+  //       }
+  //     } else {
+  //       setWallet("");
+  //       alert("Please install a wallet in your browser!");
+  //     }
+  // }
 
   async function getCurrentWalletConnected() {
 
@@ -232,7 +235,7 @@ const web3Modal = new Web3Modal({
 
         {window.innerWidth < 900 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
         <ProgressBar num={sectionInFocus}/>
-        <Section bg={null} size={1} Component={Hero} componentProps={{walletAddress: walletAddress, connect: walletConnect, openModal: openModal, chainId: chainId}}/>
+        <Section bg={null} size={1} Component={Hero} componentProps={{ethers: ethers, provider: provider, signer: signer, contract: contract, walletAddress: walletAddress, connect: walletConnect, openModal: openModal, chainId: chainId}}/>
         <Section bg={bg2} size={1} Component={TextSection} componentProps={{header: "About", body: "<div>Every Wrist Aficionado Mint is customized and built in a unique colour and finish. With the first 1,000 pieces created using moving parts from a Hypercar Engine, no two releases will be the same. All our Custom Pieces come with an all World Access Pass. View our roadmap below to see what you will be able to do with your time piece as we build out our project.</div>" }}/>
         <Section bg={bg3} size={1} Component={TextSection} componentProps={{header: "Community", body: "<div>Our members become a part of a community of watch collectors and enthusiasts that can hold onto their time piece as it appreciates, or trade it and pass along the benefits to another collector. Join our Discord to be apart of our community.</div>", emailCapture: true}}/>
         <Section bg={bg4} size={1} Component={TextSection} componentProps={{header: "Events", body: "<div>Early members will have VIP access to the Wrist Aficionado Convention in Miami on April 7th, with a chance to win a one off Piece Unique that you will customize in person at the convention. Several members will also have the opportunity to win private dinners in New York City or Miami with the members of Wrist Aficionado.</div>"}}/>
