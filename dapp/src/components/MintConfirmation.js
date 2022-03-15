@@ -6,7 +6,7 @@ function MintConfirmation ({error, txHash, reciept}) {
     function errorText () {
         if (error.message == 'execution reverted: claimed') {
             return 'Already Claimed'
-        } else if (error.code == 3001) {
+        } else if (error.code == 4001) {
             return 'Transaction Canceled'
         } else if (error.code == 'UNPREDICTABLE_GAS_LIMIT') {
             return 'Already Claimed'
