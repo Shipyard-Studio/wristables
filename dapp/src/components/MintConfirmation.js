@@ -4,10 +4,10 @@ import React from 'react';
 function MintConfirmation ({error, txHash, reciept}) {
 
     function errorText () {
-        console.log(error)
+        console.log('code: ',error.code)
         if (error.message == 'execution reverted: claimed') {
             return 'Already Claimed'
-        } else if (error.code == 3001) {
+        } else if (error.code == 4001) {
             return 'Transaction Canceled'
         } else {
             return 'Something went wrong...'
