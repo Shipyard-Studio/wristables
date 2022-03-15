@@ -15,28 +15,39 @@ import Footer from './Footer';
 import { ethers } from "ethers"
 import WAWCJSON from '../utils/WAWC.json'
 import '../style/App.css';
+import Web3Modal from "web3modal";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 
 
 function App() {
 
+
+const providerOptions = {
+  walletconnect: {
+    package: WalletConnectProvider, // required
+    options: {
+      infuraId: "INFURA_ID" // required
+    }
+  }
+};
+
+const web3Modal = new Web3Modal({
+  network: "rinkeby", // optional
+  cacheProvider: true, // optional
+  providerOptions // required
+});
+
+  const WAWCAddr = '0xf7DE696145B527C004669Fb07B66591e2dD53E58'
   const desiredChain = 4
   const desiredHexChain = '0x4'
 
-  let provider, signer, WAWCAddr, contract
-
   if (window.ethereum) {
-    provider = new ethers.providers.Web3Provider(window.ethereum)
-    signer = provider?.getSigner()
-    WAWCAddr = '0xf7DE696145B527C004669Fb07B66591e2dD53E58'
-    contract = new ethers.Contract(WAWCAddr, WAWCJSON.abi, provider);
+    // provider = new ethers.providers.Web3Provider(window.ethereum)
+    // signer = provider?.getSigner()
+    // WAWCAddr = '0xf7DE696145B527C004669Fb07B66591e2dD53E58'
+    // contract = new ethers.Contract(WAWCAddr, WAWCJSON.abi, provider);
   }
-
-
-  window.ethers = ethers
-  window.provider = provider
-  window.signer = signer
-  window.contract = contract
 
   const bg1 = '/WASiteAssets/bg1.png'
   const bg2 = '/WASiteAssets/bg2.png'
@@ -60,6 +71,9 @@ function App() {
 
   Modal.setAppElement('#root');
 
+  const [contract, setContract] = useState(undefined)
+  const [signer, setSigner] = useState(undefined)
+  const [provider, setProvider] = useState(undefined)
   const [walletAddress, setWallet] = useState("")
   const [chainId, setChainId] = useState(provider?._network?.chainId)
   const [sectionInFocus, setSectionInFocus] = useState(0)
@@ -83,6 +97,36 @@ function App() {
 
   function closeChainModal() {
     setChainModalIsOpen(false);
+  }
+
+  async function walletConnect () {
+      web3Modal.connect().then(async (instance) => {
+
+        const p = new ethers.providers.Web3Provider(instance);
+        setProvider(p)
+        const s = p.getSigner();
+        setSigner(s)
+        
+        const c = new ethers.Contract(WAWCAddr, WAWCJSON.abi, p);
+        setContract(c)
+
+        // console.log(p)
+        // window.ethers = ethers
+        // window.provider = provider
+        // window.signer = signer
+        // window.contract = contract
+
+        const addressArray = await p.send("eth_requestAccounts", [])
+        setWallet(addressArray[0]);
+        // setChainId(p._network?.chainId)
+        // if (chainId !== desiredChain) {
+        //   openChainModal()
+        // } else {
+        //   closeChainModal()
+        // }
+
+      })
+      
   }
   
   async function connectWallet() {
@@ -188,7 +232,7 @@ function App() {
 
         {window.innerWidth < 900 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
         <ProgressBar num={sectionInFocus}/>
-        <Section bg={null} size={1} Component={Hero} componentProps={{walletAddress: walletAddress, connect: connectWallet, openModal: openModal, chainId: chainId}}/>
+        <Section bg={null} size={1} Component={Hero} componentProps={{walletAddress: walletAddress, connect: walletConnect, openModal: openModal, chainId: chainId}}/>
         <Section bg={bg2} size={1} Component={TextSection} componentProps={{header: "About", body: "<div>Every Wrist Aficionado Mint is customized and built in a unique colour and finish. With the first 1,000 pieces created using moving parts from a Hypercar Engine, no two releases will be the same. All our Custom Pieces come with an all World Access Pass. View our roadmap below to see what you will be able to do with your time piece as we build out our project.</div>" }}/>
         <Section bg={bg3} size={1} Component={TextSection} componentProps={{header: "Community", body: "<div>Our members become a part of a community of watch collectors and enthusiasts that can hold onto their time piece as it appreciates, or trade it and pass along the benefits to another collector. Join our Discord to be apart of our community.</div>", emailCapture: true}}/>
         <Section bg={bg4} size={1} Component={TextSection} componentProps={{header: "Events", body: "<div>Early members will have VIP access to the Wrist Aficionado Convention in Miami on April 7th, with a chance to win a one off Piece Unique that you will customize in person at the convention. Several members will also have the opportunity to win private dinners in New York City or Miami with the members of Wrist Aficionado.</div>"}}/>
