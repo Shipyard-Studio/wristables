@@ -31,10 +31,6 @@ const Hero = ({props}) => {
 
     async function handleClick () {
         if (props.walletAddress.length > 0) {
-            if (verified === undefined) {
-                verifyWallet()
-            }
-            if (verified === true) {
 
                 if (!txHash && !error) {
 
@@ -51,25 +47,13 @@ const Hero = ({props}) => {
                         setError(err)
                     }
                 }
-            }
-            if (verified === false) {
-                // display error
-            }
-        } else {
-            await props.connect()
+            } else {
+            props.connect()
         }
     }
 
     function mintText () {
-        if (verified === undefined) {
-            return 'Verify WL'
-        }
-        if (verified === true) {
-            return 'Claim'
-        }
-        if (verified === false) {
-            return 'Not on WL :('
-        }
+            return 'Mint'
     }
 
     async function getCurrentSupply () {
