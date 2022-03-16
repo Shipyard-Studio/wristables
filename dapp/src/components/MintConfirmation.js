@@ -9,6 +9,8 @@ function MintConfirmation ({error, txHash, reciept}) {
             return 'Already Claimed'
         } else if (error.code == 4001) {
             return 'Transaction Canceled'
+        } else if (error.code == 'INSUFFICIENT_FUNDS') {
+            return 'Insufficient Funds'
         } else {
             return 'Something went wrong...'
         }
