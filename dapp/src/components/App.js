@@ -23,7 +23,10 @@ const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider, // required
     options: {
-      infuraId: "INFURA_ID" // required
+      rpc: {
+        4: "https://rinkeby.infura.io/v3/830023ae9bfc4c86ac5bb1d468b5cdc8"
+      },
+      infuraId: "830023ae9bfc4c86ac5bb1d468b5cdc8", // required
     }
   }
 };
@@ -98,9 +101,14 @@ const web3Modal = new Web3Modal({
         
         const c = new ethers.Contract(WAWCAddr, WAWCJSON.abi, p);
         setContract(c)
-
-        const addressArray = await p.send("eth_requestAccounts", [])
-        setWallet(addressArray[0])
+        // console.log(p, s)
+        
+        if (p.connection.url !== "metamask") {
+          setWallet(p.provider.accounts[0])
+        } else {
+          const addressArray = await p.send("eth_requestAccounts", [])
+          setWallet(addressArray[0])
+        }
 
         checkChain(p)
   }
