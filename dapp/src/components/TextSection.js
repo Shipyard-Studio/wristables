@@ -1,8 +1,24 @@
 import React, { useState } from 'react';
 import ReactHtmlParser from "react-html-parser";
 import axios from 'axios';
+const Recaptcha = require('react-recaptcha');
+
 
 const TextSection = ({props}) => {
+    
+    let recaptchaInstance;
+     
+    // manually trigger reCAPTCHA execution
+    const executeCaptcha = function () {
+      recaptchaInstance.execute();
+    };
+     
+    // executed once the captcha has been verified
+    // can be used to post forms, redirect, etc.
+    const verifyCallback = async function (response) {
+      console.log(response);
+      await postEmail();
+    };
 
     let emailText = (status) => {
         let input = document.getElementById('email-input')
@@ -50,7 +66,13 @@ const TextSection = ({props}) => {
                     <form>
                         <input id='email-input' className='p-3 text-neutral-300 bg-neutral-800' placeholder='join our mailing list' style={{outline: 'none'}}/>
                     </form>
-                    <div onClick={postEmail} className='p-2 px-5 bg-amber-400 text-black text-xl hover:cursor-pointer'>→</div>
+                    <div onClick={executeCaptcha} className='p-2 px-5 bg-amber-400 text-black text-xl hover:cursor-pointer'>→</div>
+                        <Recaptcha
+                        ref={e => recaptchaInstance = e}
+                        sitekey="6LeiBOweAAAAAAkoAeWvHON9T83oQ5jq4793tVcY"
+                        size="invisible"
+                        verifyCallback={verifyCallback}
+                        />
                 </div>
                 :
                 <></>

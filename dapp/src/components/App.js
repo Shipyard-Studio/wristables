@@ -27,6 +27,7 @@ const providerOptions = {
         4: "https://rinkeby.infura.io/v3/830023ae9bfc4c86ac5bb1d468b5cdc8"
       },
       infuraId: "830023ae9bfc4c86ac5bb1d468b5cdc8", // required
+      rpcUrl: "https://rinkeby.infura.io/v3/830023ae9bfc4c86ac5bb1d468b5cdc8",
     }
   }
 };
