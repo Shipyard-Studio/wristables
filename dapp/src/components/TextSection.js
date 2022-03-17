@@ -16,7 +16,6 @@ const TextSection = ({props}) => {
     // executed once the captcha has been verified
     // can be used to post forms, redirect, etc.
     const verifyCallback = async function (response) {
-      console.log(response);
       await postEmail();
     };
 
