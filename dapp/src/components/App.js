@@ -1,19 +1,25 @@
-import React, {useEffect, useState} from 'react';
-import Sidebar from './Sidebar';
+import React, {useEffect, useState, lazy} from 'react';
+// import Sidebar from './Sidebar';
 import Modal from 'react-modal';
-import ModalForm from './ModalForm';
-import ModalChainID from './ModalChainId'
+// import ModalForm from './ModalForm';
+// import ModalChainID from './ModalChainId'
 import Section from './Section';
-import TextSection from './TextSection';
+// import TextSection from './TextSection';
 import ProgressBar from './ProgressBar';
 import Hero from './Hero';
-import Footer from './Footer';
+// import Footer from './Footer';
 import { ethers } from "ethers"
 import WAWCJSON from '../utils/WAWC.json'
 import '../style/App.css';
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import { Suspense } from 'react/cjs/react.production.min';
 
+const Sidebar = lazy(() => import('./Sidebar'));
+const ModalForm = lazy(() => import('./ModalForm'));
+const ModalChainID = lazy(() => import('./ModalChainId'));
+const TextSection = lazy(() => import('./TextSection'));
+const Footer = lazy(() => import('./Footer'));
 
 
 function App() {
@@ -48,7 +54,7 @@ const web3Modal = new Web3Modal({
   const bg4 = '/WASiteAssets/bg4.png'
   const bg5 = '/WASiteAssets/bg5.png'
   const bg6 ='./WASiteAssets/bg6.png'
-
+  
   const modalStyles = {
     content: {
       top: '50%',
@@ -179,7 +185,7 @@ const web3Modal = new Web3Modal({
 
 
   return (
-    
+    <Suspense fallback={<div>Loading...</div>}>
       <div className="App" id="outer-container">
         <Modal
           isOpen={modalIsOpen}
@@ -187,7 +193,7 @@ const web3Modal = new Web3Modal({
           onRequestClose={closeModal}
           style={modalStyles}
           contentLabel="Example Modal"
-        >
+          >
           <ModalForm closeModal={closeModal}/>
       </Modal>
 
@@ -197,7 +203,7 @@ const web3Modal = new Web3Modal({
         onAfterOpen={afterOpenModal}
         style={modalStyles}
         contentLabel="Example Modal"
-      >
+        >
         <ModalChainID chainId={chainId} closeModal={closeChainModal}/>
     </Modal>
 
@@ -212,6 +218,7 @@ const web3Modal = new Web3Modal({
         <Section bg={bg6} size={2} Component={TextSection} componentProps={{header: "Roadmap", body: "<div><b>15% | March</b><br/><ul><li>1,000 Metaverse Hyper Car Watch</li><li>1,000 Crypto Watch</li><li>GIVEAWAY 3-5 watches from our boutique to our watch club members</li><ul/><br/><b>25% | April</b><br/><ul><li>1,000 Solar System watch</li><li>1,000 Steam Power Watch</li><li>GIVEAWAY 3-5 watches from our boutique to our watch club members</li></ul><br/><b>35% | May</b><br/><ul><li>1,000 Custom Formula 1 watch for Miami F1</li><li>1,000 DJ Watch</li><li>GIVEAWAY 3-5 watches from our boutique to our watch club members</li></ul><br/><b>45% | June</b><br/><ul><li>1,000 Casino Watch inspired by Vegas & Macau</li><li>1,000 Time Machine Watch</li><li>GIVEAWAY 3-5 watches from our boutique to our watch club members</li></ul><br/><b>55% | July</b><br/><ul><li>1,000 Formula E Watch</li><li>1,000 Piece Uniques that will be fully customizable in our studio</li><li>GIVEAWAY 3-5 watches from our boutique to our watch club members</li></ul><br/><b>75%</b><br/><ul><li>Develop AR platform to see your watch in real life</li></ul><br/><b>85%</b><br/><ul><li>Accessory store launch</li></ul><br/><b>100%</b><br/><ul><li>Build virtual Wrist Aficionado boutique where you can accessorize your watch and buy real watches from our inventory. (WA members will get early access, and exclusive prices on watch purchases).</li><li>All of our members can now enter the Metaverse with our All World Access Pass.</li></ul></div>"}}/>
         <Footer />
       </div>
+    </Suspense>
     
   );
 }

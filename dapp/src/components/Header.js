@@ -25,8 +25,8 @@ function Header ({walletAddress, connect}) {
                 }</div>
                 <a href="https://wristaficionado.com/" target='_blank' className='ease-in ease-out duration-300 mx-2 px-4 py-2 border-2 border-blue-600 rounded-full hover:bg-blue-600 hover:cursor-pointer z-10'>Visit Boutique</a>
                 <a href="https://www.tiktok.com/@wristaficionado" className='z-10' target="_blank" alt="tiktok" rel="noreferrer"><img className="nav-logos mx-2" src={process.env.PUBLIC_URL + '/TikTok-Logo.png'} /></a>
-                <a href="https://instagram.com/wristaficionado/" className='z-10' target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos mx-2" src={process.env.PUBLIC_URL + '/WASiteAssets/InstagramLogo.png'} /></a>
-                <a href="https://twitter.com/wristaficionado/" className='z-10' target="_blank" alt="twitter" rel="noreferrer"><img className="nav-logos mx-2" src={process.env.PUBLIC_URL + '/WASiteAssets/TwitterLogo.png'} /></a>
+                <a href="https://instagram.com/wristaficionado/" className='z-10' target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos mx-2" src={process.env.PUBLIC_URL + '/WASiteAssets/InstagramLogo.webp'} /></a>
+                <a href="https://twitter.com/wristaficionado/" className='z-10' target="_blank" alt="twitter" rel="noreferrer"><img className="nav-logos mx-2" src={process.env.PUBLIC_URL + '/WASiteAssets/TwitterLogo.webp'} /></a>
             </div>
             :
             <div></div>
