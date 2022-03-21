@@ -1,12 +1,8 @@
 import React, {useEffect, useState, lazy, Suspense} from 'react';
-// import Sidebar from './Sidebar';
 import Modal from 'react-modal';
-// import ModalForm from './ModalForm';
 import Section from './Section';
 import ProgressBar from './ProgressBar';
 import Hero from './Hero';
-// import TextSection from './TextSection';
-// import Footer from './Footer';
 import '../style/App.css';
 
 const Sidebar = lazy(() => import('./Sidebar'));

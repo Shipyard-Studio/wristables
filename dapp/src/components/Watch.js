@@ -1,8 +1,7 @@
 import React, {Suspense} from 'react';
 import { useGLTF, BakeShadows, OrbitControls, ContactShadows, Environment } from '@react-three/drei'
 import { Canvas } from "@react-three/fiber"
-// import Model from './Model'
-// import Model from './Test'
+
 
 const Watch = () => {
 
