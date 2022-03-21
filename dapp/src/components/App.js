@@ -18,12 +18,12 @@ const Footer = lazy(() => import('./Footer'));
 
 function App() {
 
-  const bg1 = '/WASiteAssets/bg1.png'
-  const bg2 = '/WASiteAssets/bg2.png'
-  const bg3 = '/WASiteAssets/bg3.png'
-  const bg4 = '/WASiteAssets/bg4.png'
-  const bg5 = '/WASiteAssets/bg5.png'
-  const bg6 ='./WASiteAssets/bg6.png'
+  const bg1 = '/optimized/1.jpg'
+  const bg2 = '/optimized/2.jpg'
+  const bg3 = '/optimized/3.jpg'
+  const bg4 = '/optimized/4.jpg'
+  const bg5 = '/optimized/5.jpg'
+  const bg6 ='./optimized/6.jpg'
 
   const modalStyles = {
     content: {
