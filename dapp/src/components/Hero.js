@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Watch from './Watch'
+import Video from './Video'
 
 
 import '../style/Hero.css'
@@ -8,8 +9,9 @@ import '../style/Hero.css'
 const Hero = ({props}) => {
 
     return (
-        <div className='hero h-full bg-zinc-900'>
-            <Watch />
+        <div className='hero h-full bg-black'>
+            {/* <Watch /> */}
+            <Video />
             <Header walletAddress={props.walletAddress} connect={props.connect} pageWidth={props.pageWidth}/>
             <div className='flex flex-col justify-between m-auto h-5/6 w-10/12 pt-10'>
                 <div className='big-text text-center z-10 noselect'>
