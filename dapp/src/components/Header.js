@@ -3,17 +3,17 @@ import WALogo from '../WAlogo.png'; //neccessary evil idk why
 import '../style/Header.css';
 //import backgroundVideo from './test.mp4';
 
-function Header ({walletAddress, connect}) {
+function Header ({walletAddress, connect, pageWidth}) {
   return (
     <div className="header z-40">
         <div className='nav-container z-40'>
-            {window.innerWidth > 900? 
+            {pageWidth > 950? 
             <a href="https://wristaficionado.com/" target='_blank' rel="noreferrer" className='ease-in ease-out duration-300 ml-8 px-4 py-2 border-2 border-blue-600 rounded-full hover:bg-blue-600 hover:cursor-pointer z-40'>Visit Boutique</a>
             :
             <div></div>
             }
              <img className='wa-logo z-40 mt-5 lg:mt-0' src={WALogo} alt='wrist afficianado logo'/>
-            {window.innerWidth > 900? 
+            {pageWidth > 950? 
             <div className='nav-logo-flex z-40'>
                 {/* <div onClick={connect} className='ease-in ease-out duration-300 ml-8 px-4 py-2 border-2 border-blue-600 rounded-full hover:bg-blue-600 hover:cursor-pointer z-10'>
                 {walletAddress.length > 0 ? `${walletAddress.slice(0,6)}...${walletAddress.slice(-4)}` :

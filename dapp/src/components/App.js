@@ -43,6 +43,7 @@ function App() {
   const [walletAddress, setWallet] = useState("")
   const [sectionInFocus, setSectionInFocus] = useState(0)
   const [modalIsOpen, setIsOpen] = useState(false)
+  const [pageWidth, setPageWidth] = useState(window.innerWidth)
 
   function openModal() {
     setIsOpen(true);
@@ -112,6 +113,9 @@ function App() {
     // getCurrentWalletConnected();
     addWalletListener(); 
     window.addEventListener("scroll", getInFocusSection)
+    window.addEventListener("resize", () => {
+      setPageWidth(window.innerWidth)
+    })
   }, []); 
 
   return (
@@ -127,9 +131,9 @@ function App() {
           <ModalForm closeModal={closeModal}/>
       </Modal>
 
-        {window.innerWidth < 800 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
+        {pageWidth < 950 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
         <ProgressBar num={sectionInFocus}/>
-        <Section bg={null} size={1} Component={Hero} componentProps={{walletAddress: walletAddress, connect: connectWallet, openModal: openModal}}/>
+        <Section bg={null} size={1} Component={Hero} componentProps={{walletAddress: walletAddress, connect: connectWallet, openModal: openModal, pageWidth: pageWidth}}/>
         <Section bg={bg2} size={1} Component={TextSection} componentProps={{header: "About", body: "<div>Every Wrist Aficionado Mint is customized and built in a unique colour and finish. With the first 1,000 pieces created using moving parts from a Hypercar Engine, no two releases will be the same. All our Custom Pieces come with an all World Access Pass. View our roadmap below to see what you will be able to do with your time piece as we build out our project.</div>" }}/>
         <Section bg={bg3} size={1} Component={TextSection} componentProps={{header: "Community", body: "<div>Our members become a part of a community of watch collectors and enthusiasts that can hold onto their time piece as it appreciates, or trade it and pass along the benefits to another collector. Join our Discord to be apart of our community.</div>", emailCapture: true}}/>
         <Section bg={bg4} size={1} Component={TextSection} componentProps={{header: "Events", body: "<div>Early members will have VIP access to the Wrist Aficionado Convention in Miami on April 6th-9th, with a chance to win a one off Piece Unique that you will customize in person at the convention. Several members will also have the opportunity to win private dinners in New York City or Miami with the members of Wrist Aficionado.</div>"}}/>
