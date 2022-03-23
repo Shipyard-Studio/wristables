@@ -32,16 +32,6 @@
       "kind": "uups"
     },
     {
-      "address": "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f",
-      "txHash": "0xe613626278d80e0ae1c4072617ce4ace5cd384459858bfa260f7444ca52660f0",
-      "kind": "uups"
-    },
-    {
-      "address": "0x09635F643e140090A9A8Dcd712eD6285858ceBef",
-      "txHash": "0x436f48796b22ed62652880718af2360a2f7743f043bb19558eb7e019c3d97b91",
-      "kind": "uups"
-    },
-    {
       "address": "0x67d269191c92Caf3cD7723F116c85e6E9bf55933",
       "txHash": "0x511d51537fc9d54ebe5b7c092457a924471f53cc84c31f6675a43ef9df00e36a",
       "kind": "uups"
@@ -572,65 +562,75 @@
       "kind": "uups"
     },
     {
+      "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+      "txHash": "0xde5f6869891f39168ffb78f80f80657fc83480c6c54bdf1031d5285de55b91be",
+      "kind": "uups"
+    },
+    {
       "address": "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
-      "txHash": "0xe8dd03ee2054ed7808d9e4ad765e80d8144e7c2d260b852e09391e9a7b7f0eeb",
+      "txHash": "0x0d12133c727608fde9dbcee8009254185775778b95c9c82fd3c945b45011dd53",
+      "kind": "uups"
+    },
+    {
+      "address": "0x09635F643e140090A9A8Dcd712eD6285858ceBef",
+      "txHash": "0x4150a5d98567fb0fb1bca16193e2a4d529252f06fa0171fcba7ba6b58e9ba2a1",
       "kind": "uups"
     },
     {
       "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-      "txHash": "0x0732d80841df75ed95f27ed04804f4ae2fa29cadbc4c710c28bb367892e17e45",
+      "txHash": "0x0b4302074425d69bd0a9061282f4dffb6dcd6b6959f132e8421d3a5c0c7b9ad1",
       "kind": "uups"
     },
     {
       "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-      "txHash": "0x7317ba26027cbd511225c4efe2d36a120960ce701ba57e4e07d135864fe24220",
+      "txHash": "0x29afc74c0c9d6c93558c43ef6ae5467781806b0e79eba10787dd422bf021f7af",
       "kind": "uups"
     },
     {
       "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
-      "txHash": "0x6e08e64dda43b88153009176bc6cfc50a7cb08ac86124843f0087569cff83d89",
+      "txHash": "0xd6827d810ca31f85d10c02c5f490f1862371f5dfcfa65b5b22bd872459b043df",
       "kind": "uups"
     },
     {
       "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
-      "txHash": "0x38c7d1ec3f03e84855708a4ffc8f58ec7087d5f51b2d1e5b2b14e189d6f6619c",
+      "txHash": "0xfb6aae9e979af7f0252e55a491097c47267f21f38c5868841c8dfc155587931c",
       "kind": "uups"
     },
     {
       "address": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
-      "txHash": "0x1e192a9110c89b9a93762bc7a1edf200801a79fac0e803098740394bd1d5bfba",
+      "txHash": "0xdda211e6fd6619858412a5150d71816077cb5d5ba86cbcc5ce27d30a76cdf20d",
       "kind": "uups"
     },
     {
       "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
-      "txHash": "0x9cffde98eb89c84c85faba7b190bfae8d740df3bb01ab1a07c550fada76c2afb",
+      "txHash": "0x9a5ba2cbc92ab2d907b1ae7677b54171c2a27d2b33b5fe57fa880c1b3a3ba29a",
       "kind": "uups"
     },
     {
       "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
-      "txHash": "0x27408204dd3b69757451c748434ca2742ecdbd8b9e2db8e432ec1053bad24ede",
+      "txHash": "0x8f270f9ea97e47fbb634c341af1f5d735ad92de78916992d5107d2978cc0d921",
       "kind": "uups"
     },
     {
       "address": "0x59b670e9fA9D0A427751Af201D676719a970857b",
-      "txHash": "0xde61d08246397ed2fc20c08cb4d115ea86c82e2dccce1a86c4b5009383c7bc48",
+      "txHash": "0x7f14f75e34662facddb0138b9f3fcbd5ec474e1e5fbbf171e88cd62945f86f3e",
+      "kind": "uups"
+    },
+    {
+      "address": "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f",
+      "txHash": "0xb98755729150d3bdc3f6963fcb1683bea1337e6d8f36a6cb9fd0a740f6e5ba7e",
       "kind": "uups"
     },
     {
       "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
-      "txHash": "0xf9ea1257fcaf69d76339972f191bc973e5f72cdb1ec6bf3de4fb05e000f4db42",
-      "kind": "uups"
-    },
-    {
-      "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
-      "txHash": "0xde5f6869891f39168ffb78f80f80657fc83480c6c54bdf1031d5285de55b91be",
+      "txHash": "0xb7f223b7551020457939c6bc209007e8ad3e7d49f3744326b29afdbe785a90e7",
       "kind": "uups"
     }
   ],
   "impls": {
-    "678bc74b25fc308ee4405c46e7b116984b4a22aaefd2e79e8bf39d52b7a2d253": {
+    "904c349ff91a9a6867fdb2db1f9a12954bec61d36266e092e3b430f367f51f05": {
       "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      "txHash": "0xa501ff15340c4f32d7af7eae932ce90a3b249276a66ec738c8f551b495147c9e",
+      "txHash": "0x70a3fc1f835efcc86a3de5ac17c69eced077443d78aace6c0b20d8e9a9b6a003",
       "layout": {
         "storage": [
           {
@@ -649,13 +649,13 @@
             "contract": "ContextUpgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:31"
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
           },
           {
             "contract": "ERC165Upgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:36"
+            "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:41"
           },
           {
             "contract": "ERC721Upgradeable",
@@ -697,7 +697,7 @@
             "contract": "ERC721Upgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)44_storage",
-            "src": "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol:431"
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol:458"
           },
           {
             "contract": "OwnableUpgradeable",
@@ -709,7 +709,7 @@
             "contract": "OwnableUpgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)49_storage",
-            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:82"
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:87"
           },
           {
             "contract": "PaymentSplitterUpgradeable",
@@ -744,32 +744,32 @@
           {
             "contract": "PaymentSplitterUpgradeable",
             "label": "_erc20TotalReleased",
-            "type": "t_mapping(t_contract(IERC20Upgradeable)1324,t_uint256)",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)1327,t_uint256)",
             "src": "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol:41"
           },
           {
             "contract": "PaymentSplitterUpgradeable",
             "label": "_erc20Released",
-            "type": "t_mapping(t_contract(IERC20Upgradeable)1324,t_mapping(t_address,t_uint256))",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)1327,t_mapping(t_address,t_uint256))",
             "src": "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol:42"
           },
           {
             "contract": "PaymentSplitterUpgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)43_storage",
-            "src": "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol:195"
+            "src": "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol:200"
           },
           {
             "contract": "ERC1967UpgradeUpgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "@openzeppelin/contracts-upgradeable/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol:215"
+            "src": "@openzeppelin/contracts-upgradeable/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol:211"
           },
           {
             "contract": "UUPSUpgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol:81"
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol:107"
           },
           {
             "contract": "ReentrancyGuardUpgradeable",
@@ -781,73 +781,73 @@
             "contract": "ReentrancyGuardUpgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)49_storage",
-            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:68"
+            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:74"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "claimedWL",
             "type": "t_mapping(t_address,t_array(t_bool)10_storage)",
-            "src": "contracts/Wristables.sol:21"
+            "src": "contracts/Wristables.sol:19"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "dutchAuction",
-            "type": "t_struct(DutchAuction)3420_storage",
-            "src": "contracts/Wristables.sol:23"
+            "type": "t_struct(DutchAuction)3452_storage",
+            "src": "contracts/Wristables.sol:21"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "_tokenSupply",
-            "type": "t_struct(Counter)2865_storage",
-            "src": "contracts/Wristables.sol:24"
+            "type": "t_struct(Counter)2894_storage",
+            "src": "contracts/Wristables.sol:22"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "_baseTokenURI",
             "type": "t_string_storage",
-            "src": "contracts/Wristables.sol:25"
+            "src": "contracts/Wristables.sol:23"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "availableSupply",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:26"
+            "src": "contracts/Wristables.sol:24"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "MAX_SUPPLY",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:27"
+            "src": "contracts/Wristables.sol:25"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "mintPrice",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:28"
+            "src": "contracts/Wristables.sol:26"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "toggleAuction",
             "type": "t_bool",
-            "src": "contracts/Wristables.sol:29"
+            "src": "contracts/Wristables.sol:27"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "saleActive",
             "type": "t_bool",
-            "src": "contracts/Wristables.sol:30"
+            "src": "contracts/Wristables.sol:28"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "root",
             "type": "t_bytes32",
-            "src": "contracts/Wristables.sol:31"
+            "src": "contracts/Wristables.sol:29"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "indexWL",
             "type": "t_uint32",
-            "src": "contracts/Wristables.sol:32"
+            "src": "contracts/Wristables.sol:30"
           }
         ],
         "types": {
@@ -863,7 +863,7 @@
           "t_bool": {
             "label": "bool"
           },
-          "t_struct(DutchAuction)3420_storage": {
+          "t_struct(DutchAuction)3452_storage": {
             "label": "struct WristAficionadoWatchClub.DutchAuction",
             "members": [
               {
@@ -891,7 +891,7 @@
           "t_uint256": {
             "label": "uint256"
           },
-          "t_struct(Counter)2865_storage": {
+          "t_struct(Counter)2894_storage": {
             "label": "struct CountersUpgradeable.Counter",
             "members": [
               {
@@ -921,13 +921,13 @@
           "t_array(t_address)dyn_storage": {
             "label": "address[]"
           },
-          "t_mapping(t_contract(IERC20Upgradeable)1324,t_uint256)": {
+          "t_mapping(t_contract(IERC20Upgradeable)1327,t_uint256)": {
             "label": "mapping(contract IERC20Upgradeable => uint256)"
           },
-          "t_contract(IERC20Upgradeable)1324": {
+          "t_contract(IERC20Upgradeable)1327": {
             "label": "contract IERC20Upgradeable"
           },
-          "t_mapping(t_contract(IERC20Upgradeable)1324,t_mapping(t_address,t_uint256))": {
+          "t_mapping(t_contract(IERC20Upgradeable)1327,t_mapping(t_address,t_uint256))": {
             "label": "mapping(contract IERC20Upgradeable => mapping(address => uint256))"
           },
           "t_array(t_uint256)43_storage": {
@@ -948,9 +948,9 @@
         }
       }
     },
-    "12bd402b082a0934d4c3a9d03a4d197800331c0f95cf241c664fd12e59d99466": {
+    "7c5ec8d007e2572b344b8732ad967f4e4de643243c66d71860143c7efb1011ba": {
       "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0x333b3fb9c5655acf200557f922b7779d1b497c49c013cde889df1c048bc057df",
+      "txHash": "0x8f6b74ffce9646b6dd12107cd644d9583df8e9e7007ea735cc1f497f16354e9b",
       "layout": {
         "storage": [
           {
@@ -969,13 +969,13 @@
             "contract": "ContextUpgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:31"
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
           },
           {
             "contract": "ERC165Upgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:36"
+            "src": "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol:41"
           },
           {
             "contract": "ERC721Upgradeable",
@@ -1017,7 +1017,7 @@
             "contract": "ERC721Upgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)44_storage",
-            "src": "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol:431"
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol:458"
           },
           {
             "contract": "OwnableUpgradeable",
@@ -1029,7 +1029,7 @@
             "contract": "OwnableUpgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)49_storage",
-            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:82"
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:87"
           },
           {
             "contract": "PaymentSplitterUpgradeable",
@@ -1064,32 +1064,32 @@
           {
             "contract": "PaymentSplitterUpgradeable",
             "label": "_erc20TotalReleased",
-            "type": "t_mapping(t_contract(IERC20Upgradeable)1324,t_uint256)",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)1327,t_uint256)",
             "src": "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol:41"
           },
           {
             "contract": "PaymentSplitterUpgradeable",
             "label": "_erc20Released",
-            "type": "t_mapping(t_contract(IERC20Upgradeable)1324,t_mapping(t_address,t_uint256))",
+            "type": "t_mapping(t_contract(IERC20Upgradeable)1327,t_mapping(t_address,t_uint256))",
             "src": "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol:42"
           },
           {
             "contract": "PaymentSplitterUpgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)43_storage",
-            "src": "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol:195"
+            "src": "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol:200"
           },
           {
             "contract": "ERC1967UpgradeUpgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "@openzeppelin/contracts-upgradeable/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol:215"
+            "src": "@openzeppelin/contracts-upgradeable/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol:211"
           },
           {
             "contract": "UUPSUpgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol:81"
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol:107"
           },
           {
             "contract": "ReentrancyGuardUpgradeable",
@@ -1101,73 +1101,73 @@
             "contract": "ReentrancyGuardUpgradeable",
             "label": "__gap",
             "type": "t_array(t_uint256)49_storage",
-            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:68"
+            "src": "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol:74"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "claimedWL",
             "type": "t_mapping(t_address,t_array(t_bool)10_storage)",
-            "src": "contracts/Wristables.sol:21"
+            "src": "contracts/Wristables.sol:19"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "dutchAuction",
-            "type": "t_struct(DutchAuction)3420_storage",
-            "src": "contracts/Wristables.sol:23"
+            "type": "t_struct(DutchAuction)3452_storage",
+            "src": "contracts/Wristables.sol:21"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "_tokenSupply",
-            "type": "t_struct(Counter)2865_storage",
-            "src": "contracts/Wristables.sol:24"
+            "type": "t_struct(Counter)2894_storage",
+            "src": "contracts/Wristables.sol:22"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "_baseTokenURI",
             "type": "t_string_storage",
-            "src": "contracts/Wristables.sol:25"
+            "src": "contracts/Wristables.sol:23"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "availableSupply",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:26"
+            "src": "contracts/Wristables.sol:24"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "MAX_SUPPLY",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:27"
+            "src": "contracts/Wristables.sol:25"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "mintPrice",
             "type": "t_uint256",
-            "src": "contracts/Wristables.sol:28"
+            "src": "contracts/Wristables.sol:26"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "toggleAuction",
             "type": "t_bool",
-            "src": "contracts/Wristables.sol:29"
+            "src": "contracts/Wristables.sol:27"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "saleActive",
             "type": "t_bool",
-            "src": "contracts/Wristables.sol:30"
+            "src": "contracts/Wristables.sol:28"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "root",
             "type": "t_bytes32",
-            "src": "contracts/Wristables.sol:31"
+            "src": "contracts/Wristables.sol:29"
           },
           {
             "contract": "WristAficionadoWatchClub",
             "label": "indexWL",
             "type": "t_uint32",
-            "src": "contracts/Wristables.sol:32"
+            "src": "contracts/Wristables.sol:30"
           }
         ],
         "types": {
@@ -1183,7 +1183,7 @@
           "t_bool": {
             "label": "bool"
           },
-          "t_struct(DutchAuction)3420_storage": {
+          "t_struct(DutchAuction)3452_storage": {
             "label": "struct WristAficionadoWatchClub.DutchAuction",
             "members": [
               {
@@ -1211,7 +1211,7 @@
           "t_uint256": {
             "label": "uint256"
           },
-          "t_struct(Counter)2865_storage": {
+          "t_struct(Counter)2894_storage": {
             "label": "struct CountersUpgradeable.Counter",
             "members": [
               {
@@ -1241,13 +1241,13 @@
           "t_array(t_address)dyn_storage": {
             "label": "address[]"
           },
-          "t_mapping(t_contract(IERC20Upgradeable)1324,t_uint256)": {
+          "t_mapping(t_contract(IERC20Upgradeable)1327,t_uint256)": {
             "label": "mapping(contract IERC20Upgradeable => uint256)"
           },
-          "t_contract(IERC20Upgradeable)1324": {
+          "t_contract(IERC20Upgradeable)1327": {
             "label": "contract IERC20Upgradeable"
           },
-          "t_mapping(t_contract(IERC20Upgradeable)1324,t_mapping(t_address,t_uint256))": {
+          "t_mapping(t_contract(IERC20Upgradeable)1327,t_mapping(t_address,t_uint256))": {
             "label": "mapping(contract IERC20Upgradeable => mapping(address => uint256))"
           },
           "t_array(t_uint256)43_storage": {
