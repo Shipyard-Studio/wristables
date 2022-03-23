@@ -16,7 +16,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     using StringsUpgradeable for uint256;
     using CountersUpgradeable for CountersUpgradeable.Counter;
 
-    mapping(address => bool[10]) public claimedWL; // stores addresses that have claimed whitelisted tokens, set to fixed array because a dynamic array inside of a mapping does not fill with falsey values by default. There won't be more than 10 drops so this is safe for us to assume.
+    mapping(bytes32 => bool) public claimedWL; // stores addresses that have claimed whitelisted tokens, set to fixed array because a dynamic array inside of a mapping does not fill with falsey values by default. There won't be more than 10 drops so this is safe for us to assume.
 
     DutchAuction public dutchAuction; 
     CountersUpgradeable.Counter private _tokenSupply;
@@ -124,8 +124,9 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         require(_verify(_leaf(msg.sender), proof), "Invalid merkle proof");
         require(!toggleAuction, "use `mintAuction`");
         require(msg.value == mintPrice, "incorrect ether sent");
-        require(!claimedWL[msg.sender][indexWL], "claimed");
-        claimedWL[msg.sender][indexWL] = true;
+        bytes32 hash = keccak256(abi.encodePacked(msg.sender,indexWL));
+        require(!claimedWL[hash], "claimed");
+        claimedWL[hash] = true;
         issueToken(msg.sender);
     }    
 
