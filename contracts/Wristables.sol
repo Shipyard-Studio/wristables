@@ -7,6 +7,7 @@ import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.s
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/MerkleProofUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/interfaces/IERC2981Upgradeable.sol";
 
 contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable, UUPSUpgradeable {
 
@@ -51,16 +52,11 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     /// @dev See `PaymentSplitter.sol` for documentation on `payees` and `shares_`.
     function initialize( 
         address[] memory payees, 
-        uint256[] memory shares_,
-        bytes32 _root
+        uint256[] memory shares_
     ) external initializer {
         __Ownable_init();
          __ERC721_init("Wrist Aficionado Watch Club", "WAWC");
         __PaymentSplitter_init( payees, shares_);
-        // initial values must be set in initialize(), so proxy can set them too.
-        root = _root;
-
-        supportsInterface(0x2a55205a); // required for ERC2981 (royalty) standard
     }
 
     function increment (uint16 x) internal {

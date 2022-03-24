@@ -57,13 +57,13 @@ async function proxyDeploy() {
     [
       [shipyardWallet.address, imagineWallet.address, wristablesWallet.address],
       [7, 2, 1],
-      merkleTree.getHexRoot(),
     ],
     // Here we indicate this is a UUPS:
     { kind: "uups" }
   );
 
   await wawc.deployed();
+  await wawc.setMerkleRoot(merkleTree.getHexRoot());
 }
 
 describe("Wristables Proxy", function () {
