@@ -1,7 +1,6 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.4;
 
-import "hardhat/console.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol";
@@ -11,21 +10,20 @@ import "@openzeppelin/contracts-upgradeable/utils/cryptography/MerkleProofUpgrad
 
 contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable, UUPSUpgradeable {
 
-    using AddressUpgradeable for address;
     using StringsUpgradeable for uint256;
 
     mapping(bytes32 => bool) public claimedWL; // stores addresses that have claimed whitelisted tokens, set to fixed array because a dynamic array inside of a mapping does not fill with falsey values by default. There won't be more than 10 drops so this is safe for us to assume.
 
     DutchAuction public dutchAuction; 
-    string private _baseTokenURI;
-    uint16 public availableSupply; // max number of tokens currently available for mint
-    uint16 public MAX_SUPPLY;
+    string public _baseTokenURI;
+    uint16 public availableTokenId; // max number of tokens currently available for mint
+    uint16 public MAX_TOKEN_ID;
     uint8 public indexWL; // index for for drop #, allows us to check claimedWL for the correct bool
-    bool private toggleAuction; // true = dutch auction active, false = mint for flat price active
-    bool private saleActive; // if false, mint functions will revert
+    bool public toggleAuction; // true = dutch auction active, false = mint for flat price active
+    bool public saleActive; // if false, mint functions will revert
     bytes32 public root; // merkle root set in initializer
     uint16 public tokenSupply;
-    uint128 private mintPrice; // price of each token in the `mint` functions
+    uint128 public mintPrice; // price of each token in the `mint` functions
 
 
 
@@ -50,19 +48,17 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         uint128 priceDeductionRate
     );
 
-    /// @dev `maxBatchSize` refers to how much a minter can mint at a time.
     /// @dev See `PaymentSplitter.sol` for documentation on `payees` and `shares_`.
     function initialize( 
         address[] memory payees, 
         uint256[] memory shares_,
         bytes32 _root
-    ) public initializer {
-        // console.log(payees[0], shares_[0]);
+    ) external initializer {
         __Ownable_init();
          __ERC721_init("Wrist Aficionado Watch Club", "WAWC");
         __PaymentSplitter_init( payees, shares_);
         // initial values must be set in initialize(), so proxy can set them too.
-        MAX_SUPPLY = 9999;
+        MAX_TOKEN_ID = 9999;
         root = _root;
 
         supportsInterface(0x2a55205a); // required for ERC2981 (royalty) standard
@@ -75,13 +71,13 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     }
 
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {
-        // 
+        // necessary to override
     }
 
     /// @dev sends the next token to the `to` address for free + gas
-    function airdrop (address to, uint16 quantity) public payable onlyOwner {
+    function airdrop (address to, uint16 quantity) external payable onlyOwner {
         uint mintIndex = tokenSupply;
-        require(mintIndex + quantity <= availableSupply + 1, "exceeds available supply");
+        require(mintIndex + quantity <= availableTokenId + 1, "exceeds available supply");
         for (uint16 i = 0; i < quantity; i++) {
             _safeMint(to, mintIndex + i);
         }
@@ -89,10 +85,10 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     }
 
     /// @dev sends one token to each address in the `to` array
-    function batchAirdrop (address[] memory to) public payable onlyOwner {
+    function batchAirdrop (address[] memory to) external payable onlyOwner {
         uint16 length = uint16(to.length);
         uint16 mintIndex = tokenSupply;
-        require(mintIndex + length <= availableSupply + 1, "exceeds token supply");
+        require(mintIndex + length <= availableTokenId + 1, "exceeds token supply");
         for (uint16 i = 0; i < to.length; i++) {
             _safeMint(to[i], mintIndex + i);
         }
@@ -136,7 +132,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     /// @dev issues token to recipient
     function issueToken (address recipient) private {
         uint mintIndex = tokenSupply;
-        require(mintIndex <= availableSupply, "exceeds token supply");
+        require(mintIndex <= availableTokenId, "exceeds token supply");
         _safeMint(recipient, mintIndex);
         increment(1);
     }
@@ -174,9 +170,9 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     }
 
     /// @dev set available token supply
-    function setAvailableSupply (uint16 availableSupplyIncrease) public payable onlyOwner {
-        require(availableSupply + availableSupplyIncrease <= MAX_SUPPLY, "cannot be greater than 9999");
-        availableSupply += availableSupplyIncrease;
+    function setAvailableTokenID (uint16 availableTokenIdIncrease) public payable onlyOwner {
+        require(availableTokenId + availableTokenIdIncrease <= MAX_TOKEN_ID, "cannot be greater than 9999");
+        availableTokenId += availableTokenIdIncrease;
     }
 
     /// @dev set price of each token in the `mint` function
@@ -199,7 +195,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         _baseTokenURI = baseURI;
     }
 
-    /// @dev allows owner to reset base uri when updating metadata
+    /// @dev allows owner to set the current iteration of the whitelist
     function setIndexWL (uint8 _indexWL) public payable onlyOwner {
         require(_indexWL > indexWL, "less than current index");
         indexWL = _indexWL;
@@ -226,12 +222,12 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         return MerkleProofUpgradeable.verify(proof, root, leaf);
     }
 
-    function setAllSaleParams (uint16 _availableSupply, bytes32 _root, uint8 _indexWL, bool _saleActive, uint128 _mintPrice) external onlyOwner {
+    function setAllSaleParams (uint16 _availableTokenId, bytes32 _root, uint8 _indexWL, bool _saleActive, uint128 _mintPrice) external onlyOwner {
         setMerkleRoot(_root);
         setIndexWL(_indexWL);
         setSaleActive(_saleActive);
         setMintPrice(_mintPrice);
-        setAvailableSupply(_availableSupply);
+        setAvailableTokenID(_availableTokenId);
     }
 }
 

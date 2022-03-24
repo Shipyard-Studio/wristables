@@ -72,7 +72,7 @@ describe("Wristables Proxy", function () {
   });
 
   it("Should deploy as a proxy successfully", async function () {
-    expect(await wawc.MAX_SUPPLY()).to.equal(9999); // quick deploy check
+    expect(await wawc.MAX_TOKEN_ID()).to.equal(9999); // quick deploy check
   });
 
   it("Should be upgradeable", async function () {
@@ -92,7 +92,7 @@ describe("Wristables Proxy", function () {
 describe("Wristables Contract Unit Tests", function () {
   beforeEach(async function () {
     await proxyDeploy();
-    await wawc.setAvailableSupply(999);
+    await wawc.setAvailableTokenID(999);
     await hre.network.provider.request({
       method: "hardhat_impersonateAccount",
       params: ["0x7Eb696df980734DD592EBDd9dfC39F189aDc5456"],
