@@ -199,7 +199,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
 
     /// @dev allows owner to set the current iteration of the whitelist
     function setIndexWL (uint8 _indexWL) public payable onlyOwner {
-        require(_indexWL > indexWL, "less than current index");
+        require(_indexWL >= indexWL, "less than current index");
         indexWL = _indexWL;
     }
 

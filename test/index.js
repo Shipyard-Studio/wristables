@@ -239,6 +239,26 @@ describe("Wristables Contract Unit Tests", function () {
     expect(royaltyInfo[1]).to.deep.equal(ethers.utils.parseEther("0.6"));
   });
 
+  it("should not allow anyone to claim when merkle root is 0", async function () {
+    const deadbeef = keccak256("0");
+    const mt = new MerkleTree([deadbeef], keccak256, { sortPairs: true });
+    await wawc.setAllSaleParams(
+      0,
+      mt.getHexRoot(),
+      0,
+      true,
+      ethers.utils.parseEther("0.01")
+    );
+
+    const addressHash = keccak256(addr2.address);
+    const proof = mt.getHexProof(addressHash);
+    expect(
+      wawc
+        .connect(addr2)
+        .redeem(proof, { value: ethers.utils.parseEther("0.01") })
+    ).to.be.revertedWith("");
+  });
+
   it("should allow whitelisted addresses to claim", async function () {
     await wawc.setMintPrice(ethers.utils.parseEther("5"));
     await wawc.setSaleActive(true);
