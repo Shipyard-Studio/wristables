@@ -106,9 +106,9 @@ describe("Wristables Contract Unit Tests", function () {
     expect(await wawc.ownerOf(1)).to.deep.equal(addr2.address);
 
     // only owner check
-    expect(
-      wawc.connect(addr2).airdrop(addr2.address, 2)
-    ).to.be.revertedWith("");
+    expect(wawc.connect(addr2).airdrop(addr2.address, 2)).to.be.revertedWith(
+      ""
+    );
   });
 
   it("Should batch airdrop", async function () {
@@ -149,27 +149,21 @@ describe("Wristables Contract Unit Tests", function () {
     await wawc.setMintPrice(ethers.utils.parseEther("5"));
     await wawc.setSaleActive(true);
 
-    await wawc
-      .connect(addr2)
-      .mint({ value: ethers.utils.parseEther("5") });
+    await wawc.connect(addr2).mint({ value: ethers.utils.parseEther("5") });
     expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
   });
 
   it("Mint at Auction", async function () {
     // reverts due to saleActive being false
     expect(
-      wawc
-        .connect(addr2)
-        .mintAuction({ value: ethers.utils.parseEther("1") })
+      wawc.connect(addr2).mintAuction({ value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
 
     await wawc.setSaleActive(true);
 
     // reverts due to toggleAuction being false
     expect(
-      wawc
-        .connect(addr2)
-        .mintAuction({ value: ethers.utils.parseEther("1") })
+      wawc.connect(addr2).mintAuction({ value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
 
     await wawc.setToggleAuction(true);
@@ -225,9 +219,7 @@ describe("Wristables Contract Unit Tests", function () {
 
     // mint at floor price
     expect(
-      wawc
-        .connect(addr2)
-        .mintAuction({ value: ethers.utils.parseEther("1") })
+      wawc.connect(addr2).mintAuction({ value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
   });
 
