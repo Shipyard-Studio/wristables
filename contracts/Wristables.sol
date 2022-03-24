@@ -8,26 +8,24 @@ import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.s
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/MerkleProofUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 
-contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable, UUPSUpgradeable, ReentrancyGuardUpgradeable  {
+contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, PaymentSplitterUpgradeable, UUPSUpgradeable {
 
     using AddressUpgradeable for address;
     using StringsUpgradeable for uint256;
-    using CountersUpgradeable for CountersUpgradeable.Counter;
 
     mapping(bytes32 => bool) public claimedWL; // stores addresses that have claimed whitelisted tokens, set to fixed array because a dynamic array inside of a mapping does not fill with falsey values by default. There won't be more than 10 drops so this is safe for us to assume.
 
     DutchAuction public dutchAuction; 
-    CountersUpgradeable.Counter private _tokenSupply;
     string private _baseTokenURI;
     uint16 public availableSupply; // max number of tokens currently available for mint
     uint16 public MAX_SUPPLY;
     uint8 public indexWL; // index for for drop #, allows us to check claimedWL for the correct bool
     bool private toggleAuction; // true = dutch auction active, false = mint for flat price active
     bool private saleActive; // if false, mint functions will revert
-    uint128 private mintPrice; // price of each token in the `mint` functions
     bytes32 public root; // merkle root set in initializer
+    uint16 public tokenSupply;
+    uint128 private mintPrice; // price of each token in the `mint` functions
 
 
 
@@ -37,19 +35,19 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     }
 
     struct DutchAuction {
-        uint256 startingPrice;
-        uint256 floorPrice;
-        uint256 startAt;
-        uint256 expiresAt;
-        uint256 priceDeductionRate;
+        uint128 startingPrice;
+        uint128 floorPrice;
+        uint64  startAt;
+        uint64  expiresAt;
+        uint128 priceDeductionRate;
     }
 
     event NewDutchAuction(
-        uint256 startingPrice,
-        uint256 floorPrice,
-        uint256 startAt,
-        uint256 expiresAt,
-        uint256 priceDeductionRate
+        uint128 startingPrice,
+        uint128 floorPrice,
+        uint64  startAt,
+        uint64  expiresAt,
+        uint128 priceDeductionRate
     );
 
     /// @dev `maxBatchSize` refers to how much a minter can mint at a time.
@@ -63,8 +61,6 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         __Ownable_init();
          __ERC721_init("Wrist Aficionado Watch Club", "WAWC");
         __PaymentSplitter_init( payees, shares_);
-        __ReentrancyGuard_init();
-        
         // initial values must be set in initialize(), so proxy can set them too.
         MAX_SUPPLY = 9999;
         root = _root;
@@ -72,32 +68,39 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         supportsInterface(0x2a55205a); // required for ERC2981 (royalty) standard
     }
 
+    function increment (uint16 x) internal {
+        unchecked {
+            tokenSupply += x;
+        }
+    }
+
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {
         // 
     }
 
     /// @dev sends the next token to the `to` address for free + gas
-    function airdrop (address to, uint256 quantity) public payable onlyOwner nonReentrant {
-        uint mintIndex = _tokenSupply.current();
+    function airdrop (address to, uint16 quantity) public payable onlyOwner {
+        uint mintIndex = tokenSupply;
         require(mintIndex + quantity <= availableSupply + 1, "exceeds available supply");
-        for (uint256 i = 0; i < quantity; i++) {
+        for (uint16 i = 0; i < quantity; i++) {
             _safeMint(to, mintIndex + i);
-            _tokenSupply.increment();
         }
+            increment(quantity);
     }
 
     /// @dev sends one token to each address in the `to` array
-    function batchAirdrop (address[] memory to) public payable onlyOwner nonReentrant {
-        uint mintIndex = _tokenSupply.current();
-        require(mintIndex + to.length <= availableSupply + 1, "exceeds token supply");
-        for (uint256 i = 0; i < to.length; i++) {
+    function batchAirdrop (address[] memory to) public payable onlyOwner {
+        uint16 length = uint16(to.length);
+        uint16 mintIndex = tokenSupply;
+        require(mintIndex + length <= availableSupply + 1, "exceeds token supply");
+        for (uint16 i = 0; i < to.length; i++) {
             _safeMint(to[i], mintIndex + i);
-            _tokenSupply.increment();
         }
+            increment(length);
     }
 
     /// @dev dutch auction mint
-    function mintAuction () external payable SaleActive nonReentrant {
+    function mintAuction () external payable SaleActive {
         require(toggleAuction, "use `mint`");
         require(block.timestamp > dutchAuction.startAt , "auction has not started yet" );
         require(block.timestamp < dutchAuction.expiresAt, "auction expired");
@@ -112,7 +115,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     }
 
     /// @dev allows users to mint for a flat fee (not a dutch auction)
-    function mint () external payable SaleActive nonReentrant {
+    function mint () external payable SaleActive {
         require(!toggleAuction, "use `mintAuction`");
         require(msg.value == mintPrice, "incorrect ether sent");
 
@@ -132,10 +135,10 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
 
     /// @dev issues token to recipient
     function issueToken (address recipient) private {
-        uint mintIndex = _tokenSupply.current();
+        uint mintIndex = tokenSupply;
         require(mintIndex <= availableSupply, "exceeds token supply");
         _safeMint(recipient, mintIndex);
-        _tokenSupply.increment();
+        increment(1);
     }
 
     /// @dev ERC2981
@@ -160,11 +163,11 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
 
     /// @dev sets dutch auction struct
     function setDutchAuction ( 
-        uint256 _startingPrice,
-        uint256 _floorPrice,
-        uint256 _startAt,
-        uint256 _expiresAt,
-        uint256 _priceDeductionRate
+        uint128 _startingPrice,
+        uint128 _floorPrice,
+        uint64 _startAt,
+        uint64 _expiresAt,
+        uint128 _priceDeductionRate
         ) external payable onlyOwner {
         dutchAuction = DutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);
         emit NewDutchAuction(_startingPrice, _floorPrice, _startAt, _expiresAt, _priceDeductionRate);

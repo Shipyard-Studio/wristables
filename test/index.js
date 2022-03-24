@@ -146,12 +146,12 @@ describe("Wristables Contract Unit Tests", function () {
       wawc.connect(addr2).mint({ value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
 
-    await wawc.setMintPrice(ethers.utils.parseEther("1"));
+    await wawc.setMintPrice(ethers.utils.parseEther("5"));
     await wawc.setSaleActive(true);
 
     await wawc
       .connect(addr2)
-      .mint({ value: ethers.utils.parseEther("1") });
+      .mint({ value: ethers.utils.parseEther("5") });
     expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
   });
 
@@ -253,12 +253,12 @@ describe("Wristables Contract Unit Tests", function () {
   });
 
   it("should allow whitelisted addresses to claim", async function () {
-    await wawc.setMintPrice(ethers.utils.parseEther("1"));
+    await wawc.setMintPrice(ethers.utils.parseEther("5"));
     await wawc.setSaleActive(true);
 
     await addr2.sendTransaction({
       to: "0x7Eb696df980734DD592EBDd9dfC39F189aDc5456",
-      value: ethers.utils.parseEther("3"),
+      value: ethers.utils.parseEther("6"),
     });
 
     const wlUserAddress = "0x7Eb696df980734DD592EBDd9dfC39F189aDc5456";
@@ -282,21 +282,21 @@ describe("Wristables Contract Unit Tests", function () {
 
     await wawc // good proof correct user
       .connect(wlUser)
-      .redeem(proof, { value: ethers.utils.parseEther("1") });
+      .redeem(proof, { value: ethers.utils.parseEther("5") });
 
     expect(await wawc.balanceOf(wlUserAddress)).to.deep.equal(1);
     expect(await wawc.ownerOf(0)).to.deep.equal(wlUserAddress);
 
     expect(
       // good proof wrong user
-      wawc.redeem(proof, { value: ethers.utils.parseEther("1") })
+      wawc.redeem(proof, { value: ethers.utils.parseEther("5") })
     ).to.be.revertedWith("");
 
     expect(
       // good proof good user, can't claim more than once
       wawc // good proof correct user
         .connect(wlUser)
-        .redeem(proof, { value: ethers.utils.parseEther("1") })
+        .redeem(proof, { value: ethers.utils.parseEther("5") })
     ).to.be.revertedWith("");
   });
 });
