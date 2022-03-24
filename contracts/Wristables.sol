@@ -21,13 +21,13 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     DutchAuction public dutchAuction; 
     CountersUpgradeable.Counter private _tokenSupply;
     string private _baseTokenURI;
-    uint256 public availableSupply; // max number of tokens currently available for mint
-    uint256 public MAX_SUPPLY;
-    uint256 private mintPrice; // price of each token in the `mint` functions
+    uint16 public availableSupply; // max number of tokens currently available for mint
+    uint16 public MAX_SUPPLY;
+    uint8 public indexWL; // index for for drop #, allows us to check claimedWL for the correct bool
     bool private toggleAuction; // true = dutch auction active, false = mint for flat price active
     bool private saleActive; // if false, mint functions will revert
+    uint128 private mintPrice; // price of each token in the `mint` functions
     bytes32 public root; // merkle root set in initializer
-    uint32 public indexWL; // index for for drop #, allows us to check claimedWL for the correct bool
 
 
 
@@ -171,13 +171,13 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     }
 
     /// @dev set available token supply
-    function setAvailableSupply (uint256 availableSupplyIncrease) public payable onlyOwner {
+    function setAvailableSupply (uint16 availableSupplyIncrease) public payable onlyOwner {
         require(availableSupply + availableSupplyIncrease <= MAX_SUPPLY, "cannot be greater than 9999");
         availableSupply += availableSupplyIncrease;
     }
 
     /// @dev set price of each token in the `mint` function
-    function setMintPrice (uint256 _mintPrice) public payable onlyOwner {
+    function setMintPrice (uint128 _mintPrice) public payable onlyOwner {
         mintPrice = _mintPrice;
     }
 
@@ -197,7 +197,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     }
 
     /// @dev allows owner to reset base uri when updating metadata
-    function setIndexWL (uint32 _indexWL) public payable onlyOwner {
+    function setIndexWL (uint8 _indexWL) public payable onlyOwner {
         require(_indexWL > indexWL, "less than current index");
         indexWL = _indexWL;
     }
@@ -223,7 +223,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         return MerkleProofUpgradeable.verify(proof, root, leaf);
     }
 
-    function setAllSaleParams (uint _availableSupply, bytes32 _root, uint32 _indexWL, bool _saleActive, uint256 _mintPrice) external onlyOwner {
+    function setAllSaleParams (uint16 _availableSupply, bytes32 _root, uint8 _indexWL, bool _saleActive, uint128 _mintPrice) external onlyOwner {
         setMerkleRoot(_root);
         setIndexWL(_indexWL);
         setSaleActive(_saleActive);
