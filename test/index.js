@@ -100,13 +100,16 @@ describe("Wristables Contract Unit Tests", function () {
   });
 
   it("Should batch airdrop", async function () {
-    await wawc.batchAirdrop([
-      addr2.address,
-      addr3.address,
-      addr4.address,
-      addr5.address,
-      addr6.address,
-    ],[1,1,1,1,3]);
+    await wawc.batchAirdrop(
+      [
+        addr2.address,
+        addr3.address,
+        addr4.address,
+        addr5.address,
+        addr6.address,
+      ],
+      [1, 1, 1, 1, 3]
+    );
 
     expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
     expect(await wawc.ownerOf(1)).to.deep.equal(addr3.address);
@@ -118,13 +121,16 @@ describe("Wristables Contract Unit Tests", function () {
     expect(
       wawc
         .connect(addr2)
-        .batchAirdrop([
-          addr2.address,
-          addr3.address,
-          addr4.address,
-          addr5.address,
-          addr6.address,
-        ], [1,1,1,1,1])
+        .batchAirdrop(
+          [
+            addr2.address,
+            addr3.address,
+            addr4.address,
+            addr5.address,
+            addr6.address,
+          ],
+          [1, 1, 1, 1, 1]
+        )
     ).to.be.revertedWith("");
   });
 
@@ -219,9 +225,6 @@ describe("Wristables Contract Unit Tests", function () {
     expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
     expect(await wawc.ownerOf(999)).to.deep.equal(addr2.address);
     expect(wawc.ownerOf(1000)).to.be.revertedWith("");
-
-    console.log(await wawc.tokenSupply())
-    console.log(await wawc.availableTokenId())
 
     expect(wawc.batchAirdrop([addr2.address], [1])).to.be.revertedWith("");
   });

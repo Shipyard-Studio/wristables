@@ -17,7 +17,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     DutchAuction public dutchAuction; 
     string public _baseTokenURI;
     uint16 public availableTokenId; // max number of tokens currently available for mint
-    uint16 public MAX_TOKEN_ID;
+    uint16 constant public MAX_TOKEN_ID = 9999;
     uint8 public indexWL; // index for for drop #, allows us to check claimedWL for the correct bool
     bool public toggleAuction; // true = dutch auction active, false = mint for flat price active
     bool public saleActive; // if false, mint functions will revert
@@ -58,7 +58,6 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
          __ERC721_init("Wrist Aficionado Watch Club", "WAWC");
         __PaymentSplitter_init( payees, shares_);
         // initial values must be set in initialize(), so proxy can set them too.
-        MAX_TOKEN_ID = 9999;
         root = _root;
 
         supportsInterface(0x2a55205a); // required for ERC2981 (royalty) standard
