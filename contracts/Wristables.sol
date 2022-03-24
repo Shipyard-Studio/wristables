@@ -74,26 +74,30 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         // necessary to override
     }
 
-    /// @dev sends the next token to the `to` address for free + gas
-    function airdrop (address to, uint16 quantity) external payable onlyOwner {
-        uint mintIndex = tokenSupply;
-        require(mintIndex + quantity <= availableTokenId + 1, "exceeds available supply");
-        for (uint16 i = 0; i < quantity; i++) {
-            _safeMint(to, mintIndex + i);
-        }
-            increment(quantity);
-    }
-
     /// @dev sends one token to each address in the `to` array
-    function batchAirdrop (address[] memory to) external payable onlyOwner {
+    function batchAirdrop (address[] calldata to, uint16[] calldata quantity) public payable onlyOwner {
         uint16 length = uint16(to.length);
         uint16 mintIndex = tokenSupply;
         require(mintIndex + length <= availableTokenId + 1, "exceeds token supply");
-        for (uint16 i = 0; i < to.length; i++) {
-            _safeMint(to[i], mintIndex + i);
+        increment(length);
+        for (uint16 i = 0; i < length; i++) {
+            for (uint256 j = 0; j < quantity[i]; j++) {
+                _safeMint(to[i], mintIndex + j);
+            }
         }
-            increment(length);
     }
+
+
+    // /// @dev sends one token to each address in the `to` array
+    // function batchAirdrop (address[] memory to) external payable onlyOwner {
+    //     uint16 length = uint16(to.length);
+    //     uint16 mintIndex = tokenSupply;
+    //     require(mintIndex + length <= availableTokenId + 1, "exceeds token supply");
+    //     for (uint16 i = 0; i < to.length; i++) {
+    //         _safeMint(to[i], mintIndex + i);
+    //     }
+    //         increment(length);
+    // }
 
     /// @dev dutch auction mint
     function mintAuction () external payable SaleActive {
