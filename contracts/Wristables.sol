@@ -235,6 +235,10 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         setMintPrice(_mintPrice);
         setAvailableTokenID(_availableTokenId);
     }
+
+    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
+        return interfaceId == type(IERC2981Upgradeable).interfaceId || super.supportsInterface(interfaceId);
+    }
 }
 
 /// @dev dummy contract for testing upgradeability
