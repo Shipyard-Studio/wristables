@@ -13,12 +13,13 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
 
     using StringsUpgradeable for uint256;
 
+    uint256 constant public MAX_TOKEN_ID = 9999;
+
     mapping(bytes32 => bool) public claimedWL; // stores addresses that have claimed whitelisted tokens, set to fixed array because a dynamic array inside of a mapping does not fill with falsey values by default. There won't be more than 10 drops so this is safe for us to assume.
 
     DutchAuction public dutchAuction; 
     string public _baseTokenURI;
     uint16 public availableTokenId; // max number of tokens currently available for mint
-    uint16 constant public MAX_TOKEN_ID = 9999;
     uint8 public indexWL; // index for for drop #, allows us to check claimedWL for the correct bool
     bool public toggleAuction; // true = dutch auction active, false = mint for flat price active
     bool public saleActive; // if false, mint functions will revert
@@ -69,19 +70,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         // necessary to override
     }
 
-//     mintIndexLocal = mintIndex
-//     Loop through to[]
-//         address = to[_]
-//         quantityForThis = quantity[_]
-        
-//         Loop from i=0 to quantityForThis
-//             mint (address, mintIndexLocal + i)
-        
-//         mintIndexLocal = mintIndexLocal + quantityForThis
-
-// mintIndex = mintIndexLocal
-
-    /// @dev sends one token to each address in the `to` array
+    /// @dev sends a specified number of tokens to each address in the `to` array
     function batchAirdrop (address[] calldata to, uint16[] calldata quantity) public payable onlyOwner {
         require(to.length == quantity.length, "[] diff length");
         uint16 length = uint16(to.length);
@@ -90,7 +79,6 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
             address a = to[i];
             uint16 quantityForA = quantity[i];
         require(mintIndex + quantityForA <= availableTokenId + 1, "exceeds token supply");
-        // total += quantity[i];
             for (uint16 j = 0; j < quantityForA; j++) {
                 _safeMint(a, mintIndex + j);
             }
