@@ -69,11 +69,11 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         require(to.length == quantity.length, "[] diff length");
         uint16 length = uint16(to.length);
         uint16 mintIndex = tokenSupply;
-        for (uint16 i = 0; i < length; i++) {
+        for (uint16 i = 0; i < length; ++i) {
             address a = to[i];
             uint16 quantityForA = quantity[i];
         require(mintIndex + quantityForA <= availableTokenId + 1, "exceeds token supply");
-            for (uint16 j = 0; j < quantityForA; j++) {
+            for (uint16 j = 0; j < quantityForA; ++j) {
                 _safeMint(a, mintIndex + j);
             }
             mintIndex += quantityForA;
