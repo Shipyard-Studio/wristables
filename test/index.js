@@ -226,6 +226,8 @@ describe("Wristables Contract Unit Tests", function () {
     expect(await wawc.ownerOf(999)).to.deep.equal(addr2.address);
     expect(wawc.ownerOf(1000)).to.be.revertedWith("");
 
+    // console.log(await wawc.tokenSupply(), await wawc.availableTokenId())
+
     expect(wawc.batchAirdrop([addr2.address], [1])).to.be.revertedWith("");
   });
 

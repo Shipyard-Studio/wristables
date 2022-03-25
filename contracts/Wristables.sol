@@ -69,33 +69,35 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         // necessary to override
     }
 
+//     mintIndexLocal = mintIndex
+//     Loop through to[]
+//         address = to[_]
+//         quantityForThis = quantity[_]
+        
+//         Loop from i=0 to quantityForThis
+//             mint (address, mintIndexLocal + i)
+        
+//         mintIndexLocal = mintIndexLocal + quantityForThis
+
+// mintIndex = mintIndexLocal
+
     /// @dev sends one token to each address in the `to` array
     function batchAirdrop (address[] calldata to, uint16[] calldata quantity) public payable onlyOwner {
         require(to.length == quantity.length, "[] diff length");
         uint16 length = uint16(to.length);
         uint16 mintIndex = tokenSupply;
-        uint16 total;
         for (uint16 i = 0; i < length; i++) {
-        require(mintIndex + total + quantity[i] <= availableTokenId + 1, "exceeds token supply");
-        total += quantity[i];
-            for (uint256 j = 0; j < quantity[i]; j++) {
-                _safeMint(to[i], mintIndex + i + j);
+            address a = to[i];
+            uint16 quantityForA = quantity[i];
+        require(mintIndex + quantityForA <= availableTokenId + 1, "exceeds token supply");
+        // total += quantity[i];
+            for (uint16 j = 0; j < quantityForA; j++) {
+                _safeMint(a, mintIndex + j);
             }
+            mintIndex += quantityForA;
         }
-        increment(total);
+        increment(mintIndex);
     }
-
-
-    // /// @dev sends one token to each address in the `to` array
-    // function batchAirdrop (address[] memory to) external payable onlyOwner {
-    //     uint16 length = uint16(to.length);
-    //     uint16 mintIndex = tokenSupply;
-    //     require(mintIndex + length <= availableTokenId + 1, "exceeds token supply");
-    //     for (uint16 i = 0; i < to.length; i++) {
-    //         _safeMint(to[i], mintIndex + i);
-    //     }
-    //         increment(length);
-    // }
 
     /// @dev dutch auction mint
     function mintAuction () external payable SaleActive {
