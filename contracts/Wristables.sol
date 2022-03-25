@@ -84,7 +84,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
             }
             mintIndex += quantityForA;
         }
-        increment(mintIndex);
+        increment(mintIndex - tokenSupply);
     }
 
     /// @dev dutch auction mint

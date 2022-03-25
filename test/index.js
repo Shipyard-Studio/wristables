@@ -231,6 +231,17 @@ describe("Wristables Contract Unit Tests", function () {
     expect(wawc.batchAirdrop([addr2.address], [1])).to.be.revertedWith("");
   });
 
+  it("should not count tokens more than once", async function () {
+    wawc.batchAirdrop([addr2.address, addr3.address], [2, 3]);
+
+    expect(await wawc.ownerOf(1)).to.deep.equal(addr2.address);
+    expect(await wawc.ownerOf(4)).to.deep.equal(addr3.address);
+
+    wawc.batchAirdrop([addr2.address, addr3.address], [2, 3]);
+
+    expect(await wawc.tokenSupply()).to.deep.equal(10);
+  });
+
   it("should return proper royalty amount", async function () {
     const royaltyInfo = await wawc.royaltyInfo(
       0,
