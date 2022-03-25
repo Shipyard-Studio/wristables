@@ -60,12 +60,6 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         __PaymentSplitter_init( payees, shares_);
     }
 
-    function increment (uint16 x) internal {
-        unchecked {
-            tokenSupply += x;
-        }
-    }
-
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {
         // necessary to override
     }
@@ -84,7 +78,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
             }
             mintIndex += quantityForA;
         }
-        increment(mintIndex - tokenSupply);
+        tokenSupply = mintIndex;
     }
 
     /// @dev dutch auction mint
@@ -126,7 +120,9 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
         uint mintIndex = tokenSupply;
         require(mintIndex <= availableTokenId, "exceeds token supply");
         _safeMint(recipient, mintIndex);
-        increment(1);
+        unchecked {
+            ++tokenSupply;
+        }
     }
 
     /// @dev ERC2981
