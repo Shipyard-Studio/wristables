@@ -5,7 +5,6 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/finance/PaymentSplitterUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/MerkleProofUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/interfaces/IERC2981Upgradeable.sol";
 
@@ -19,14 +18,15 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
 
     DutchAuction public dutchAuction; 
     string public _baseTokenURI;
-    uint16 public availableTokenId; // max number of tokens currently available for mint
-    uint8 public indexWL; // index for for drop #, allows us to check claimedWL for the correct bool
+
+    uint16 public availableTokenId; // max token id available
+    uint16 public tokenSupply; // current token supply
+    uint8 public indexWL; // index for for drop #
     bool public toggleAuction; // true = dutch auction active, false = mint for flat price active
     bool public saleActive; // if false, mint functions will revert
-    bytes32 public root; // merkle root set in initializer
-    uint16 public tokenSupply;
     uint128 public mintPrice; // price of each token in the `mint` functions
 
+    bytes32 public root; // merkle root set in initializer
 
 
     modifier SaleActive () {
@@ -65,14 +65,14 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     }
 
     /// @dev sends a specified number of tokens to each address in the `to` array
-    function batchAirdrop (address[] calldata to, uint16[] calldata quantity) public payable onlyOwner {
+    function batchAirdrop (address[] calldata to, uint16[] calldata quantity) external payable onlyOwner {
         require(to.length == quantity.length, "[] diff length");
         uint16 length = uint16(to.length);
         uint16 mintIndex = tokenSupply;
         for (uint16 i = 0; i < length; ++i) {
             address a = to[i];
             uint16 quantityForA = quantity[i];
-        require(mintIndex + quantityForA <= availableTokenId + 1, "exceeds token supply");
+            require(mintIndex + quantityForA <= availableTokenId + 1, "exceeds token supply");
             for (uint16 j = 0; j < quantityForA; ++j) {
                 _safeMint(a, mintIndex + j);
             }
