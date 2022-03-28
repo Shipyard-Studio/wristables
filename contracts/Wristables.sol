@@ -14,7 +14,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
 
     uint256 constant public MAX_TOKEN_ID = 9999;
 
-    mapping(bytes32 => bool) public claimedWL; // stores addresses that have claimed whitelisted tokens, set to fixed array because a dynamic array inside of a mapping does not fill with falsey values by default. There won't be more than 10 drops so this is safe for us to assume.
+    mapping(bytes32 => bool) public claimedWL; // stores hash of address + indexWL
 
     DutchAuction public dutchAuction; 
     string public _baseTokenURI;
@@ -26,7 +26,7 @@ contract WristAficionadoWatchClub is ERC721Upgradeable, OwnableUpgradeable, Paym
     bool public saleActive; // if false, mint functions will revert
     uint128 public mintPrice; // price of each token in the `mint` functions
 
-    bytes32 public root; // merkle root set in initializer
+    bytes32 public root; // merkle root 
 
 
     modifier SaleActive () {
