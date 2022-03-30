@@ -19,6 +19,7 @@ function Header ({walletAddress, connect, pageWidth}) {
                 {walletAddress.length > 0 ? `${walletAddress.slice(0,6)}...${walletAddress.slice(-4)}` :
                 'CONNECT'
                 }</div> */}
+                <a href="https://www.youtube.com/channel/UCAbEh6zK2h7LfnFCUzCi6mg" className='z-40' target="_blank" alt="tiktok" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/YouTube-Logo.png'} /></a>
                 <a href="https://www.tiktok.com/@wristaficionado" className='z-40' target="_blank" alt="tiktok" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/TikTok-Logo.png'} /></a>
                 <a href="https://instagram.com/wristaficionado/" className='z-40' target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/WASiteAssets/InstagramLogo.png'} /></a>
                 <a href="https://twitter.com/wristaficionado/" className='z-40' target="_blank" alt="twitter" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/WASiteAssets/TwitterLogo.png'} /></a>
