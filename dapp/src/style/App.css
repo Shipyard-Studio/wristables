@@ -71,6 +71,13 @@ body{
 
 }
 
+.text-section a {
+  text-decoration: underline;
+}
+.text-section a:hover {
+  cursor: pointer;
+}
+
 @media (min-width: 1300px) {
   
   .big-text {
