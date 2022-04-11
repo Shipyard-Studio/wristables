@@ -4,6 +4,7 @@ import Section from './Section';
 import ProgressBar from './ProgressBar';
 import Hero from './Hero';
 import '../style/App.css';
+import getModalStyle from '../helpers/modalStyles'
 
 const Sidebar = lazy(() => import('./Sidebar'));
 const ModalForm = lazy(() => import('./ModalForm'));
@@ -20,19 +21,6 @@ function App() {
   const bg4 = '/optimized/4.jpg'
   const bg5 = '/optimized/5.jpg'
   const bg6 ='./optimized/6.jpg'
-
-  const modalStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      borderRadius: '20px',
-      zIndex: 20
-    },
-  }
 
   Modal.setAppElement('#root');
 
@@ -121,7 +109,7 @@ function App() {
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
-          style={modalStyles}
+          style={getModalStyle()}
           contentLabel="Example Modal"
           >
           <ModalForm closeModal={closeModal}/>

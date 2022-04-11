@@ -12,7 +12,7 @@ function Header ({walletAddress, connect, pageWidth}) {
             :
             <div></div>
             }
-             <img className='wa-logo z-40 mt-5 lg:mt-0' src={WALogo} alt='wrist afficianado logo'/>
+             <img className='wa-logo z-40 lg:mt-0' src={WALogo} alt='wrist afficianado logo'/>
             {pageWidth > 950? 
             <div className='nav-logo-flex z-40'>
                 {/* <div onClick={connect} className='ease-in ease-out duration-300 ml-8 px-4 py-2 border-2 border-blue-600 rounded-full hover:bg-blue-600 hover:cursor-pointer z-10'>
