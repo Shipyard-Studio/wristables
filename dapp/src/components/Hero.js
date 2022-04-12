@@ -11,7 +11,7 @@ const Hero = ({props}) => {
     return (
         <div className='hero h-full bg-black'>
             {/* <Watch /> */}
-            <Video />
+            {/* <Video /> */}
             <Header walletAddress={props.walletAddress} connect={props.connect} pageWidth={props.pageWidth}/>
             <div className='flex flex-col justify-between m-auto h-5/6 w-10/12 pt-10'>
                 <div className='big-text text-center z-10 noselect'>
