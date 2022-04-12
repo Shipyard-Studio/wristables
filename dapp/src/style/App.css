@@ -39,7 +39,6 @@ body{
   font-style: normal;
   font-size: 30pt;
   line-height: 36pt;
-  padding-bottom: 10px;
 }
 .medium-text {
   font-family: proxima-nova, sans-serif;
@@ -71,12 +70,11 @@ body{
 
 }
 
-@media (min-width: 768px) {
+@media (max-width: 950px) {
   
   .big-text {
     font-size: 24pt;
     font-style: normal;
-    line-height: 48pt;
   }
   
   .small-text {

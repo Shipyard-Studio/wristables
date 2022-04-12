@@ -20,16 +20,9 @@ const Section = ({bg, size, Component, componentProps}) => {
     }` 
 
     return (
-        <Parallax strength={300}
-            className={classes}
-            blur={{ min: -5, max: 5 }}
-            bgImage={bg ? bg : null}
-            bgImageAlt="background image"
-            bgImageSize="100%"
-            strength={200}
-        >
-                {Component ? <Component props={componentProps}/> : <></>}
-        </Parallax>
+        <>
+        {Component ? <Component props={componentProps}/> : <></>}
+        </>
     )
 
 }
