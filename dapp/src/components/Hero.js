@@ -18,7 +18,7 @@ const Hero = ({props}) => {
                 </div>
             <Video />
                 <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-10 pb-0 lg:pb-10'>
-                    <a href='medium-text https://discord.com/invite/cJpYAvJhTG' className='whitespace-nowrap ease-in ease-out duration-300 hover:underline-offset-2  mx-auto lg:mx-2  lg:mt-0 m-auto lg:m-none  w-10/12 lg:w-1/2 md:mt-5 bg-cover text-center text-center border-2 py-2 lg:py-5 hover:cursor-pointer' target='_blank' alt='discord link'>JOIN US ON DISCORD</a>
+                    <a href='medium-text https://discord.com/invite/cJpYAvJhTG' className='hover-invert whitespace-nowrap ease-in ease-out duration-300 hover:underline-offset-2  mx-auto lg:mx-2  lg:mt-0 m-auto lg:m-none  w-10/12 lg:w-1/2 md:mt-5 bg-cover text-center text-center border-2 py-2 lg:py-5 hover:cursor-pointer' target='_blank' alt='discord link'>JOIN US ON DISCORD</a>
                     <div 
                     onClick={null} // disabled
                     // onClick={props.connect} //for live site

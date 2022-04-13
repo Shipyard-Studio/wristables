@@ -65,6 +65,17 @@ body{
 
 }
 
+.hover-invert {
+  transition: 500ms;
+}
+
+.hover-invert:hover {
+  transition: 500ms;
+  background-color: #e5e7eb;
+  color: black;
+  cursor: pointer;
+}
+
 @media (max-width: 950px) {
   
   .big-text {
