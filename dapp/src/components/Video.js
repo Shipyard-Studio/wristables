@@ -18,9 +18,9 @@ const Video = () => {
 
   function getSource () {
     return window.innerWidth > 950 ? 
-    "/videos/Background Video 04 - Desktop 1080p 8MBps.mp4" 
+    "/assets/Background Video 04 - Desktop 1080p 8MBps.mp4" 
     :
-    "/videos/Background Video 04 - Mobile 1080p 8MBps.mp4"
+    "/assets/Background Video 04 - Mobile 1080p 8MBps.mp4"
   }
 
   return (
