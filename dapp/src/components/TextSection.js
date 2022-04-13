@@ -21,6 +21,7 @@ const TextSection = ({props}) => {
     }
 
     let body = ReactHtmlParser(props.body)
+    let body2 = ReactHtmlParser(props.body2)
 
     async function postEmail () {
         let input = document.getElementById('email-input')
@@ -51,7 +52,8 @@ const TextSection = ({props}) => {
     }
 
     return (
-        <div className='m-auto h-full flex flex-col pb-10 justify-center w-10/12 md:w-4/12'>
+        <div className=''>
+            <div className='m-auto h-full flex flex-col pb-10 justify-center w-10/12 md:w-4/12'>
                 <div className='big-text m-auto noselect'>{props.header}</div>
                 {props.image ?
                 <img src={props.image} alt="WAWC Watch Image"/>
@@ -73,6 +75,15 @@ const TextSection = ({props}) => {
                 {props.roadmap ?
                 <div className='hover-invert mt-8 p-2 w-10/12 m-auto border-2 text-center'>
                     VIEW ROADMAP
+                </div>
+                :
+                <></>
+                }
+            </div>
+                {props.header2 ?
+                <div className='m-auto h-full flex flex-col pb-10 justify-center w-10/12 md:w-4/12'>
+                    <div className='big-text m-auto noselect'>{props.header2}</div>
+                    <div className='small-text'>{body2}</div>
                 </div>
                 :
                 <></>
