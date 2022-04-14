@@ -37,7 +37,7 @@ body{
   line-height: 36pt;
 }
 .medium-text {
-  font-weight: 1200;
+  font-weight: bold;
   font-style: normal;
   font-size: 16pt;
   line-height: 24pt;
@@ -62,7 +62,6 @@ body{
 
 .ReactModal__Content--after-open {
   margin-right: 0 !important;
-
 }
 
 .hover-invert {
@@ -76,15 +75,47 @@ body{
   cursor: pointer;
 }
 
+.modal {
+  border-radius: '20px';
+  z-index: 20;
+  border: 2px solid white;
+}
+
+.ReactModal__Overlay {
+  background-color: rgba(0,0,0) !important;
+}
+
+.ReactModal__Overlay--after-open {
+  background-color: rgba(0,0,0) !important;
+}
+
 @media (max-width: 950px) {
   
   .big-text {
     font-size: 24pt;
     font-style: normal;
   }
+
+  .medium-text {
+    font-weight: bold;
+  }
   
   .small-text {
     font-size: 12pt;
+    font-weight: 600;
   }
 
+  .modal {
+    width: 90vw;
+    margin: auto;
+    margin-top: 25%;
+  }
+
+  .ReactModal__Content {
+    margin-right: auto !important;
+  }
+  
+  .ReactModal__Content--after-open {
+    margin-right: auto !important;
+  }
 }

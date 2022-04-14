@@ -109,8 +109,9 @@ function App() {
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
-          style={getModalStyle()}
-          contentLabel="Example Modal"
+          // style={getModalStyle()}
+          contentLabel="Piece Unique Modal"
+          className="modal"
           >
           <ModalForm closeModal={closeModal}/>
       </Modal>
