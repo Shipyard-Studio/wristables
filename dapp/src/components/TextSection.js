@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactHtmlParser from "react-html-parser";
 import axios from 'axios';
+import { Link, animateScroll as scroll } from "react-scroll";
 
 const TextSection = ({props}) => {
 
@@ -73,9 +74,17 @@ const TextSection = ({props}) => {
                 <></>
                 }
                 {props.roadmap ?
-                <div className='hover-invert mt-8 p-2 w-10/12 m-auto border-2 text-center'>
-                    VIEW ROADMAP
-                </div>
+                <Link 
+                to="roadmap"
+                activeClass="active"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}>
+                    <div className='hover-invert mt-8 p-2 w-10/12 m-auto border-2 text-center'>
+                        VIEW ROADMAP
+                    </div>
+                </Link>
                 :
                 <></>
                 }
