@@ -78,3 +78,8 @@
 .bm-overlay {
     background: rgba(0, 0, 0, 0.3);
   }
+
+.bm-center {
+  margin: auto !important;
+  margin-top: 20px !important;
+}
