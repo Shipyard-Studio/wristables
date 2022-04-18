@@ -53,7 +53,7 @@ const TextSection = ({props}) => {
     }
 
     return (
-        <div className=''>
+        <div className='' id={props.header.toLowerCase()}>
             <div className='m-auto h-full flex flex-col pb-10 justify-center w-10/12 md:w-4/12'>
                 <div className='big-text m-auto noselect'>{props.header}</div>
                 {props.image ?

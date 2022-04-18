@@ -9,7 +9,7 @@ import '../style/Hero.css'
 const Hero = ({props}) => {
 
     return (
-        <div className='hero h-full bg-black'>
+        <div className='hero h-full bg-black' id='home'>
             {/* <Watch /> */}
             <Header walletAddress={props.walletAddress} connect={props.connect} pageWidth={props.pageWidth}/>
             <div className='flex flex-col justify-between m-auto h-5/6 w-full pt-10'>
