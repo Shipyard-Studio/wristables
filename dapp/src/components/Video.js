@@ -18,13 +18,13 @@ const Video = () => {
 
   function getSource () {
     return window.innerWidth > 950 ? 
-    "/assets/Background Video 04 - Desktop 1080p 8MBps.mp4" 
+    "/Background Video 04 - Desktop 1080p 8MBps-1x1.mp4" 
     :
     "/assets/Background Video 04 - Mobile 1080p 8MBps.mp4"
   }
 
   return (
-    <div className='w-full mx-auto flex items-center z-auto'>
+    <div className='h-auto w-3/5 mx-auto flex lg:items-start items-center z-auto'>
            <video id='vid' className={classString} style={{}} loop={true} autoPlay="autoplay" muted>
      {/* <source src="where the video is" type="video/mov"/> */}
      <source src={getSource()} type="video/mp4" />

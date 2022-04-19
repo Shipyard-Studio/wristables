@@ -14,7 +14,7 @@ const Hero = ({props}) => {
             <Header walletAddress={props.walletAddress} connect={props.connect} pageWidth={props.pageWidth}/>
             <div className='flex flex-col justify-between m-auto h-5/6 w-full pt-10'>
                 <div className='lg:ml-10 lg:text-left big-text text-center z-10 noselect'>
-                    <span className='huge-text'>Wrist Aficionado</span><br/>Watch Club.
+                    <span className='huge-text'>Wrist Aficionado</span><br/>{props.pageWidth > 950 ? '' : 'Watch Club'}
                 </div>
                 <div className='lg:flex'>
                 {props.pageWidth < 950 ? <Video /> : <></>}
@@ -34,14 +34,16 @@ const Hero = ({props}) => {
                             <div onClick={props.openModal} className='decoration-white whitespace-nowrap hover:underline-offset-2 ease-in ease-out duration-300 m-auto  mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none mb-10 lg:mb-0 w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center text-center lg:py-5 hover:cursor-pointer' src='/WASiteAssets/DiscordButton.png' alt='piece unique' >Piece Unique Studio</div>
                         </div>
                     }
+                    <div className='big-text w-full lg:ml-10'>{props.pageWidth > 950 ? 'Watch Club' : ''}</div>
                     <div className='lg:flex lg:mt-10 lg:ml-10'>
-                        <div>
-                            <div className='medium-text m-auto pb-2 text-center lg:text-left'>Luxury</div>
-                            <div className='mb-10'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu ipsum nulla. Sed porttitor ipsum odio, in condimentum nunc vehicula in. Etiam eget accumsan turpis. Pellentesque habitant morbi tristique senectus et netus.</div>
+                        <div className=''>
+                            <div className='medium-text m-auto text-center lg:text-left'>Luxury</div>
+                            <div className=''>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu ipsum nulla. Sed porttitor ipsum odio, in condimentum nunc vehicula in. Etiam eget accumsan turpis. Pellentesque habitant morbi tristique senectus et netus.</div>
                         </div>
+                        {props.pageWidth > 950 ? <div className='border mr-6'/> : <></>}
                         <div>
                             <div className='medium-text m-auto pb-2 text-center lg:text-left'>Excellence</div>
-                            <div className='pb-10'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu ipsum nulla. Sed porttitor ipsum odio, in condimentum nunc vehicula in. Etiam eget accumsan turpis. Pellentesque habitant morbi tristique senectus et netus.</div>
+                            <div className=''>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu ipsum nulla. Sed porttitor ipsum odio, in condimentum nunc vehicula in. Etiam eget accumsan turpis. Pellentesque habitant morbi tristique senectus et netus.</div>
                         </div>
                     </div>
                     {props.pageWidth > 950 ?
