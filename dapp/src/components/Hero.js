@@ -35,7 +35,7 @@ const Hero = ({props}) => {
                         </div>
                     }
                     <div className='big-text w-full lg:ml-10'>{props.pageWidth > 950 ? 'Watch Club' : ''}</div>
-                    <div className='lg:flex lg:mt-10 lg:ml-10'>
+                    <div className='lg:flex lg:ml-10 lg:mt-20'>
                         <div className=''>
                             <div className='medium-text m-auto text-center lg:text-left'>Luxury</div>
                             <div className=''>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu ipsum nulla. Sed porttitor ipsum odio, in condimentum nunc vehicula in. Etiam eget accumsan turpis. Pellentesque habitant morbi tristique senectus et netus.</div>
