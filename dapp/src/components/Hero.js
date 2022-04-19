@@ -21,8 +21,8 @@ const Hero = ({props}) => {
                 <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-10 pb-0 lg:pb-10'>
                     <div className='lg:flex-col'>
                     {props.pageWidth > 950 ? <></> :
-                        <>
-                            <a href='https://discord.com/invite/cJpYAvJhTG' className='hover-invert whitespace-nowrap ease-in ease-out duration-300 hover:underline-offset-2  mx-auto lg:mx-2  lg:mt-0 m-auto lg:m-none  w-10/12 lg:w-1/2 md:mt-5 bg-cover text-center text-center border-2 py-2 lg:py-5 hover:cursor-pointer' target='_blank' alt='discord link'>JOIN US ON DISCORD</a>
+                        <div className='flex flex-col items-center'>
+                            <a href='https://discord.com/invite/cJpYAvJhTG' className='hover-invert whitespace-nowrap ease-in ease-out duration-300 hover:underline-offset-2 m-auto w-10/12 bg-cover text-center border-2 py-2 hover:cursor-pointer' target='_blank' alt='discord link' rel="noreferrer">JOIN US ON DISCORD</a>
                             <div 
                             onClick={null} // disabled
                             // onClick={props.connect} //for live site
@@ -32,7 +32,7 @@ const Hero = ({props}) => {
                                 </div>
                             <a className='whitespace-nowrap hover:underline-offset-2 ease-in ease-out duration-300 m-auto  mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none lg:mb-0 w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center text-center lg:py-5 hover:cursor-pointer' href="https://wristaficionado.com/" target="_blank" rel="noreferrer" alt='boutique link' >Visit Boutique</a>
                             <div onClick={props.openModal} className='decoration-white whitespace-nowrap hover:underline-offset-2 ease-in ease-out duration-300 m-auto  mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none mb-10 lg:mb-0 w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center text-center lg:py-5 hover:cursor-pointer' src='/WASiteAssets/DiscordButton.png' alt='piece unique' >Piece Unique Studio</div>
-                        </>
+                        </div>
                     }
                     <div className='lg:flex lg:mt-10 lg:ml-10'>
                         <div>
@@ -46,7 +46,7 @@ const Hero = ({props}) => {
                     </div>
                     {props.pageWidth > 950 ?
                         <div className='lg:mt-10 flex flex-col items-center'>
-                            <a href='https://discord.com/invite/cJpYAvJhTG' className='hover-invert whitespace-nowrap ease-in ease-out duration-300 hover:underline-offset-2  lg:mx-2 m-auto lg:m-auto  w-10/12 md:mt-5 bg-cover text-center text-center border-2 py-2 lg:p-5 hover:cursor-pointer' target='_blank' alt='discord link'>JOIN US ON DISCORD</a>
+                            <a href='https://discord.com/invite/cJpYAvJhTG' className='hover-invert whitespace-nowrap ease-in ease-out duration-300 hover:underline-offset-2  lg:mx-2 m-auto lg:m-auto  w-10/12 md:mt-5 bg-cover text-center text-center border-2 py-2 lg:p-5 hover:cursor-pointer' target='_blank' alt='discord link' rel="noreferrer">JOIN US ON DISCORD</a>
                             <div className='lg:flex lg:w-full lg:justify-between lg:my-10'>
                             <div 
                             onClick={null} // disabled
