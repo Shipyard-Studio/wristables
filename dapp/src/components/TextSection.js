@@ -63,7 +63,7 @@ const TextSection = ({props}) => {
                 }
                 <div className='small-text'>{body}</div>
                 {props.emailCapture ?
-                <div className='hover-invert mt-8 p-2 w-10/12 m-auto border-2 text-center'>
+                <div className='hover-invert mt-8 p-2 w-10/12 m-auto border-2 text-center' onClick={props.openEmailModal}>
                     JOIN OUR MAILING LIST
                     {/* <form>
                         <input id='email-input' className='p-3 text-neutral-300 bg-neutral-800' placeholder='join our mailing list' style={{outline: 'none'}}/>
