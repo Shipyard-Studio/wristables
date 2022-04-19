@@ -33,13 +33,24 @@ body{
   font-size: 10pt;
 }
 
+.huge-text {
+  font-family: 'Cinzel', serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 72pt;
+  letter-spacing: 10px;
+  line-height: 72pt;
+}
+
 .big-text {
   font-family: 'Cinzel', serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 30pt;
-  line-height: 36pt;
+  font-size: 48pt;
+  line-height: 48pt;
+  letter-spacing: 10px;
 }
+
 .medium-text {
   font-weight: bold;
   font-style: normal;
@@ -95,9 +106,18 @@ body{
 
 @media (max-width: 950px) {
   
+  .huge-text {
+    font-size: 24pt;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+  }
+  
   .big-text {
     font-size: 24pt;
     font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
   }
 
   .medium-text {
