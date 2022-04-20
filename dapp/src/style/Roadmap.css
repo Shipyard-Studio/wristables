@@ -1,0 +1,34 @@
+#part1 {
+    margin-top: 50px;
+    width:450px;
+    margin-left: 380px;
+    margin-bottom: 150px;
+}
+
+#part2 {
+    width:450px;
+    margin-left: 520px;
+    margin-bottom: 150px;
+}
+
+#part3 {
+    width:450px;
+    margin-left: 575px;
+    margin-bottom: 150px;
+}
+
+#part4 {
+    width:450px;
+    margin-left: 520px;
+    margin-bottom: 150px;
+}
+
+#part5 {
+    width:450px;
+    margin-left: 380px;
+    margin-bottom: 150px;
+}
+
+@media (max-width: 1400px) {
+
+}
