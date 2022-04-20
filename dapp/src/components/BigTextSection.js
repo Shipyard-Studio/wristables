@@ -5,8 +5,6 @@ import { Link, animateScroll as scroll } from "react-scroll";
 
 const TextSection = ({props}) => {
 
-    console.log('meow')
-
     function validateEmail(email) 
     {
         var re = /\S+@\S+\.\S+/;
@@ -55,42 +53,48 @@ const TextSection = ({props}) => {
     }
 
     return (
-        <div className='' id={props.header.toLowerCase()}>
-            <div className='m-auto h-full flex flex-col pb-10 justify-center w-10/12 md:w-4/12'>
-                <div className='big-text m-auto noselect'>{props.header}</div>
-                {props.image ?
-                <img src={props.image} alt="WAWC Watch Image"/>
+        <div className='md:mx-20' id={props.header.toLowerCase()}>
+            <div className='m-auto w-full h-full flex pb-10 justify-between'>
+                {props.image && props.header === 'About' ?
+                <img src={props.image} alt="WAWC Watch Image" className='w-5/12'/>
                 :
                 <></>
                 }
-                <div className='small-text'>{body}</div>
-                {props.emailCapture ?
-                <div className='hover-invert mt-8 p-2 w-10/12 m-auto border-2 text-center' onClick={props.openEmailModal}>
-                    JOIN OUR MAILING LIST
-                    {/* <form>
-                        <input id='email-input' className='p-3 text-neutral-300 bg-neutral-800' placeholder='join our mailing list' style={{outline: 'none'}}/>
-                    </form>
-                    <div onClick={postEmail} className='p-2 px-5 bg-amber-400 text-black text-xl hover:cursor-pointer'>→</div> */}
-                </div>
-                :
-                <></>
-                }
-                {props.roadmap ?
-                <Link 
-                to="roadmap"
-                activeClass="active"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}>
-                    <div className='hover-invert mt-8 p-2 w-10/12 m-auto border-2 text-center'>
-                        VIEW ROADMAP
+                <div className='flex flex-col w-5/12 justify-center'>
+                    <div className='big-text text-left noselect pb-10'>{props.header}</div>
+                    <div className='small-text'>{body}</div>
+                    {props.emailCapture ?
+                    <div className='hover-invert mt-8 p-2 w-full border-2 text-center' onClick={props.openEmailModal}>
+                        JOIN OUR MAILING LIST
+                        {/* <form>
+                            <input id='email-input' className='p-3 text-neutral-300 bg-neutral-800' placeholder='join our mailing list' style={{outline: 'none'}}/>
+                            </form>
+                        <div onClick={postEmail} className='p-2 px-5 bg-amber-400 text-black text-xl hover:cursor-pointer'>→</div> */}
                     </div>
-                </Link>
+                    :
+                    <></>
+                    }
+                    {props.roadmap ?
+                    <Link 
+                    to="roadmap"
+                    activeClass="active"
+                    spy={true}
+                    smooth={true}
+                    offset={-70}
+                    duration={500}>
+                        <div className='hover-invert mt-8 p-2 w-full m-auto border-2 text-center'>
+                            VIEW ROADMAP
+                        </div>
+                    </Link>
+                    :
+                    <></>
+                    }
+                </div>
+                {props.image && props.header === 'Utility' ?
+                <img src={props.image} alt="WAWC Watch Image" className='w-5/12'/>
                 :
                 <></>
                 }
-            </div>
                 {props.header2 ?
                 <div className='m-auto h-full flex flex-col pb-10 justify-center w-10/12 md:w-4/12'>
                     <div className='big-text m-auto noselect'>{props.header2}</div>
@@ -98,7 +102,8 @@ const TextSection = ({props}) => {
                 </div>
                 :
                 <></>
-                }
+            }
+            </div>
         </div>
     )
 
