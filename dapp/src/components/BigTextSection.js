@@ -61,7 +61,7 @@ const TextSection = ({props}) => {
                 <></>
                 }
                 <div className='flex flex-col w-5/12 justify-center'>
-                    <div className='big-text text-left noselect pb-10'>{props.header}</div>
+                    <div className='big-text text-left noselect pb-10' style={props.header === 'Events' ? {fontSize: 50} : {}}>{props.header}</div>
                     <div className='small-text'>{body}</div>
                     {props.emailCapture ?
                     <div className='hover-invert mt-8 p-2 w-full border-2 text-center' onClick={props.openEmailModal}>
@@ -96,8 +96,8 @@ const TextSection = ({props}) => {
                 <></>
                 }
                 {props.header2 ?
-                <div className='m-auto h-full flex flex-col pb-10 justify-center w-10/12 md:w-4/12'>
-                    <div className='big-text m-auto noselect'>{props.header2}</div>
+                <div className='m-auto h-full flex flex-col pb-10 justify-center w-5/12'>
+                    <div className='big-text noselect pb-10' style={{fontSize: 50}}>{props.header2}</div>
                     <div className='small-text'>{body2}</div>
                 </div>
                 :
