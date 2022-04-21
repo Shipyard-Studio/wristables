@@ -4,10 +4,14 @@ import Section from './Section';
 import ProgressBar from './ProgressBar';
 import Hero from './Hero';
 import '../style/App.css';
+import getModalStyle from '../helpers/modalStyles'
 
 const Sidebar = lazy(() => import('./Sidebar'));
 const ModalForm = lazy(() => import('./ModalForm'));
+const EmailModalForm = lazy(() => import('./EmailModalForm'));
 const TextSection = lazy(() => import('./TextSection'));
+const BigTextSection = lazy(() => import('./BigTextSection'));
+const Roadmap = lazy(() => import('./Roadmap'));
 const Footer = lazy(() => import('./Footer'));
 
 
@@ -21,24 +25,12 @@ function App() {
   const bg5 = '/optimized/5.jpg'
   const bg6 ='./optimized/6.jpg'
 
-  const modalStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      borderRadius: '20px',
-      zIndex: 20
-    },
-  }
-
   Modal.setAppElement('#root');
 
   const [walletAddress, setWallet] = useState("")
   const [sectionInFocus, setSectionInFocus] = useState(0)
   const [modalIsOpen, setIsOpen] = useState(false)
+  const [emailModalIsOpen, setIsEmailModalOpen] = useState(false)
   const [pageWidth, setPageWidth] = useState(window.innerWidth)
 
   function openModal() {
@@ -51,6 +43,18 @@ function App() {
 
   function closeModal() {
     setIsOpen(false);
+  }
+
+  function openEmailModal() {
+    setIsEmailModalOpen(true);
+  }
+
+  function afterOpenEmailModal() {
+    // subtitle.style.color = '#f00';
+  }
+
+  function closeEmailModal() {
+    setIsEmailModalOpen(false);
   }
 
   async function connectWallet() {
@@ -99,6 +103,14 @@ function App() {
     } 
   }
 
+  function typeOfSection(r) {
+    if(pageWidth > 950) {
+      return r ? Roadmap : BigTextSection 
+    } else {
+      return TextSection
+    } 
+  }
+
   function getInFocusSection() {
     let screenHeight = window.innerHeight;
     let section = Math.round(window.scrollY / screenHeight)
@@ -121,20 +133,30 @@ function App() {
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
-          style={modalStyles}
-          contentLabel="Example Modal"
+          // style={getModalStyle()}
+          contentLabel="Piece Unique Modal"
+          className="modal"
           >
-          <ModalForm closeModal={closeModal}/>
+          <ModalForm closeModal={closeModal} pageWidth={pageWidth}/>
+      </Modal>
+      <Modal
+          isOpen={emailModalIsOpen}
+          onAfterOpen={afterOpenEmailModal}
+          onRequestClose={closeEmailModal}
+          // style={getModalStyle()}
+          contentLabel="Email Modal"
+          className="email-modal"
+          >
+          <EmailModalForm closeModal={closeEmailModal} pageWidth={pageWidth}/>
       </Modal>
 
         {pageWidth < 950 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
-        <ProgressBar num={sectionInFocus}/>
-        <Section bg={null} size={1} Component={Hero} componentProps={{walletAddress: walletAddress, connect: connectWallet, openModal: openModal, pageWidth: pageWidth}}/>
-        <Section bg={bg2} size={1} Component={TextSection} componentProps={{header: "About", body: "<div>Every Wrist Aficionado Mint is customized and built in a unique colour and finish. With the first 1,000 pieces created using moving parts from a Hypercar Engine. V1 of our roadmap consists of 10,000 watches total, with every 1,000 released being a different design. View our roadmap below to see what you will be able to do with your time piece as we build out our project.</div>" }}/>
-        <Section bg={bg3} size={1} Component={TextSection} componentProps={{header: "Utility", body: "<div>As a Wrist Aficionado Watch Club (WAWC) holder, you will gain access to private collector events, dinners, and have first dibs on new pieces in our boutiques at exclusive prices before they become available to the public. Get started by <a href='https:discord.com/invite/cJpYAvJhTG'>joining our Discord</a> community and stay up to date with each release</div>", emailCapture: true}}/>
-        <Section bg={bg4} size={1} Component={TextSection} componentProps={{header: "Events", body: "<div>Holders will have access to our VIP events in various different cities, and have the opportunity to meet with some of the worlds top collectors in the Wrist Aficionado network. </div>"}}/>
-        <Section bg={bg5} size={1} Component={TextSection} componentProps={{header: "Bitcoin 2022", body: "<div>Come see us at Bitcoin 2022 in Miami Beach, where we will be showcasing some of our rarest pieces, as well as announcing the mint date for WAWC. Active community members that are in Miami between the 6th-9th will be invited to our boutique located in the Setai hotel for a private tour.</div>"}}/>
-        <Section bg={bg6} size={2} Component={TextSection} componentProps={{header: "Roadmap", body: "<div><b>10% | April</b><br/><ul><li>1,000 Hypercar watch</li><li>GIVEAWAY 3-5 Watches from our boutique to our watch club members</li></ul><br/><b>15% | May</b><br/><ul><li>1,000 Crypto Watch</li><li>GIVEAWAY 3-5 Watches from our boutique to our watch club members</li></ul><br/><b>20% | June</b><br/><ul><li>1,000 Formula 1 Watch for Miami F1</li><li>GIVEAWAY 3-5 Watches from our boutique to our watch club members</li></ul><br/><b>25% | July</b><br/><ul><li>1,000 DJ Watch</li><li>GIVEAWAY 3-5 watches from our boutique to our watch club members</li></ul><br/><b>30% | August</b><br/><ul><li>1,000 Steam Power Watch</li><li>GIVEAWAY 3-5 watches from our boutique to our watch club members</li></ul><br/><b>35% | September</b><br/><ul><li>1,000 Casino Watch inspired by Vegas & Macau</li><li>GIVEAWAY 3-5 watches from our boutique to our watch club members</li></ul><br/><b>40% | October</b><br/><ul><li>1,000 Solar System Watch</li><li>GIVEAWAY 3-5 Watches from our boutique to our watch club members </li></ul><br/><b>45% | November</b><br/><ul><li>1,000 Robotic Watch</li><li>GIVEAWAY 3-5 Watches from our boutique to our watch club members</li></ul><br/><b>50% | December</b><br/><ul><li>1,000 Time Machine Watch</li><li>GIVEAWAY 3-5 Watches from our boutique to our watch club members</li><br/></ul><br/><b>55% | January </b><br/><ul><li>1,000 Formula E Watch</li><li>GIVEAWAY 3-5 Watches from our boutique to our watch club members</li><br/></ul><br/><b>70%</b><br/><ul><li>1,000 Piece Uniques that will be fully customizable in our studio</li><li>Develop AR platform to see your watch in real life</li><br/></ul><br/><b>85%</b><br/><ul><li>Accessory store launch</li><br/></ul><br/><b>100%</b><br/><ul><li>Build Virtual Wrist Aficionado boutique where you can accessorize your watch and buy real watches from our inventory. ( WA members will get early access, and exclusive prices on watch purchases).</li></br><li>All of our members can now enter Web3 with our All World Access Pass (AWAP).</li><br/></ul></div>"}}/>
+        {/* <ProgressBar num={sectionInFocus}/> */}
+        <Section bg={null} size={1} Component={Hero} id="home" componentProps={{walletAddress: walletAddress, connect: connectWallet, openModal: openModal, pageWidth: pageWidth}}/>
+        <Section bg={bg2} size={1} Component={typeOfSection()} id="about" componentProps={{header: "About", image: "/assets/Watch Still 02.png", roadmap: true, body: "<div>Backed by over 30 years of rich industry experience, Wrist Aficionado blends Madison-Avenue polish with the tech-forward world of NFTs and web3. The goal of matching your wrist to the ideal watch - in the metaverse and beyond - that’s what drives us.</div>" }}/>
+        <Section bg={bg3} size={1} Component={typeOfSection()} id="utility" componentProps={{header: "Utility", image: "/assets/Watch Still 01.png", emailCapture: true, openEmailModal: openEmailModal, body: "<div>Wrist Aficionado Watch Club members comprise an elite group, with access to a host of private events, presale watch releases, and fractional group-buys that minimize risk and enable larger investments. Holders will own IP rights to their watch and acquire 3D files of each. These dynamic watches will be wearable in the metaverse. Experience exclusive Discords with members-only daily drops, invaluable buying & selling tips and much more. Utility grows with the purchase of each additional watch. Owners of 1 to 5 watches are automatically whitelisted. Should holders acquire more than 10 watches, minting on the next project will be entirely free.</div>"}}/>
+        <Section bg={bg4} size={1} Component={typeOfSection()} id="vision" componentProps={{header: "Vision", header2:"Team", body: "<div>Imbued with a spirit of delirious ambition, WAWC is the future of timekeeping accessories. We envision Wrist Aficionado Watch Club as the premier wearable luxury brand in the fledgling Metaverse. Brands are only beginning to enter the Metaverse through NFTs, leaving ample white space in the market - especially where luxury accessories are concerned. Distinguished by our expert team and nimble roadmap, WAWC is primed to adapt to this nascent industry. Wrist Aficionado aims to provide a powerful investment, through which holders gain immense value and discover community.</div>", body2: "<div><div>Spearheaded by our founders, Eddie , Vadim  and Mike, Wrist Aficionado is composed of upcoming digital artists, web3 degens and community builders.</div><br/><b>Founder | Eddie</b><br/>Eddie holds over 15 years of experience in the watch industry. His ultimate ambition is to migrate the luxury watch boutique experience to the Metaverse, and establish Wrist Aficionado as the Metaverse’s premier watchmaker. <br/><br/><b>Founder | Vadim</b><br/>A 25-year watch industry veteran, Vadim shrewdly predicted that the future of the luxury market rested in web3. After beginning his career with Jacob & Co, he launched Wrist Aficionado in 2017, quickly opening up two brick-and-mortar stores in NYC and Miami, alongside Eddie. <br/><br/><b>Founder | Mike</b><br/>Mike’s captivation with watches stretches back three decades. A serial entrepreneur from a young age, he has conceived and sold multiple million-dollar businesses. In 2017, Mike began a client-business relationship with Wrist Aficionado. After gaining an appreciation for their honesty and professionalism, he became a company partner in 2020. <br/><br/><b>Artist | J. Digital</b><br/>J. Digital is an award-winning artist with over 25 years of creative exploration in primetime network campaigns, movies, and national commercials. His work is characterized by boundary-pushing artistry, with a roster of previous clients that includes the Emmy Awards, Lord of the Rings game, Warner Bros., Sega, Toshiba, Red Bull, Monster, Fox Sports, Ford, Toyota, Discovery Network and Mattel. <br/><br/><b>Development Team</b><br/>Our expert development team works for Shipyard, an advanced fellowship program for training in solidity and web3, backed by some of the best founders, operators and investors in web3.</div>"}}/>
+        <Section bg={bg6} size={2} Component={typeOfSection(true)} componentProps={{header: "Roadmap", body: '<div id="roadmap"><div id="part1">    <h4>Part I</h4><br/>    <p>The first Wrist Aficionado (WA) NFT drop will be "Hyper Car" inspired. It will have a quantity of 500 NFTs with five (5) tiers (Limited, Unique, Rare, Exotic, & Ultimate). Once you buy a WA NFT, you will become a watch club member.</p><br/></div><div id="part2">            <h4>Part II</h4><br/>    <p>Once the mint is sold out, Wrist Aficionado will throw a WA- sponsored event for all watch club members. We will also give our loyal club members three (3) watches from our IRL boutiques. As the event takes place, a second watch collection will be in development.</p><br/></div><div id="part3">    <h4>Part III</h4><br/>    <p>After our WA NFT sponsored event, we will launch a watch flipping course in our private Discord for all of our club members. A $500 coupon will accompany this educational course so that all club members can buy WA Boutique items at a discounted price.</p><br/></div><div id="part4">    <h4>Part IV</h4><br/>    <p>As our community builds, we plan to give back more and grant a lucky watch club member free seats to specific MLB & NBA Games. We will also look to develop an Augmented Reality (AR) platform to see your Wrist Aficionado watch NFT IRL.</p><br/></div><div id="part5">    <h4>Part V</h4><br/>    <p>Wrist Aficionado, at this point, is looking to merge its IRL boutique selections into the metaverse. The Virtual Wrist Aficionado Boutique will be a place where buyers can inspect and purchase IRL and NFT watches within an engaging virtual experience.</p><br/></div></div>'}}/>
         <Footer />
       </div>
     </Suspense>

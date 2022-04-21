@@ -1,7 +1,6 @@
-@font-face {
-  font-family: proximaNova;
-  /* src: url(../../public/WASiteAssets/ProximaNovaFont.otf); */
-  src: url(./ProximaNovaFont.otf);
+body {
+  max-width: 1440px;
+  margin: auto;
 }
 
 .noselect {
@@ -20,7 +19,8 @@
 
 .App {
   text-align: center;
-  font-family: proximaNova;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
   color: #ffffff;
   text-align: left;
 }
@@ -33,19 +33,28 @@ body{
   font-size: 10pt;
 }
 
-.big-text {
-  font-family: proxima-nova, sans-serif;
-  font-weight: 700;
+.huge-text {
+  font-family: 'Cinzel', serif;
+  font-weight: 400;
   font-style: normal;
-  font-size: 30pt;
-  line-height: 36pt;
-  padding-bottom: 10px;
+  font-size: 72pt;
+  letter-spacing: 10px;
+  line-height: 72pt;
 }
-.medium-text {
-  font-family: proxima-nova, sans-serif;
-  font-weight: 700;
+
+.big-text {
+  font-family: 'Cinzel', serif;
+  font-weight: 400;
   font-style: normal;
-  font-size: 24pt;
+  font-size: 48pt;
+  line-height: 48pt;
+  letter-spacing: 10px;
+}
+
+.medium-text {
+  font-weight: bold;
+  font-style: normal;
+  font-size: 16pt;
   line-height: 24pt;
   padding-bottom: 10px;
 }
@@ -68,26 +77,109 @@ body{
 
 .ReactModal__Content--after-open {
   margin-right: 0 !important;
-
 }
 
-.text-section a {
-  text-decoration: underline;
+.hover-invert {
+  transition: 500ms;
 }
-.text-section a:hover {
+
+.hover-invert:hover {
+  transition: 500ms;
+  background-color: #e5e7eb;
+  color: black;
   cursor: pointer;
 }
 
-@media (min-width: 1300px) {
+.modal {
+  max-width: 750px;
+  min-width: 750px;
+  width: 50vw;
+  border-radius: '20px';
+  z-index: 20;
+  margin: auto !important;
+  margin-top: 20% !important;
+  border: 2px solid white;
+}
+
+.email-modal {
+  max-width: 750px;
+  min-width: 750px;
+  width: 50vw;
+  border-radius: '20px';
+  z-index: 20;
+  margin: auto !important;
+  margin-top: 20% !important;
+  border: 2px solid white;
+}
+
+.ReactModal__Overlay {
+  background-color: rgba(0,0,0) !important;
+}
+
+.ReactModal__Overlay--after-open {
+  background-color: rgba(0,0,0) !important;
+}
+
+@media (max-width: 1125px) {
+  .huge-text {
+    font-size: 60pt;
+  }
+}
+@media (max-width: 1002px) {
+  .huge-text {
+    font-size: 54pt;
+  }
+  .big-text {
+    font-size: 40pt;
+  }
+}
+
+@media (max-width: 950px) {
+  
+  .huge-text {
+    font-size: 24pt;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+  }
   
   .big-text {
-    font-size: 56pt;
+    font-size: 24pt;
     font-style: normal;
-    line-height: 48pt;
+    letter-spacing: normal;
+    line-height: normal;
+  }
+
+  .medium-text {
+    font-weight: bold;
   }
   
   .small-text {
     font-size: 12pt;
+    font-weight: 600;
   }
 
+  .modal {
+    max-width: auto;
+    min-width: auto;
+    width: 90vw;
+    margin: auto !important;
+    margin-top: 25% !important;
+  }
+
+  .email-modal {
+    max-width: auto;
+    min-width: auto;
+    width: 90vw;
+    margin: auto !important;
+    margin-top: 25% !important;
+  }
+
+  .ReactModal__Content {
+    margin-right: auto !important;
+  }
+  
+  .ReactModal__Content--after-open {
+    margin-right: auto !important;
+  }
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactHtmlParser from "react-html-parser";
 import axios from 'axios';
+import { Link, animateScroll as scroll } from "react-scroll";
 
 const TextSection = ({props}) => {
 
@@ -21,6 +22,7 @@ const TextSection = ({props}) => {
     }
 
     let body = ReactHtmlParser(props.body)
+    let body2 = ReactHtmlParser(props.body2)
 
     async function postEmail () {
         let input = document.getElementById('email-input')
@@ -51,15 +53,46 @@ const TextSection = ({props}) => {
     }
 
     return (
-        <div className='text-section m-auto h-full flex flex-col justify-center w-10/12 md:w-4/12'>
-                <div className='big-text noselect'>{props.header}</div>
-                <div className='small-text'>{body}</div>
+        <div className='' id={props.header.toLowerCase()}>
+            <div className='m-auto h-full flex flex-col pb-10 justify-center w-10/12 md:w-4/12 mt-10'>
+                <div className='big-text m-auto noselect'>{props.header}</div>
+                {props.image ?
+                <img src={props.image} alt="WAWC Watch Image"/>
+                :
+                <></>
+                }
+                <div className='small-text text-justify'>{body}</div>
                 {props.emailCapture ?
-                <div className='w-1/12 flex align-center justify-between pt-2'>
-                    <form>
+                <div className='hover-invert mt-8 p-2 w-10/12 m-auto border-2 text-center' onClick={props.openEmailModal}>
+                    JOIN OUR MAILING LIST
+                    {/* <form>
                         <input id='email-input' className='p-3 text-neutral-300 bg-neutral-800' placeholder='join our mailing list' style={{outline: 'none'}}/>
                     </form>
-                    <div onClick={postEmail} className='p-2 px-5 bg-amber-400 text-black text-xl hover:cursor-pointer'>→</div>
+                    <div onClick={postEmail} className='p-2 px-5 bg-amber-400 text-black text-xl hover:cursor-pointer'>→</div> */}
+                </div>
+                :
+                <></>
+                }
+                {props.roadmap ?
+                <Link 
+                to="roadmap"
+                activeClass="active"
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}>
+                    <div className='hover-invert mt-8 p-2 w-10/12 m-auto border-2 text-center'>
+                        VIEW ROADMAP
+                    </div>
+                </Link>
+                :
+                <></>
+                }
+            </div>
+                {props.header2 ?
+                <div className='m-auto h-full flex flex-col pb-10 justify-center w-10/12 md:w-4/12'>
+                    <div className='big-text m-auto noselect'>{props.header2}</div>
+                    <div className='small-text text-justify'>{body2}</div>
                 </div>
                 :
                 <></>

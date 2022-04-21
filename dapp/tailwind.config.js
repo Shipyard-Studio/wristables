@@ -3,7 +3,16 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    screens: {
+      'sm': '950px',
+      // => @media (min-width: 576px) { ... }
+
+      // 'md': 'px',
+      // => @media (min-width: 960px) { ... }
+
+      'lg': '950px',
+      // => @media (min-width: 1440px) { ... }
+    },
   },
   plugins: [],
 }
