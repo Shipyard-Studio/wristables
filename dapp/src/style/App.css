@@ -91,6 +91,8 @@ body{
 }
 
 .modal {
+  max-width: 750px;
+  min-width: 750px;
   width: 50vw;
   border-radius: '20px';
   z-index: 20;
@@ -147,10 +149,11 @@ body{
   }
 
   .modal {
+    max-width: auto;
+    min-width: auto;
     width: 90vw;
-    margin: auto;
-    margin: none !important;
-    margin-top: 25%;
+    margin: auto !important;
+    margin-top: 25% !important;
   }
 
   .email-modal {
