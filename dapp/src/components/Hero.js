@@ -34,8 +34,8 @@ const Hero = ({props}) => {
                             <div onClick={props.openModal} className='decoration-white whitespace-nowrap hover:underline-offset-2 ease-in ease-out duration-300 m-auto  mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none mb-10 lg:mb-0 w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center text-center lg:py-5 md:py-5 hover:cursor-pointer' src='/WASiteAssets/DiscordButton.png' alt='piece unique' >Piece Unique Studio</div>
                         </div>
                     }
-                    <div className='big-text w-full lg:ml-10'>{props.pageWidth > 950 ? 'Watch Club' : ''}</div>
-                    <div className='lg:flex lg:ml-10 lg:mt-20'>
+                    <div className='big-text w-full lg:ml-10 md:ml-10'>{props.pageWidth > 950 ? 'Watch Club' : ''}</div>
+                    <div className='lg:flex lg:ml-10 lg:mt-20 md:flex md:ml-10 md:mt-20'>
                         <div className='lg:mx-2'>
                             <div className='medium-text m-auto text-center lg:text-left'>Luxury</div>
                             <div className=''>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu ipsum nulla. Sed porttitor ipsum odio, in condimentum nunc vehicula in. Etiam eget accumsan turpis. Pellentesque habitant morbi tristique senectus et netus.</div>

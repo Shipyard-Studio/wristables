@@ -109,6 +109,14 @@ body{
     font-size: 60pt;
   }
 }
+@media (max-width: 1002px) {
+  .huge-text {
+    font-size: 54pt;
+  }
+  .big-text {
+    font-size: 40pt;
+  }
+}
 
 @media (max-width: 950px) {
   

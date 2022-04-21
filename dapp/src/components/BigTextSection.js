@@ -60,7 +60,7 @@ const TextSection = ({props}) => {
                 :
                 <></>
                 }
-                <div className='flex flex-col w-5/12 justify-center text-justify'>
+                <div className='flex flex-col w-5/12 justify-center text-justify px-10'>
                     <div className='big-text text-left noselect pb-10' style={props.header === 'Events' ? {fontSize: 50} : {}}>{props.header}</div>
                     <div className='small-text'>{body}</div>
                     {props.emailCapture ?
