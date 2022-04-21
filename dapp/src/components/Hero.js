@@ -22,7 +22,7 @@ const Hero = ({props}) => {
                     <div className='lg:flex-col md:flex-col'>
                     {props.pageWidth > 950 ? <></> :
                         <div className='flex flex-col items-center'>
-                            <a href='https://discord.com/invite/cJpYAvJhTG' className='hover-invert whitespace-nowrap ease-in ease-out duration-300 hover:underline-offset-2 m-auto w-10/12 bg-cover text-center border-2 py-2 hover:cursor-pointer' target='_blank' alt='discord link' rel="noreferrer">JOIN US ON DISCORD</a>
+                            <a href='https://www.tiktok.com/link/v2?aid=1988&lang=en&scene=bio_url&target=https%3A%2F%2Fdiscord.gg%2Fwawc' className='hover-invert whitespace-nowrap ease-in ease-out duration-300 hover:underline-offset-2 m-auto w-10/12 bg-cover text-center border-2 py-2 hover:cursor-pointer' target='_blank' alt='discord link' rel="noreferrer">JOIN US ON DISCORD</a>
                             <div 
                             onClick={null} // disabled
                             // onClick={props.connect} //for live site
@@ -48,7 +48,7 @@ const Hero = ({props}) => {
                     </div>
                     {props.pageWidth > 950 ?
                         <div className='lg:mt-10 ml-10 flex flex-col items-center'>
-                            <a href='https://discord.com/invite/cJpYAvJhTG' className='hover-invert whitespace-nowrap ease-in ease-out duration-300 hover:underline-offset-2  lg:mx-2 m-auto lg:m-auto  w-10/12 md:mt-5 bg-cover text-center text-center border-2 py-2 lg:p-5 hover:cursor-pointer' target='_blank' alt='discord link' rel="noreferrer">JOIN US ON DISCORD</a>
+                            <a href='https://www.tiktok.com/link/v2?aid=1988&lang=en&scene=bio_url&target=https%3A%2F%2Fdiscord.gg%2Fwawc' className='hover-invert whitespace-nowrap ease-in ease-out duration-300 hover:underline-offset-2  lg:mx-2 m-auto lg:m-auto  w-10/12 md:mt-5 bg-cover text-center text-center border-2 py-2 lg:p-5 hover:cursor-pointer' target='_blank' alt='discord link' rel="noreferrer">JOIN US ON DISCORD</a>
                             <div className='lg:flex lg:w-full lg:justify-between lg:my-10'>
                             <div 
                             onClick={null} // disabled
