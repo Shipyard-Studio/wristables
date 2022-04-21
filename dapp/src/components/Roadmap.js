@@ -12,7 +12,7 @@ const Roadmap = ({props}) => {
             <div className='m-auto w-full h-full flex pb-10 justify-between'>
                 <div className='flex flex-col w-full justify-center m-auto'>
                     <div className='big-text text-left noselect pb-10 m-auto'>{props.header}</div>
-                    <div className='small-text text-left'>{body}</div>
+                    <div className='small-text text-left text-justify'>{body}</div>
                 </div>  
             </div>
         </div>

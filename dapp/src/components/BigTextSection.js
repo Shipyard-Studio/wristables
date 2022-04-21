@@ -54,13 +54,13 @@ const TextSection = ({props}) => {
 
     return (
         <div className='md:mx-20' id={props.header.toLowerCase()}>
-            <div className='m-auto w-full h-full flex pb-10 justify-between'>
+            <div className='m-auto w-full h-full flex pb-10 justify-between text-justify'>
                 {props.image && props.header === 'About' ?
                 <img src={props.image} alt="WAWC Watch Image" className='w-5/12'/>
                 :
                 <></>
                 }
-                <div className='flex flex-col w-5/12 justify-center'>
+                <div className='flex flex-col w-5/12 justify-center text-justify'>
                     <div className='big-text text-left noselect pb-10' style={props.header === 'Events' ? {fontSize: 50} : {}}>{props.header}</div>
                     <div className='small-text'>{body}</div>
                     {props.emailCapture ?

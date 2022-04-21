@@ -104,6 +104,12 @@ body{
   background-color: rgba(0,0,0) !important;
 }
 
+@media (max-width: 1125px) {
+  .huge-text {
+    font-size: 60pt;
+  }
+}
+
 @media (max-width: 950px) {
   
   .huge-text {
