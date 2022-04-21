@@ -59,7 +59,7 @@ const Hero = ({props}) => {
                                 </div>
                             <a className='whitespace-nowrap hover:underline-offset-2 ease-in ease-out duration-300 m-auto  mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none lg:mb-0 w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center text-center lg:py-5 hover:cursor-pointer' href="https://wristaficionado.com/" target="_blank" rel="noreferrer" alt='boutique link' >Visit Boutique</a>
                             <div onClick={props.openModal} className='decoration-white whitespace-nowrap hover:underline-offset-2 ease-in ease-out duration-300 m-auto  mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none mb-10 lg:mb-0 w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center text-center lg:py-5 hover:cursor-pointer' src='/WASiteAssets/DiscordButton.png' alt='piece unique' >Piece Unique Studio</div>
-                            <a className='whitespace-nowrap hover:underline-offset-2 ease-in ease-out duration-300 m-auto  mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none lg:mb-0 w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center text-center lg:py-5 hover:cursor-pointer' href="Wrist_Aficionado_Whitepaper.pdf" target="_blank" rel="noreferrer" alt='whitepaper link' >Whitepaper</a>
+                            <a className='whitespace-nowrap hover:underline-offset-2 ease-in ease-out duration-300 m-auto  mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none lg:mb-0 w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center text-center lg:py-5 hover:cursor-pointer' href="/Wrist Aficionado Whitepaper.pdf" target="_blank" rel="noreferrer" alt='whitepaper link' >Whitepaper</a>
                             </div>
                         </div>
                         : <></>

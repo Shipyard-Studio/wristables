@@ -60,7 +60,7 @@ const Sidebar = () => {
       Roadmap
       </Link>
 
-      <a href='/Wrist_Aficionado_Whitepaper.pdf' target='_blank' rel="noreferrer" alt='whitepaper link'>Whitepaper</a>
+      <a href='/Wrist Aficionado Whitepaper.pdf' target='_blank' rel="noreferrer" alt='whitepaper link'>Whitepaper</a>
 
     <a href="https://wristaficionado.com/" target='_blank' rel="noreferrer" className='bm-center hover-invert whitespace-nowrap ease-in ease-out duration-300 hover:underline-offset-2 m-auto w-10/12 bg-cover text-center border-2 py-2 lg:py-5 hover:cursor-pointer z-10'>Visit Boutique</a>
 
