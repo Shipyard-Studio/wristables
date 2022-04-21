@@ -101,6 +101,17 @@ body{
   border: 2px solid white;
 }
 
+.email-modal {
+  max-width: 750px;
+  min-width: 750px;
+  width: 50vw;
+  border-radius: '20px';
+  z-index: 20;
+  margin: auto !important;
+  margin-top: 20% !important;
+  border: 2px solid white;
+}
+
 .ReactModal__Overlay {
   background-color: rgba(0,0,0) !important;
 }
@@ -157,9 +168,11 @@ body{
   }
 
   .email-modal {
+    max-width: auto;
+    min-width: auto;
     width: 90vw;
-    margin: auto;
-    margin-top: 50%;
+    margin: auto !important;
+    margin-top: 25% !important;
   }
 
   .ReactModal__Content {

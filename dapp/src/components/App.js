@@ -147,7 +147,7 @@ function App() {
           contentLabel="Email Modal"
           className="email-modal"
           >
-          <EmailModalForm closeModal={closeEmailModal}/>
+          <EmailModalForm closeModal={closeEmailModal} pageWidth={pageWidth}/>
       </Modal>
 
         {pageWidth < 950 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
