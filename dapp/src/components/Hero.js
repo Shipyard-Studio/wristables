@@ -37,13 +37,13 @@ const Hero = ({props}) => {
                     <div className='big-text w-full lg:ml-10 md:ml-10'>{props.pageWidth > 950 ? 'Watch Club' : ''}</div>
                     <div className='lg:flex lg:ml-10 lg:mt-20 md:flex md:ml-10 md:mt-20'>
                         <div className='lg:mx-2'>
-                            <div className='medium-text m-auto text-center lg:text-left'>Luxury</div>
-                            <div className='lg:mb-0 mb-10'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu ipsum nulla. Sed porttitor ipsum odio, in condimentum nunc vehicula in. Etiam eget accumsan turpis. Pellentesque habitant morbi tristique senectus et netus.</div>
+                            <div className='medium-text m-auto text-center lg:text-left'>The Web3 Watch Pioneer</div>
+                            <div className='lg:mb-0 mb-10'>As a veteran of the luxury watch industry, we offer an elite selection of NFT watches in the metaverse. When it comes to web3 timepieces, if it’s not Wrist Aficionado, it simply doesn’t belong on your wrist. </div>
                         </div>
                         {props.pageWidth > 950 ? <div className='border mx-6'/> : <></>}
                         <div className='lg:mx-2'>
                             <div className='medium-text m-auto pb-2 text-center lg:text-left'>Excellence</div>
-                            <div className=''>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu ipsum nulla. Sed porttitor ipsum odio, in condimentum nunc vehicula in. Etiam eget accumsan turpis. Pellentesque habitant morbi tristique senectus et netus.</div>
+                            <div className=''>Propelled by an unsurpassed commitment to our customers, we provide you with an NFT accessory that combines real-world utility, longevity and IP rights value - the <i>very first</i> luxury watch in the metaverse to do so. </div>
                         </div>
                     </div>
                     {props.pageWidth > 950 ?
