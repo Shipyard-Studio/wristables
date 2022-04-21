@@ -21,10 +21,10 @@ function Header ({walletAddress, connect, pageWidth}) {
                     {walletAddress.length > 0 ? `${walletAddress.slice(0,6)}...${walletAddress.slice(-4)}` :
                     'CONNECT'
                     }</div> */}
-                    <a href="https://twitter.com/wristaficionado/" className='m-auto mx-2 z-10 invert' target="_blank" alt="discord" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/discord.png'} /></a>
+                    <a href="https://discord.com/invite/cJpYAvJhTG" className='m-auto mx-2 z-10 invert' target="_blank" alt="discord" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/discord.png'} /></a>
                     <a href="https://twitter.com/wristaficionado/" className='m-auto mx-2 z-10 invert' target="_blank" alt="twitter" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/twitter.png'} /></a>
                     <a href="https://instagram.com/wristaficionado/" className='m-auto mx-2 z-10 invert' target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/instagram.png'} /></a>
-                    <a href="https://instagram.com/wristaficionado/" className='m-auto mx-2 z-10 invert' target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/youtube.jpeg'} /></a>
+                    <a href="https://www.youtube.com/channel/UCAbEh6zK2h7LfnFCUzCi6mg" className='m-auto mx-2 z-10 invert' target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/youtube.jpeg'} /></a>
                     <a href="https://www.tiktok.com/@wristaficionado" className='m-auto mx-2 z-10' target="_blank" alt="tiktok" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/tiktok.webp'} /></a>
                 </div>
             </div>
