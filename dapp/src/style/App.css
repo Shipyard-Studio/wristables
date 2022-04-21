@@ -91,8 +91,11 @@ body{
 }
 
 .modal {
+  width: 50vw;
   border-radius: '20px';
   z-index: 20;
+  margin: auto !important;
+  margin-top: 20% !important;
   border: 2px solid white;
 }
 
@@ -146,6 +149,7 @@ body{
   .modal {
     width: 90vw;
     margin: auto;
+    margin: none !important;
     margin-top: 25%;
   }
 

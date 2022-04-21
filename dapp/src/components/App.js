@@ -137,7 +137,7 @@ function App() {
           contentLabel="Piece Unique Modal"
           className="modal"
           >
-          <ModalForm closeModal={closeModal}/>
+          <ModalForm closeModal={closeModal} pageWidth={pageWidth}/>
       </Modal>
       <Modal
           isOpen={emailModalIsOpen}
