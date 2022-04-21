@@ -38,7 +38,7 @@ const Hero = ({props}) => {
                     <div className='lg:flex lg:ml-10 lg:mt-20 md:flex md:ml-10 md:mt-20'>
                         <div className='lg:mx-2'>
                             <div className='medium-text m-auto text-center lg:text-left'>Luxury</div>
-                            <div className=''>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu ipsum nulla. Sed porttitor ipsum odio, in condimentum nunc vehicula in. Etiam eget accumsan turpis. Pellentesque habitant morbi tristique senectus et netus.</div>
+                            <div className='lg:mb-0 mb-10'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu ipsum nulla. Sed porttitor ipsum odio, in condimentum nunc vehicula in. Etiam eget accumsan turpis. Pellentesque habitant morbi tristique senectus et netus.</div>
                         </div>
                         {props.pageWidth > 950 ? <div className='border mx-6'/> : <></>}
                         <div className='lg:mx-2'>
