@@ -1,0 +1,2 @@
+(this.webpackJsonpWristables=this.webpackJsonpWristables||[]).push([[7],{192:function(t,e,a){"use strict";a.r(e);a(9);var s=a(8);e.default=function(){return Object(s.jsx)("div",{className:"h-20 w-150 p-10 flex items-center justify-center bg-darkgray",children:Object(s.jsx)("a",{href:"https://www.imaginationroom.io/",target:"_blank",className:"text-slate-300",children:"Made in the Imagination Room"})})}}}]);
+//# sourceMappingURL=7.d64f00e2.chunk.js.map

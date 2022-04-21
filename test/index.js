@@ -57,13 +57,13 @@ async function proxyDeploy() {
     [
       [shipyardWallet.address, imagineWallet.address, wristablesWallet.address],
       [7, 2, 1],
-      merkleTree.getHexRoot(),
     ],
     // Here we indicate this is a UUPS:
     { kind: "uups" }
   );
 
   await wawc.deployed();
+  await wawc.setMerkleRoot(merkleTree.getHexRoot());
 }
 
 describe("Wristables Proxy", function () {
@@ -72,7 +72,7 @@ describe("Wristables Proxy", function () {
   });
 
   it("Should deploy as a proxy successfully", async function () {
-    expect(await wawc.MAX_SUPPLY()).to.equal(9999); // quick deploy check
+    expect(await wawc.MAX_TOKEN_ID()).to.equal(9999); // quick deploy check
   });
 
   it("Should be upgradeable", async function () {
@@ -92,33 +92,24 @@ describe("Wristables Proxy", function () {
 describe("Wristables Contract Unit Tests", function () {
   beforeEach(async function () {
     await proxyDeploy();
-    await wawc.setAvailableSupply(999);
+    await wawc.setAvailableTokenID(999);
     await hre.network.provider.request({
       method: "hardhat_impersonateAccount",
       params: ["0x7Eb696df980734DD592EBDd9dfC39F189aDc5456"],
     });
   });
 
-  it("Should airdrop", async function () {
-    await wawc.airdrop(addr2.address, 2);
-
-    expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
-    expect(await wawc.ownerOf(1)).to.deep.equal(addr2.address);
-
-    // only owner check
-    expect(
-      wawc.connect(addr2).airdrop(addr2.address, 2)
-    ).to.be.revertedWith("");
-  });
-
   it("Should batch airdrop", async function () {
-    await wawc.batchAirdrop([
-      addr2.address,
-      addr3.address,
-      addr4.address,
-      addr5.address,
-      addr6.address,
-    ]);
+    await wawc.batchAirdrop(
+      [
+        addr2.address,
+        addr3.address,
+        addr4.address,
+        addr5.address,
+        addr6.address,
+      ],
+      [1, 1, 1, 1, 3]
+    );
 
     expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
     expect(await wawc.ownerOf(1)).to.deep.equal(addr3.address);
@@ -130,13 +121,16 @@ describe("Wristables Contract Unit Tests", function () {
     expect(
       wawc
         .connect(addr2)
-        .batchAirdrop([
-          addr2.address,
-          addr3.address,
-          addr4.address,
-          addr5.address,
-          addr6.address,
-        ])
+        .batchAirdrop(
+          [
+            addr2.address,
+            addr3.address,
+            addr4.address,
+            addr5.address,
+            addr6.address,
+          ],
+          [1, 1, 1, 1, 1]
+        )
     ).to.be.revertedWith("");
   });
 
@@ -146,30 +140,24 @@ describe("Wristables Contract Unit Tests", function () {
       wawc.connect(addr2).mint({ value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
 
-    await wawc.setMintPrice(ethers.utils.parseEther("1"));
+    await wawc.setMintPrice(ethers.utils.parseEther("5"));
     await wawc.setSaleActive(true);
 
-    await wawc
-      .connect(addr2)
-      .mint({ value: ethers.utils.parseEther("1") });
+    await wawc.connect(addr2).mint({ value: ethers.utils.parseEther("5") });
     expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
   });
 
   it("Mint at Auction", async function () {
     // reverts due to saleActive being false
     expect(
-      wawc
-        .connect(addr2)
-        .mintAuction({ value: ethers.utils.parseEther("1") })
+      wawc.connect(addr2).mintAuction({ value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
 
     await wawc.setSaleActive(true);
 
     // reverts due to toggleAuction being false
     expect(
-      wawc
-        .connect(addr2)
-        .mintAuction({ value: ethers.utils.parseEther("1") })
+      wawc.connect(addr2).mintAuction({ value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
 
     await wawc.setToggleAuction(true);
@@ -225,21 +213,33 @@ describe("Wristables Contract Unit Tests", function () {
 
     // mint at floor price
     expect(
-      wawc
-        .connect(addr2)
-        .mintAuction({ value: ethers.utils.parseEther("1") })
+      wawc.connect(addr2).mintAuction({ value: ethers.utils.parseEther("1") })
     ).to.be.revertedWith("");
   });
 
   it("should not be off by one", async function () {
-    expect(wawc.airdrop(addr2.address, 1000)).to.be.revertedWith("");
+    wawc.batchAirdrop([addr2.address], [1000]);
 
-    await wawc.airdrop(addr2.address, 999);
+    expect(wawc.batchAirdrop([addr2.address], [999])).to.be.revertedWith("");
 
     expect(await wawc.ownerOf(0)).to.deep.equal(addr2.address);
-    expect(await wawc.ownerOf(998)).to.deep.equal(addr2.address);
+    expect(await wawc.ownerOf(999)).to.deep.equal(addr2.address);
+    expect(wawc.ownerOf(1000)).to.be.revertedWith("");
 
-    expect(wawc.airdrop(addr2.address, 1)).to.be.revertedWith("");
+    // console.log(await wawc.tokenSupply(), await wawc.availableTokenId())
+
+    expect(wawc.batchAirdrop([addr2.address], [1])).to.be.revertedWith("");
+  });
+
+  it("should not count tokens more than once", async function () {
+    wawc.batchAirdrop([addr2.address, addr3.address], [2, 3]);
+
+    expect(await wawc.ownerOf(1)).to.deep.equal(addr2.address);
+    expect(await wawc.ownerOf(4)).to.deep.equal(addr3.address);
+
+    wawc.batchAirdrop([addr2.address, addr3.address], [2, 3]);
+
+    expect(await wawc.tokenSupply()).to.deep.equal(10);
   });
 
   it("should return proper royalty amount", async function () {
@@ -252,13 +252,33 @@ describe("Wristables Contract Unit Tests", function () {
     expect(royaltyInfo[1]).to.deep.equal(ethers.utils.parseEther("0.6"));
   });
 
+  it("should not allow anyone to claim when merkle root is 0", async function () {
+    const deadbeef = keccak256("0");
+    const mt = new MerkleTree([deadbeef], keccak256, { sortPairs: true });
+    await wawc.setAllSaleParams(
+      0,
+      mt.getHexRoot(),
+      0,
+      true,
+      ethers.utils.parseEther("0.01")
+    );
+
+    const addressHash = keccak256(addr2.address);
+    const proof = mt.getHexProof(addressHash);
+    expect(
+      wawc
+        .connect(addr2)
+        .redeem(proof, { value: ethers.utils.parseEther("0.01") })
+    ).to.be.revertedWith("");
+  });
+
   it("should allow whitelisted addresses to claim", async function () {
-    await wawc.setMintPrice(ethers.utils.parseEther("1"));
+    await wawc.setMintPrice(ethers.utils.parseEther("5"));
     await wawc.setSaleActive(true);
 
     await addr2.sendTransaction({
       to: "0x7Eb696df980734DD592EBDd9dfC39F189aDc5456",
-      value: ethers.utils.parseEther("3"),
+      value: ethers.utils.parseEther("6"),
     });
 
     const wlUserAddress = "0x7Eb696df980734DD592EBDd9dfC39F189aDc5456";
@@ -282,21 +302,21 @@ describe("Wristables Contract Unit Tests", function () {
 
     await wawc // good proof correct user
       .connect(wlUser)
-      .redeem(proof, { value: ethers.utils.parseEther("1") });
+      .redeem(proof, { value: ethers.utils.parseEther("5") });
 
     expect(await wawc.balanceOf(wlUserAddress)).to.deep.equal(1);
     expect(await wawc.ownerOf(0)).to.deep.equal(wlUserAddress);
 
     expect(
       // good proof wrong user
-      wawc.redeem(proof, { value: ethers.utils.parseEther("1") })
+      wawc.redeem(proof, { value: ethers.utils.parseEther("5") })
     ).to.be.revertedWith("");
 
     expect(
       // good proof good user, can't claim more than once
       wawc // good proof correct user
         .connect(wlUser)
-        .redeem(proof, { value: ethers.utils.parseEther("1") })
+        .redeem(proof, { value: ethers.utils.parseEther("5") })
     ).to.be.revertedWith("");
   });
 });

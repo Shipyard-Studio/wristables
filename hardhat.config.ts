@@ -28,7 +28,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 const config: HardhatUserConfig = {
   // solidity: "0.8.4",
   solidity: {
-    version: "0.8.2",
+    version: "0.8.4",
     settings: {
       optimizer: {
         enabled: true,
@@ -51,7 +51,7 @@ const config: HardhatUserConfig = {
     },
   },
   gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
+    enabled: false,
     currency: "USD",
   },
   etherscan: {
