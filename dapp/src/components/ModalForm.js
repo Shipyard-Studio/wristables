@@ -11,7 +11,7 @@ const ModalForm = ({closeModal, pageWidth}) => {
                 <div className='w-1/2 pl-10 flex flex-col justify-center'>
                     <h2 className='z-20 pt-8 text-center medium-text font-bold'>Piece Unique Studio</h2>
                     <p className='z-20 small-text w-full px-4 pb-2 mx-auto font-semibold text-justify'>
-                    The first {1 + ',' + '000'} owners of our hypercar watch will also have the opportunity to purchase 1 of 1,000 Piece Uniques that can be customized right here in our studio.
+                    The first {'500'} owners of our hypercar watch will also have the opportunity to purchase 1 of 500 Piece Uniques that can be customized right here in our studio.
                     <br/>
                     Your Piece Unique will appear blank in your wallet until you have customized your watch in our studio.
                     <br />
