@@ -65,7 +65,7 @@ const Sidebar = () => {
     <a href="https://wristaficionado.com/" target='_blank' rel="noreferrer" className='bm-center hover-invert whitespace-nowrap ease-in ease-out duration-300 hover:underline-offset-2 m-auto w-10/12 bg-cover text-center border-2 py-2 lg:py-5 hover:cursor-pointer z-10'>Visit Boutique</a>
 
       <div className='mt-10' style={{display: 'flex !important', flexDirection: 'row', marginTop: '40px'}}>
-        <a href="https://twitter.com/wristaficionado/" className='m-auto menu-item z-10 invert' target="_blank" alt="discord" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/discord.png'} /></a>
+        <a href="https://discord.gg/cJpYAvJhTG" className='m-auto menu-item z-10 invert' target="_blank" alt="discord" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/discord.png'} /></a>
         <a href="https://twitter.com/wristaficionado/" className='m-auto menu-item z-10 invert' target="_blank" alt="twitter" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/twitter.png'} /></a>
         <a href="https://instagram.com/wristaficionado/" className='m-auto menu-item z-10 invert' target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/instagram.png'} /></a>
         <a href="https://instagram.com/wristaficionado/" className='m-auto menu-item z-10 invert' target="_blank" alt="instagram" rel="noreferrer"><img className="nav-logos" src={process.env.PUBLIC_URL + '/youtube.jpeg'} /></a>
