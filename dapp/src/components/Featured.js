@@ -7,7 +7,7 @@ const Featured = () => {
     const [offsetX, setOffsetX] = useState(0)
 
     function calcOffset () {
-        setOffsetX((1750 - window.innerWidth) / 2)
+        setOffsetX((1750 - window.innerWidth) / 4)
     }
 
     useEffect(() => {
