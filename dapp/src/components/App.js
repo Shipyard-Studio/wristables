@@ -17,7 +17,6 @@ const Footer = lazy(() => import('./Footer'));
 
 
 function App() {
-
   const bg1 = '/optimized/1.jpg'
   const bg2 = '/optimized/2.jpg'
   const bg3 = '/optimized/3.jpg'

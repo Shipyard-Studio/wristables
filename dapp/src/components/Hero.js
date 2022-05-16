@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from './Header';
-import Watch from './Watch'
-import Video from './Video'
+import Watch from './Watch';
+import Video from './Video';
+import Featured from './Featured';
 
 
 import '../style/Hero.css'
@@ -12,9 +13,10 @@ const Hero = ({props}) => {
         <div className='hero h-full bg-black' id='home'>
             {/* <Watch /> */}
             <Header walletAddress={props.walletAddress} connect={props.connect} pageWidth={props.pageWidth}/>
+            <Featured />
             <div className='flex flex-col justify-between m-auto h-5/6 w-full pt-10'>
                 <div className='lg:ml-10 lg:text-left md:ml-10 md:text-left big-text text-center z-10 noselect'>
-                    <span className='huge-text'>Wrist Aficionado</span><br/>{props.pageWidth > 950 ? '' : 'Watch Club'}
+                    {/* <span className='huge-text'>Wrist Aficionado</span><br/>{props.pageWidth > 950 ? '' : 'Watch Club'} */}
                 </div>
                 <div className='lg:flex md:flex'>
                 {props.pageWidth < 950 ? <Video /> : <></>}
@@ -34,7 +36,7 @@ const Hero = ({props}) => {
                             <div onClick={props.openModal} className='decoration-white whitespace-nowrap hover:underline-offset-2 ease-in ease-out duration-300 m-auto  mx-auto lg:mx-2 mt-5 lg:mt-0 lg:m-none mb-10 lg:mb-0 w-3/5 lg:w-1/2 md:mt-5 bg-cover text-center text-center lg:py-5 md:py-5 hover:cursor-pointer' src='/WASiteAssets/DiscordButton.png' alt='piece unique' >Piece Unique Studio</div>
                         </div>
                     }
-                    <div className='big-text w-full lg:ml-10 md:ml-10'>{props.pageWidth > 950 ? 'Watch Club' : ''}</div>
+                    {/* <div className='big-text w-full lg:ml-10 md:ml-10'>{props.pageWidth > 950 ? 'Watch Club' : ''}</div> */}
                     <div className='lg:flex lg:ml-10 lg:mt-20 md:flex md:ml-10 md:mt-20'>
                         <div className='lg:mx-2'>
                             <div className='medium-text m-auto text-center lg:text-left'>The Web3 Watch Pioneer</div>
