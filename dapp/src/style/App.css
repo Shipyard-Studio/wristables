@@ -24,6 +24,7 @@ body {
   text-align: left;
   max-width: 100vw;
   overflow-x: hidden;
+  margin: auto;
 }
 
 body{
