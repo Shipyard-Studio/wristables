@@ -57,6 +57,11 @@ const TextSection = ({props}) => {
             <div className='m-auto h-full flex flex-col pb-10 justify-center w-10/12 md:w-4/12 mt-10'>
                 <div className='big-text m-auto noselect'>{props.header}</div>
                 {props.image ?
+                 props.video ? 
+                 <video id='vid' className='w-full m-auto my-5' style={{}} loop={true} autoPlay="autoplay" muted defaultMuted playsinline  oncontextmenu="return false;"  preload="auto">
+                     <source src="/WA_white_pink donuts_making_of_v1a.mov" type="video/mp4" />
+                 </video>
+                 :
                 <img src={props.image} alt="WAWC Watch Image"/>
                 :
                 <></>
