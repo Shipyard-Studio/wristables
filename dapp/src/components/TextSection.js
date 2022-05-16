@@ -66,7 +66,7 @@ const TextSection = ({props}) => {
                 :
                 <></>
                 }
-                <div className='small-text text-justify'>{body}</div>
+                <div className='small-text text-justify body-container'>{body}</div>
                 {props.emailCapture ?
                 <div className='hover-invert mt-8 p-2 w-10/12 m-auto border-2 text-center' onClick={props.openEmailModal}>
                     JOIN OUR MAILING LIST
@@ -97,7 +97,7 @@ const TextSection = ({props}) => {
                 {props.header2 ?
                 <div className='m-auto h-full flex flex-col pb-10 justify-center w-10/12 md:w-4/12'>
                     <div className='big-text m-auto noselect'>{props.header2}</div>
-                    <div className='small-text text-justify'>{body2}</div>
+                    <div className='small-text text-justify body-container'>{body2}</div>
                 </div>
                 :
                 <></>

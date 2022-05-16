@@ -20,7 +20,6 @@ body {
 .App {
   text-align: center;
   font-family: 'Raleway', sans-serif;
-  font-weight: 800;
   color: #ffffff;
   text-align: left;
   max-width: 100vw;
@@ -54,7 +53,7 @@ body{
 }
 
 .medium-text {
-  font-weight: bold;
+  font-weight: 600;
   font-style: normal;
   font-size: 16pt;
   line-height: 24pt;
@@ -164,12 +163,12 @@ b {
   }
 
   .medium-text {
-    font-weight: bold;
+    font-weight: 600;
   }
   
   .small-text {
-    font-size: 12pt;
-    font-weight: 600;
+    font-size: 14pt;
+    font-weight: 500;
   }
 
   .modal {
