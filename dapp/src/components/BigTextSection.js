@@ -23,6 +23,7 @@ const TextSection = ({props}) => {
 
     let body = ReactHtmlParser(props.body)
     let body2 = ReactHtmlParser(props.body2)
+    let aboutMarginTop = props.header === 'About' ? ' mt-60' : ''
 
     async function postEmail () {
         let input = document.getElementById('email-input')
@@ -53,9 +54,14 @@ const TextSection = ({props}) => {
     }
 
     return (
-        <div className='md:mx-20' id={props.header.toLowerCase()}>
+        <div className={'md:mx-20' + aboutMarginTop} id={props.header.toLowerCase()}>
             <div className='m-auto w-full h-full flex pb-10 justify-between text-justify'>
                 {props.image && props.header === 'About' ?
+                props.video ? 
+                <video id='vid' className='w-5/12 m-auto' style={{}} loop={true} autoPlay="autoplay" muted defaultMuted playsinline  oncontextmenu="return false;"  preload="auto">
+                    <source src="/WA_white_pink donuts_making_of_v1a.mov" type="video/mp4" />
+                </video>
+                :
                 <img src={props.image} alt="WAWC Watch Image" className='w-5/12'/>
                 :
                 <></>
@@ -99,7 +105,7 @@ const TextSection = ({props}) => {
                 <div className='m-auto h-full flex flex-col lg:pb-0 pb-10 justify-center w-5/12'>
                     <div className='big-text noselect pb-10' style={{fontSize: 50}}>{props.header2}</div>
                     {console.log(body2)}
-                    <div className='small-text border'>{body2}</div>
+                    <div className='small-text'>{body2}</div>
                 </div>
                 :
                 <></>

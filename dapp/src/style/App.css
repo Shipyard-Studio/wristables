@@ -114,6 +114,11 @@ body{
   border: 2px solid white;
 }
 
+b {
+  font-weight: 900;
+  font-size: large;
+}
+
 .ReactModal__Overlay {
   background-color: rgba(0,0,0) !important;
 }
