@@ -25,7 +25,7 @@ const Video = () => {
 
   return (
     <div className='h-auto w-3/5 mx-auto flex lg:items-start items-center z-auto'>
-           <video id='vid' className={classString} style={{}} loop={true} autoPlay="autoplay" muted defaultMuted playsinline  oncontextmenu="return false;"  preload="auto">
+           <video id='vid' className={classString} style={{}} loop={true} preload="auto" autoPlay="autoplay" muted defaultMuted preload autoplay playsinline  oncontextmenu="return false;">
      {/* <source src="where the video is" type="video/mov"/> */}
      <source src={""} type="video/mp4" />
      {/* <source src="where the video is" type="video/oog" /> */}
