@@ -23,7 +23,7 @@ const TextSection = ({props}) => {
 
     let body = ReactHtmlParser(props.body)
     let body2 = ReactHtmlParser(props.body2)
-    let aboutMarginTop = props.header === 'About' ? ' mt-60' : ''
+    let aboutMarginTop = props.header === 'About' ? ' mt-40' : ''
 
     async function postEmail () {
         let input = document.getElementById('email-input')
