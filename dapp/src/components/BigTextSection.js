@@ -98,7 +98,8 @@ const TextSection = ({props}) => {
                 {props.header2 ?
                 <div className='m-auto h-full flex flex-col lg:pb-0 pb-10 justify-center w-5/12'>
                     <div className='big-text noselect pb-10' style={{fontSize: 50}}>{props.header2}</div>
-                    <div className='small-text'>{body2}</div>
+                    {console.log(body2)}
+                    <div className='small-text border'>{body2}</div>
                 </div>
                 :
                 <></>
