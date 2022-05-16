@@ -120,6 +120,11 @@ body{
   background-color: rgba(0,0,0) !important;
 }
 
+.team-pfp {
+  width: 100px;
+  max-height: 100px;
+}
+
 @media (max-width: 1125px) {
   .huge-text {
     font-size: 60pt;
