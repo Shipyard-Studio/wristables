@@ -58,7 +58,7 @@ const TextSection = ({props}) => {
             <div className='m-auto w-full h-full flex pb-10 justify-between text-justify'>
                 {props.image && props.header === 'About' ?
                 props.video ? 
-                <video id='vid' className='w-5/12 m-auto' style={{}} loop={true} autoPlay="autoplay" muted playsinline>
+                <video id='vid' className='w-5/12 m-auto' style={{}} loop={true} autoPlay="autoplay" muted playsInline>
                     <source src="/WA_white pink donuts.mp4" type="video/mp4" />
                 </video>
                 :

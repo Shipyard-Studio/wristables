@@ -58,7 +58,7 @@ const TextSection = ({props}) => {
                 <div className='big-text m-auto noselect'>{props.header}</div>
                 {props.image ?
                  props.video ? 
-                 <video id='vid' className='w-full m-auto my-5' style={{}} loop={true} autoPlay="autoplay" muted playsinline>
+                 <video id='vid' className='w-full m-auto my-5' style={{}} loop={true} autoPlay="autoplay" muted playsInline>
                      <source src="/WA_white pink donuts.mp4" type="video/mp4" />
                  </video>
                  :
