@@ -17,7 +17,7 @@ const Featured = ({pageWidth}) => {
 
     return (
         <div className='w-full h-full mx-auto flex items-center absolute -z-50 overflow-hidden' style={{marginTop: '-76px'}}>
-           <video id='vid' className={classString} style={{minWidth: 1750, right: -offsetX}}  loop={true} autoPlay="autoplay" muted>
+           <video id='vid' className={classString} style={{minWidth: 1750, right: -offsetX}}  loop={true} autoPlay="autoplay" muted playsinline>
                 <source src='/WATCH_FACTORY_SOUNDSCAPE v2.mp4' type="video/mp4" />
             </video>
         </div>
