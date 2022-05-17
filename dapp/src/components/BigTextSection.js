@@ -59,7 +59,7 @@ const TextSection = ({props}) => {
                 {props.image && props.header === 'About' ?
                 props.video ? 
                 <video id='vid' className='w-5/12 m-auto' style={{}} loop={true} preload="auto" autoPlay="autoplay" muted defaultMuted preload autoplay playsinline  oncontextmenu="return false;">
-                    <source src="/WA_white_pink donuts_making_of_v1a.mov" type="video/mp4" />
+                    <source src="/WA_white pink donuts.mp4" type="video/mp4" />
                 </video>
                 :
                 <img src={props.image} alt="WAWC Watch Image" className='w-5/12'/>
