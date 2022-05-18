@@ -23,6 +23,7 @@ const TextSection = ({props}) => {
 
     let body = ReactHtmlParser(props.body)
     let body2 = ReactHtmlParser(props.body2)
+    let aboutMarginTop = props.header === 'About' ? ' mt-40' : ''
 
     async function postEmail () {
         let input = document.getElementById('email-input')
@@ -53,16 +54,21 @@ const TextSection = ({props}) => {
     }
 
     return (
-        <div className='md:mx-20' id={props.header.toLowerCase()}>
+        <div className={'md:mx-20' + aboutMarginTop} id={props.header.toLowerCase()}>
             <div className='m-auto w-full h-full flex pb-10 justify-between text-justify'>
                 {props.image && props.header === 'About' ?
+                props.video ? 
+                <video id='vid' className='w-5/12 m-auto' style={{}} loop={true} autoPlay="autoplay" muted playsInline>
+                    <source src="/WA_white pink donuts.mp4" type="video/mp4" />
+                </video>
+                :
                 <img src={props.image} alt="WAWC Watch Image" className='w-5/12'/>
                 :
                 <></>
                 }
                 <div className='flex flex-col w-5/12 justify-center text-justify px-10'>
                     <div className='big-text text-left noselect pb-10' style={props.header === 'Events' ? {fontSize: 50} : {}}>{props.header}</div>
-                    <div className='small-text'>{body}</div>
+                    <div className='small-text body-container'>{body}</div>
                     {props.emailCapture ?
                     <div className='hover-invert mt-8 p-2 w-full border-2 text-center' onClick={props.openEmailModal}>
                         JOIN OUR MAILING LIST
@@ -98,7 +104,7 @@ const TextSection = ({props}) => {
                 {props.header2 ?
                 <div className='m-auto h-full flex flex-col lg:pb-0 pb-10 justify-center w-5/12'>
                     <div className='big-text noselect pb-10' style={{fontSize: 50}}>{props.header2}</div>
-                    <div className='small-text'>{body2}</div>
+                    <div className='small-text body-container'>{body2}</div>
                 </div>
                 :
                 <></>
