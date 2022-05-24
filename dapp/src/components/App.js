@@ -4,7 +4,9 @@ import Section from './Section';
 import ProgressBar from './ProgressBar';
 import Hero from './Hero';
 import '../style/App.css';
-import getModalStyle from '../helpers/modalStyles'
+import getModalStyle from '../helpers/modalStyles';
+import Web3Modal from "web3modal";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 const Sidebar = lazy(() => import('./Sidebar'));
 const ModalForm = lazy(() => import('./ModalForm'));
@@ -17,6 +19,26 @@ const Footer = lazy(() => import('./Footer'));
 
 
 function App() {
+
+  const providerOptions = {
+    walletconnect: {
+      package: WalletConnectProvider, // required
+      options: {
+        infuraId: "INFURA_ID" // required
+      }
+    }
+  };
+
+  const web3Modal = new Web3Modal({
+    network: "rinkeby", // optional
+    cacheProvider: true, // optional
+    providerOptions // required
+  });
+
+  const WAWCAddr = '0xf7DE696145B527C004669Fb07B66591e2dD53E58'
+  const desiredChain = 4
+  const desiredHexChain = '0x4'
+
   const bg1 = '/optimized/1.jpg'
   const bg2 = '/optimized/2.jpg'
   const bg3 = '/optimized/3.jpg'
@@ -26,7 +48,11 @@ function App() {
 
   Modal.setAppElement('#root');
 
+  const [contract, setContract] = useState(undefined)
+  const [signer, setSigner] = useState(undefined)
+  const [provider, setProvider] = useState(undefined)
   const [walletAddress, setWallet] = useState("")
+  const [chainId, setChainId] = useState("")
   const [sectionInFocus, setSectionInFocus] = useState(0)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [emailModalIsOpen, setIsEmailModalOpen] = useState(false)

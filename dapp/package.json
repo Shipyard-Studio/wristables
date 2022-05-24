@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "^8.10.6",
-    "@react-three/fiber": "^7.0.26",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@walletconnect/web3-provider": "^1.7.8",
     "axios": "^0.26.0",
     "ethers": "^5.5.4",
     "postcss": "^8.4.6",
@@ -18,12 +17,13 @@
     "react-dom": "^16.13.1",
     "react-modal": "^3.14.4",
     "react-player": "^2.9.0",
-    "react-scripts": "5.0.0",
+    "react-scripts": "4.0.0",
     "react-scroll": "^1.8.7",
     "react-spring": "^9.4.3",
     "tailwindcss": "^3.0.23",
     "three": "^0.137.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "web3modal": "^1.9.7"
   },
   "scripts": {
     "css": "postcss src/style/tailwind.css -o src/style/tailwind.generated.css",
