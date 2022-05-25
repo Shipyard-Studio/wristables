@@ -15,7 +15,7 @@ async function main() {
         "0x36142d591D9B920f97E8e6fFA831436CfA17B822",
       ],
       [7, 2, 1],
-      merkleTree.getHexRoot(),
+      // merkleTree.getHexRoot(),
     ],
     // Here we indicate this is a UUPS:
     { kind: "uups" }

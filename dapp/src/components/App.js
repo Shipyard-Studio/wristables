@@ -1,5 +1,6 @@
 import React, {useEffect, useState, lazy, Suspense} from 'react';
 import Modal from 'react-modal';
+import ModalChainID from './ModalChainId'
 import Section from './Section';
 import ProgressBar from './ProgressBar';
 import Hero from './Hero';
@@ -37,7 +38,7 @@ function App() {
     providerOptions // required
   });
 
-  const WAWCAddr = '0xf7DE696145B527C004669Fb07B66591e2dD53E58'
+  const WAWCAddr = '0x6367A010dfe635F8b9143b6331A1768e2B873c8F'
   const desiredChain = 4
   const desiredHexChain = '0x4'
 
@@ -49,6 +50,19 @@ function App() {
   const bg6 ='./optimized/6.jpg'
 
   Modal.setAppElement('#root');
+
+  const modalStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      borderRadius: '20px',
+      zIndex: 20
+    },
+  }
 
   const [contract, setContract] = useState(undefined)
   const [signer, setSigner] = useState(undefined)
@@ -207,6 +221,15 @@ function App() {
           >
           <EmailModalForm closeModal={closeEmailModal} pageWidth={pageWidth}/>
       </Modal>
+      <Modal
+        
+        isOpen={chainModalIsOpen}
+        onAfterOpen={afterOpenModal}
+        style={modalStyles}
+        contentLabel="Example Modal"
+      >
+        <ModalChainID chainId={chainId} closeModal={closeChainModal}/>
+    </Modal>
 
         {pageWidth < 950 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
         {/* <ProgressBar num={sectionInFocus}/> */}

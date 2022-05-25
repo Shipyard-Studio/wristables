@@ -77,7 +77,7 @@ const Hero = ({props}) => {
     async function getCurrentSupply () {
         if (props.walletAddress.length > 0 && props.chainId === 4) {
 
-            let _supply = await props.contract.getCurrentSupply()
+            let _supply = await props.contract.tokenSupply()
             _supply = _supply.toString()
             for (let i = _supply.length; i < 4; i++) {
                 _supply = '0' + _supply
