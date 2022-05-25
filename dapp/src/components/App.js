@@ -7,6 +7,8 @@ import '../style/App.css';
 import getModalStyle from '../helpers/modalStyles';
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import { ethers } from "ethers"
+import WAWCJSON from '../utils/WAWC.json'
 
 const Sidebar = lazy(() => import('./Sidebar'));
 const ModalForm = lazy(() => import('./ModalForm'));
@@ -56,6 +58,7 @@ function App() {
   const [sectionInFocus, setSectionInFocus] = useState(0)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [emailModalIsOpen, setIsEmailModalOpen] = useState(false)
+  const [chainModalIsOpen, setChainModalIsOpen] = useState(false)
   const [pageWidth, setPageWidth] = useState(window.innerWidth)
 
   function openModal() {
@@ -82,20 +85,39 @@ function App() {
     setIsEmailModalOpen(false);
   }
 
-  async function connectWallet() {
-      if (window.ethereum) {
-        try {
-          const addressArray = await window.ethereum.request({
-            method: "eth_requestAccounts",
-          });
-          setWallet(addressArray[0]);
-        } catch {
-          setWallet("");
+  function openChainModal() {
+    setChainModalIsOpen(true);
+  }
+
+  function closeChainModal() {
+    setChainModalIsOpen(false);
+  }
+
+  async function walletConnect () {
+      const instance = await web3Modal.connect()
+        const p = new ethers.providers.Web3Provider(instance);
+        await p.ready;
+        setProvider(p)
+        const s = p.getSigner();
+        setSigner(s)
+        
+        const c = new ethers.Contract(WAWCAddr, WAWCJSON.abi, p);
+        setContract(c)
+
+        const addressArray = await p.send("eth_requestAccounts", [])
+        setWallet(addressArray[0])
+
+        checkChain(p)
+  }
+
+  function checkChain(provider) {
+    console.log(provider)
+        setChainId(provider._network.chainId)
+        if (chainId !== desiredChain) {
+          openChainModal()
+        } else {
+          closeChainModal()
         }
-      } else {
-        setWallet("");
-        alert("Please install a wallet in your browser!");
-      }
   }
 
   async function getCurrentWalletConnected() {
@@ -125,7 +147,18 @@ function App() {
           setWallet("");
         }
       })
-    } 
+      window.ethereum.on('chainChanged', (chain) => {
+        if(chain === desiredHexChain) {
+          chain = desiredChain
+        }
+        setChainId(chain)
+        if (chainId !== desiredChain) {
+          openChainModal()
+        } else {
+          closeChainModal()
+        }
+      })
+    }
   }
 
   function typeOfSection(r) {
@@ -177,7 +210,7 @@ function App() {
 
         {pageWidth < 950 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
         {/* <ProgressBar num={sectionInFocus}/> */}
-        <Section bg={null} size={1} Component={Hero} id="home" componentProps={{walletAddress: walletAddress, connect: connectWallet, openModal: openModal, pageWidth: pageWidth}}/>
+        <Section bg={null} size={1} Component={Hero} id="home" componentProps={{ethers: ethers, provider: provider, signer: signer, contract: contract, walletAddress: walletAddress, connect: walletConnect, openModal: openModal, chainId: chainId, pageWidth: pageWidth}}/>
         <Section bg={bg2} size={1} Component={typeOfSection()} id="about" componentProps={{header: "About", image: "/assets/Watch Still 02.png", video: true, roadmap: true, body: "<div>Backed by over 30 years of rich industry experience, Wrist Aficionado blends Madison-Avenue polish with the tech-forward world of NFTs and web3. The goal of matching your wrist to the ideal watch - in the metaverse and beyond - that’s what drives us.</div>" }}/>
         <Section bg={bg3} size={1} Component={typeOfSection()} id="utility" componentProps={{header: "Utility", image: "/assets/Watch Still 01.png", emailCapture: true, openEmailModal: openEmailModal, body: "<div>Wrist Aficionado Watch Club members comprise an elite group, with access to a host of private events, presale watch releases, and fractional group-buys that minimize risk and enable larger investments. Holders will own IP rights to their watch and acquire 3D files of each. These dynamic watches will be wearable in the metaverse. Experience exclusive Discords with members-only daily drops, invaluable buying & selling tips and much more. Utility grows with the purchase of each additional watch. Owners of 1 to 5 watches are automatically whitelisted. Should holders acquire more than 10 watches, minting on the next project will be entirely free.</div>"}}/>
         <Section bg={bg4} size={1} Component={typeOfSection()} id="vision" componentProps={{header: "Vision", header2:"Team", body: '<div>Imbued with a spirit of delirious ambition, WAWC is the future of timekeeping accessories. We envision Wrist Aficionado Watch Club as the premier wearable luxury brand in the fledgling Metaverse. Brands are only beginning to enter the Metaverse through NFTs, leaving ample white space in the market - especially where luxury accessories are concerned. Distinguished by our expert team and nimble roadmap, WAWC is primed to adapt to this nascent industry. Wrist Aficionado aims to provide a powerful investment, through which holders gain immense value and discover community.</div>', body2: `<div><div>Spearheaded by our founders, Eddie , Vadim  and Mike, Wrist Aficionado is composed of upcoming digital artists, web3 degens and community builders.</div></div><br/><div class="team-pfp"><img src="/Eddie.png" alt="eddie" /></div><b>Founder | Eddie</b><br/><div>Eddie holds over 15 years of experience in the watch industry. His ultimate ambition is to migrate the luxury watch boutique experience to the Metaverse, and establish Wrist Aficionado as the Metaverse’s premier watchmaker. </div><br/><br/><div class="team-pfp"><img src="/Vadim.png" alt="vadim" /></div><b>Founder | Vadim</b><br/><div>A 25-year watch industry veteran, Vadim shrewdly predicted that the future of the luxury market rested in web3. After beginning his career with Jacob & Co, he launched Wrist Aficionado in 2017, quickly opening up two brick-and-mortar stores in NYC and Miami, alongside Eddie. </div><br/<br/><div class="team-pfp"><img src="/Mike.png" alt="mike" /></div><b>Founder | Mike</b><br/><div>Mike’s captivation with watches stretches back three decades. A serial entrepreneur from a young age, he has conceived and sold multiple million-dollar businesses. In 2017, Mike began a client-business relationship with Wrist Aficionado. After gaining an appreciation for their honesty and professionalism, he became a company partner in 2020. </div><br/<br/><div class="team-pfp"><img src="/J Digital.png" alt="J Digital" /></div><b>Artist | J. Digital</b><br/><div>J. Digital is an award-winning artist with over 25 years of creative exploration in primetime network campaigns, movies, and national commercials. His work is characterized by boundary-pushing artistry, with a roster of previous clients that includes the Emmy Awards, Lord of the Rings game, Warner Bros., Sega, Toshiba, Red Bull, Monster, Fox Sports, Ford, Toyota, Discovery Network and Mattel. </div><br/<br/><div class="flex"><div class="team-pfp"><img src="/Shipyard1.png" alt="Macro Team" /></div><div class="team-pfp"><img src="/Shipyard2.png" alt="Macro Team" /></div><div class="team-pfp"><img src="/Shipyard3.png" alt="Macro Team" /></div></div><b>Development Team</b><br/><div>Our expert development team works for Shipyard, an advanced fellowship program for training in solidity and web3, backed by some of the best founders, operators and investors in web3.</div></div>`,}}/>
