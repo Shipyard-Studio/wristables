@@ -37,7 +37,7 @@ const Hero = ({props}) => {
                         </div>
                     }
                     <div className='big-text w-full lg:ml-10 md:ml-10'>{props.pageWidth > 950 ? 'Watch Club' : ''}</div>
-                    <div className='lg:flex lg:ml-10 lg:mt-20 md:flex md:ml-10 md:mt-20 p-5'>
+                    <div className='lg:flex lg:ml-10 lg:mt-20 md:flex md:ml-10 md:mt-20 p-5 bg-neutral-900/50'>
                         <div className='lg:mx-2'>
                             <div className='medium-text m-auto text-center lg:text-left'>The Web3 Watch Pioneer</div>
                             <div className='lg:mb-0 mb-10'>As a veteran of the luxury watch industry, we offer an elite selection of NFT watches in the metaverse. When it comes to web3 timepieces, if it’s not Wrist Aficionado, it simply doesn’t belong on your wrist. </div>
