@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header';
-import Watch from './Watch';
+// import Watch from './Watch';
 import Video from './Video';
 import Featured from './Featured';
 
