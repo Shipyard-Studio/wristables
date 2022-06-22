@@ -33,7 +33,7 @@ function App() {
   };
 
   const web3Modal = new Web3Modal({
-    network: "rinkeby", // optional
+    network: "mainnet", // optional
     cacheProvider: true, // optional
     providerOptions // required
   });

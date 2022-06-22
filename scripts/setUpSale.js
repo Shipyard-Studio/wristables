@@ -5,7 +5,7 @@ const WAWCJSON = require("../artifacts/contracts/Wristables.sol/WristAficionadoW
 const WAWCAddr = "0x6367A010dfe635F8b9143b6331A1768e2B873c8F";
 const contract = new ethers.Contract(WAWCAddr, WAWCJSON.abi);
 const provider = new ethers.providers.JsonRpcProvider(
-  `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_PRIVATE_KEY}`
+  `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_PRIVATE_KEY}`
 );
 const signer = new ethers.Wallet(process.env.RINKEBY_PRIVATE_KEY, provider);
 const root = merkleTree.getHexRoot();
