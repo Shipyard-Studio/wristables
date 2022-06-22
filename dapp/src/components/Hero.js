@@ -106,10 +106,10 @@ const Hero = ({props}) => {
                     {props.pageWidth > 950 ? <></> :
                         <div className='flex flex-col items-center '>
                             {props.walletAddress.length > 0 && props.chainId === 4 ?
-                    <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-10 pb-0 lg:pb-10'>
-                        <div className='m-auto'>
+                    <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-10 pb-0 lg:pb-10 bg-neutral-900/50'>
+                        <div className='m-auto bg-neutral-900/50'>
                             <span className='text-lime-600 bigger-medium-text'>{supply ? `${supply }` : '0000'}</span>
-                            <span className='bigger-medium-text'> / 1000</span>
+                            <span className='bigger-medium-text'> / 500</span>
                         </div>
                     </div>
                 :
@@ -140,7 +140,7 @@ const Hero = ({props}) => {
                         </div>
                     }
                     <div className='big-text w-full lg:ml-10 md:ml-10'>{props.pageWidth > 950 ? 'Watch Club' : ''}</div>
-                    <div className='lg:flex lg:ml-10 lg:mt-20 md:flex md:ml-10 md:mt-20 p-5'>
+                    <div className='lg:flex lg:ml-10 lg:mt-20 md:flex md:ml-10 md:mt-20 p-5 bg-neutral-900/50'>
                         <div className='lg:mx-2'>
                             <div className='medium-text m-auto text-center lg:text-left'>The Web3 Watch Pioneer</div>
                             <div className='lg:mb-0 mb-10'>As a veteran of the luxury watch industry, we offer an elite selection of NFT watches in the metaverse. When it comes to web3 timepieces, if it’s not Wrist Aficionado, it simply doesn’t belong on your wrist. </div>
@@ -155,7 +155,7 @@ const Hero = ({props}) => {
                         <div className='lg:mt-10 ml-10 flex flex-col items-center'>
                             {props.walletAddress.length > 0 && props.chainId === 4 ?
                     <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-10 pb-0 lg:pb-10'>
-                        <div className='m-auto'>
+                        <div className='m-auto px-4 py-2 bg-neutral-900/50'>
                             <span className='text-lime-600 bigger-medium-text'>{supply ? `${supply }` : '0000'}</span>
                             <span className='bigger-medium-text'> / 1000</span>
                         </div>

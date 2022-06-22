@@ -7,7 +7,7 @@
         <li>GIVEAWAY 3-5 Watches from our boutique to our watch club members</li>
 </ul>
 <br/>
-<b>15% | May</b>
+<b>15% | June</b>
 
 <br/>
 <ul>
