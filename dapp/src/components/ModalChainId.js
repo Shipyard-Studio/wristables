@@ -1,12 +1,16 @@
 import React, {useEffect} from 'react';
 
-const ModalForm = ({chainId, closeModal}) => {
+const ModalForm = ({chainId, closeModal, instance, provider}) => {
 
     async function chainReq () {
-        await window.ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x1' }], // chainId must be in hexadecimal numbers
-        });
+        try {
+            await instance.request({
+              method: "wallet_switchEthereumChain",
+              params: [{ chainId: '0x1' }]
+            });
+          } catch (err) {
+              console.error(err)
+          }
     }
 
     useEffect(() => {

@@ -27,7 +27,7 @@ function App() {
     walletconnect: {
       package: WalletConnectProvider, // required
       options: {
-        infuraId: "INFURA_ID" // required
+        infuraId: "f05672c8380c4c19a16397fb827b33cd" // required
       }
     }
   };
@@ -66,6 +66,7 @@ function App() {
 
   const [contract, setContract] = useState(undefined)
   const [signer, setSigner] = useState(undefined)
+  const [instance, setInstance] = useState(undefined)
   const [provider, setProvider] = useState(undefined)
   const [walletAddress, setWallet] = useState("")
   const [chainId, setChainId] = useState("")
@@ -109,29 +110,27 @@ function App() {
 
   async function walletConnect () {
       const instance = await web3Modal.connect()
-        const p = new ethers.providers.Web3Provider(instance);
-        await p.ready;
-        setProvider(p)
-        const s = p.getSigner();
-        setSigner(s)
-        
-        const c = new ethers.Contract(WAWCAddr, WAWCJSON.abi, p);
-        setContract(c)
-
-        const addressArray = await p.send("eth_requestAccounts", [])
-        setWallet(addressArray[0])
-
-        checkChain(p)
+      setInstance(instance)
+      const p = new ethers.providers.Web3Provider(instance);
+      await p.ready;
+      setProvider(p)
+      const s = p.getSigner();
+      setSigner(s)
+      const c = new ethers.Contract(WAWCAddr, WAWCJSON.abi, p);
+      setContract(c)
+      const accounts = await p.listAccounts();
+      if (accounts) setWallet(accounts[0])
+      await checkChain(p)
   }
 
-  function checkChain(provider) {
-    console.log(provider)
-        setChainId(provider._network.chainId)
-        if (chainId !== desiredChain) {
-          openChainModal()
-        } else {
-          closeChainModal()
-        }
+  async function checkChain(provider) {
+    const network = await provider.getNetwork()
+    setChainId(network.chainId)
+    if (chainId !== desiredChain) {
+      openChainModal()
+    } else {
+      closeChainModal()
+    }
   }
 
   async function getCurrentWalletConnected() {
@@ -228,7 +227,7 @@ function App() {
         style={modalStyles}
         contentLabel="Example Modal"
       >
-        <ModalChainID chainId={chainId} closeModal={closeChainModal}/>
+        <ModalChainID chainId={chainId} instance={instance} provider={provider} closeModal={closeChainModal}/>
     </Modal>
 
         {pageWidth < 950 ? <Sidebar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} /> : <></> }
