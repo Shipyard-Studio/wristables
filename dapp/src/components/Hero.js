@@ -75,7 +75,7 @@ const Hero = ({props}) => {
     }
 
     async function getCurrentSupply () {
-        if (props.walletAddress.length > 0 && props.chainId === 4) {
+        if (props.walletAddress.length > 0 && props.chainId === 1) {
 
             let _supply = await props.contract.tokenSupply()
             _supply = _supply.toString()
@@ -105,7 +105,7 @@ const Hero = ({props}) => {
                     <div className='lg:flex-col md:flex-col'>
                     {props.pageWidth > 950 ? <></> :
                         <div className='flex flex-col items-center '>
-                            {props.walletAddress.length > 0 && props.chainId === 4 ?
+                            {props.walletAddress.length > 0 && props.chainId === 1 ?
                     <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-10 pb-0 lg:pb-10 bg-neutral-900/50'>
                         <div className='m-auto bg-neutral-900/50'>
                             <span className='text-lime-600 bigger-medium-text'>{supply ? `${supply }` : '0000'}</span>
@@ -153,7 +153,7 @@ const Hero = ({props}) => {
                     </div>
                     {props.pageWidth > 950 ?
                         <div className='lg:mt-10 ml-10 flex flex-col items-center'>
-                            {props.walletAddress.length > 0 && props.chainId === 4 ?
+                            {props.walletAddress.length > 0 && props.chainId === 1 ?
                     <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-10 pb-0 lg:pb-10'>
                         <div className='m-auto px-4 py-2 bg-neutral-900/50'>
                             <span className='text-lime-600 bigger-medium-text'>{supply ? `${supply }` : '0000'}</span>

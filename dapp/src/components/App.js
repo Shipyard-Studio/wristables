@@ -39,8 +39,8 @@ function App() {
   });
 
   const WAWCAddr = '0x6367A010dfe635F8b9143b6331A1768e2B873c8F'
-  const desiredChain = 4
-  const desiredHexChain = '0x4'
+  const desiredChain = 1
+  const desiredHexChain = '0x1'
 
   const bg1 = '/optimized/1.jpg'
   const bg2 = '/optimized/2.jpg'
