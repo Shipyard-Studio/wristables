@@ -20,11 +20,22 @@ const signer = new ethers.Wallet(process.env.RINKEBY_PRIVATE_KEY, provider);
 */
 
 const setSaleParams = async () => {
-  await contract.connect(signer).setAllSaleParams (499, merkleTree.getHexRoot(), 0, false, ethers.utils.parseEther("0.25"))
+  await contract
+    .connect(signer)
+    .setAllSaleParams(
+      499,
+      merkleTree.getHexRoot(),
+      0,
+      false,
+      ethers.utils.parseEther("0.25")
+    );
 };
 
-const setBaseURI = async () => {
-  await contract.connect(signer).setBaseURI("ipfs://")
-}
+const setBaseURI = async (uri) => {
+  await contract.connect(signer).setBaseURI(uri);
+};
 
 // setSaleParams();
+setBaseURI("ipfs://QmUjJSbvttyg4M2dyxTMq7BKQQBak9WNsCGBjgdmy62S12").then(
+  console.log("success")
+);
