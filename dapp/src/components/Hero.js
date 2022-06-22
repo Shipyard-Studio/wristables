@@ -33,13 +33,9 @@ const Hero = ({props}) => {
 
     async function handleClick () {
         if (props.walletAddress.length > 0) {
-            if (verified === undefined) {
-                verifyWallet()
-            }
-            if (verified === true) {
-
+            if (supply !== 500) {
                 if (!txHash && !error) {
-
+                    
                     setMintPending(true)
                     try {
                         // let tx = await redeem() 
@@ -54,16 +50,13 @@ const Hero = ({props}) => {
                     }
                 }
             }
-            if (verified === false) {
-                // display error
-            }
         } else {
             await props.connect()
         }
     }
 
     function mintText () {
-            return 'Mint'
+       return supply === 500 ? 'Sold Out' : 'Mint';
     }
 
     async function getCurrentSupply () {
