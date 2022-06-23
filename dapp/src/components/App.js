@@ -38,7 +38,7 @@ function App() {
     providerOptions // required
   });
 
-  const WAWCAddr = '0x6367A010dfe635F8b9143b6331A1768e2B873c8F'
+  const WAWCAddr = '0x219b2276A95DeD887d1281c0841Af4161C4bb415'
   const desiredChain = 1
   const desiredHexChain = '0x1'
 
