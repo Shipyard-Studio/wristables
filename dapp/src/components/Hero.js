@@ -39,7 +39,7 @@ const Hero = ({props}) => {
                     setMintPending(true)
                     try {
                         // let tx = await redeem() 
-                        let tx = await mint() //switch to mint when the public mint goes live
+                        let tx = await mint({value: props.ethers.utils.parseEther('0.25')}) //switch to mint when the public mint goes live
                         setTxHash(tx.hash);
                         
                         const _receipt = await tx.wait();

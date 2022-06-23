@@ -12,7 +12,7 @@ function MintConfirmation ({error, txHash, reciept}) {
             } else if (error.code == 'UNPREDICTABLE_GAS_LIMIT') {
                 return 'Already Claimed / Invalid Proof'
             } else {
-                return 'Something went wrong...'
+                return 'Check Etherscan For Confirmation'
             }
         }
     }
