@@ -106,7 +106,7 @@ const Hero = ({props}) => {
                     {props.pageWidth > 950 ? <></> :
                         <div className='flex flex-col items-center '>
                             {props.walletAddress.length > 0 && props.chainId === 1 ?
-                    <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-0 pb-0 lg:pb-10 bg-neutral-900/50'>
+                    <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-0 pb-0 lg:pb-10 pb-10 bg-neutral-900/50'>
                         <div className='m-auto bg-neutral-900/50'>
                             <span className='text-lime-600 bigger-medium-text'>{supply ? `${supply }` : '000'}</span>
                             <span className='bigger-medium-text'> / 500</span>

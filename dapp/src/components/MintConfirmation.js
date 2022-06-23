@@ -10,7 +10,7 @@ function MintConfirmation ({error, txHash, reciept}) {
             } else if (error.code == 4001) {
                 return 'Transaction Canceled'
             } else if (error.code == 'UNPREDICTABLE_GAS_LIMIT') {
-                return 'Already Claimed'
+                return 'Already Claimed / Invalid Proof'
             } else {
                 return 'Something went wrong...'
             }
