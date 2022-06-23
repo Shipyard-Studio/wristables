@@ -79,7 +79,7 @@ const Hero = ({props}) => {
 
             let _supply = await props.contract.tokenSupply()
             _supply = _supply.toString()
-            for (let i = _supply.length; i < 4; i++) {
+            for (let i = _supply.length; i < 3; i++) {
                 _supply = '0' + _supply
             }
             setSupply(_supply)
@@ -108,12 +108,12 @@ const Hero = ({props}) => {
                             {props.walletAddress.length > 0 && props.chainId === 1 ?
                     <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-0 pb-0 lg:pb-10 bg-neutral-900/50'>
                         <div className='m-auto bg-neutral-900/50'>
-                            <span className='text-lime-600 bigger-medium-text'>{supply ? `${supply }` : '0000'}</span>
+                            <span className='text-lime-600 bigger-medium-text'>{supply ? `${supply }` : '000'}</span>
                             <span className='bigger-medium-text'> / 500</span>
                         </div>
                     </div>
                 :
-                <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-0 pb-0 lg:pb-10'>
+                <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-0 pb-0 pb-10'>
                 <div className='m-auto'>
                     <span className='text-lime-600 bigger-medium-text'></span>
                     <span className='bigger-medium-text'></span>
@@ -156,8 +156,8 @@ const Hero = ({props}) => {
                             {props.walletAddress.length > 0 && props.chainId === 1 ?
                     <div className='flex flex-col lg:flex-row w-10/12 md:w-3/5 lg:1/2 justify-between mx-auto z-10 pb-0 lg:pb-10'>
                         <div className='m-auto px-4 py-2 bg-neutral-900/50'>
-                            <span className='text-lime-600 bigger-medium-text'>{supply ? `${supply }` : '0000'}</span>
-                            <span className='bigger-medium-text'> / 1000</span>
+                            <span className='text-lime-600 bigger-medium-text'>{supply ? `${supply }` : '000'}</span>
+                            <span className='bigger-medium-text'> / 500</span>
                         </div>
                     </div>
                 :
