@@ -36,7 +36,7 @@ const setBaseURI = async (uri) => {
   await contract.connect(signer).setBaseURI(uri);
 };
 
-// whitelistSaleSetup();
+whitelistSaleSetup();
 // publicSaleSetup();
-setBaseURI("ipfs://QmanCYDxfTM97zBxHQGair8gnCcTyZE5AqncSn434NqB47/");
+// setBaseURI("ipfs://QmanCYDxfTM97zBxHQGair8gnCcTyZE5AqncSn434NqB47/");
 // mintFirstTokenToManagement();
