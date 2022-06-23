@@ -28,7 +28,7 @@ const Hero = ({props}) => {
 
     async function redeem () {
         let proof = getProof(props.walletAddress)
-        await props.contract.connect(props.signer).redeem(proof, {value: props.ethers.utils.parseEther('0.01')})
+        await props.contract.connect(props.signer).redeem(proof, {value: props.ethers.utils.parseEther('0.25')})
     }
 
     async function handleClick () {
