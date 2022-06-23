@@ -17,7 +17,7 @@ const Hero = ({props}) => {
     const [supply, setSupply] = useState(undefined)
 
     async function mint () {
-        return await props.contract.connect(props.signer).mint({value: props.ethers.utils.parseEther('0.01')})
+        return await props.contract.connect(props.signer).mint({value: props.ethers.utils.parseEther('0.25')})
     }
 
     function verifyWallet () {
@@ -39,7 +39,7 @@ const Hero = ({props}) => {
                     setMintPending(true)
                     try {
                         // let tx = await redeem() 
-                        let tx = await mint({value: props.ethers.utils.parseEther('0.25')}) //switch to mint when the public mint goes live
+                        let tx = await mint() //switch to mint when the public mint goes live
                         setTxHash(tx.hash);
                         
                         const _receipt = await tx.wait();
