@@ -47,6 +47,7 @@ const Hero = ({props}) => {
                         setTxHash(tx.hash);
                         
                         const _receipt = await tx.wait();
+                        setError(false)
                         setReceipt(_receipt)
                     } catch (err) {
                         console.error('code: ', err.code)
