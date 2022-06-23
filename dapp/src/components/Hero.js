@@ -33,17 +33,13 @@ const Hero = ({props}) => {
 
     async function handleClick () {
         if (props.walletAddress.length > 0) {
-            if (verified === undefined) {
-                verifyWallet()
-            }
-            if (verified === true) {
-
+            if (supply !== 500) {
                 if (!txHash && !error) {
-
+                    
                     setMintPending(true)
                     try {
-                        let tx = await redeem() 
-                        // let tx = await mint() //switch to mint when the public mint goes live
+                        // let tx = await redeem() 
+                        let tx = await mint() //switch to mint when the public mint goes live
                         setTxHash(tx.hash);
                         
                         const _receipt = await tx.wait();
@@ -55,24 +51,13 @@ const Hero = ({props}) => {
                     }
                 }
             }
-            if (verified === false) {
-                // display error
-            }
         } else {
             await props.connect()
         }
     }
 
     function mintText () {
-        if (verified === undefined) {
-            return 'Verify WL'
-        }
-        if (verified === true) {
-            return 'Claim'
-        }
-        if (verified === false) {
-            return 'Not on WL :('
-        }
+       return supply === 500 ? 'Sold Out' : 'Mint';
     }
 
     async function getCurrentSupply () {
