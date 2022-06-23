@@ -22,12 +22,6 @@ function MintConfirmation ({error, txHash, reciept}) {
   return (
     <div className="flex m-auto justify-center items-center z-30">
         {
-        error ?
-        <>
-            <img className='h-6 z-30 mx-2' src='/error.png' alt='error' />
-            <div className='z-30 mx-2 whitespace-normal' >{errorText()}</div> 
-        </>
-        :
         reciept ? 
         <>
             <img className='h-6 z-30 mx-2' src='/success.png' alt='check mark' />
@@ -38,6 +32,11 @@ function MintConfirmation ({error, txHash, reciept}) {
         <>
             <img className='h-6 z-30 mx-2' src='/spinny.gif' alt='spinner' />
             <a className='z-30 hover:text-blue-600 hover:cursor-pointer hover:decoration-solid mx-2 whitespace-normal' href={`https://etherscan.io/tx/${txHash}`} target='_blank' rel="noreferrer" >View on Etherscan</a>
+        </>
+        : error ?
+        <>
+            <img className='h-6 z-30 mx-2' src='/error.png' alt='error' />
+            <div className='z-30 mx-2 whitespace-normal' >{errorText()}</div> 
         </>
         :
         <img className='h-6 z-30 mx-2' src='/spinny.gif' alt='spinner' />
