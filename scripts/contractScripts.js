@@ -2,10 +2,10 @@ const { ethers } = require("hardhat");
 const { merkleTree } = require("./merkle-tree");
 const WAWCJSON = require("../artifacts/contracts/Wristables.sol/WristablesV2.json");
 
-const WAWCAddr = "0xf7DE696145B527C004669Fb07B66591e2dD53E58";
+const WAWCAddr = "0x219b2276A95DeD887d1281c0841Af4161C4bb415";
 const contract = new ethers.Contract(WAWCAddr, WAWCJSON.abi);
 const provider = new ethers.providers.JsonRpcProvider(
-  `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_PRIVATE_KEY}`
+  `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_MAINNET_PRIVATE_KEY}`
 );
 const signer = new ethers.Wallet(process.env.MAINNET_PRIVATE_KEY, provider);
 const root = merkleTree.getHexRoot();
@@ -13,7 +13,18 @@ const root = merkleTree.getHexRoot();
 const whitelistSaleSetup = async () => {
   await contract
     .connect(signer)
-    .setAllSaleParams(499, root, 0, false, ethers.utils.parseEther("0.25"));
+    .setAllSaleParams(0, root, 0, false, ethers.utils.parseEther("0.25"));
+};
+
+const setAvailableSupplyTo499 = async () => {
+  await contract.connect(signer).setAvailableTokenID(499);
+  console.log("token supply set to 499");
+};
+
+const mintFirstTokenToManagement = async () => {
+  await contract
+    .connect(signer)
+    .batchAirdrop(["0x7a635A34f6770775b32A5a6e5310d26DBfaB0A22"], [1]);
 };
 
 const publicSaleSetup = async () => {
@@ -27,4 +38,5 @@ const setBaseURI = async (uri) => {
 
 // whitelistSaleSetup();
 // publicSaleSetup();
-setBaseURI("ipfs://QmXqRRY9NBoGQdmEB5aZq2TNJAThLSpYi6eqbEfrNgTdms/");
+// setBaseURI("ipfs://QmXqRRY9NBoGQdmEB5aZq2TNJAThLSpYi6eqbEfrNgTdms/");
+mintFirstTokenToManagement();
