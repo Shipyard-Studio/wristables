@@ -678,7 +678,11 @@
     },
     {
       "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+<<<<<<< HEAD
       "txHash": "0x00a976e5ed526ee2f59660bd8ef00bf6ff4c9f6f191641f56fd79b915dc381d1",
+=======
+      "txHash": "0x05c1ded1f167c1a349550582ba80f2ffd58dc596923da0d66428d3b6ddd4fdee",
+>>>>>>> new-wl-day
       "kind": "uups"
     }
   ],

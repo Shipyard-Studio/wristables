@@ -1,5 +1,5 @@
 import React from 'react';
-import { Parallax, Background } from 'react-parallax';
+// import { Parallax, Background } from 'react-parallax';
 import Hero from './Hero'
 import '../style/Section.css';
 
