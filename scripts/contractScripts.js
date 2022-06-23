@@ -7,39 +7,24 @@ const contract = new ethers.Contract(WAWCAddr, WAWCJSON.abi);
 const provider = new ethers.providers.JsonRpcProvider(
   `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_PRIVATE_KEY}`
 );
-const signer = new ethers.Wallet(process.env.RINKEBY_PRIVATE_KEY, provider);
+const signer = new ethers.Wallet(process.env.MAINNET_PRIVATE_KEY, provider);
+const root = merkleTree.getHexRoot();
 
-/*
- function setAllSaleParams (uint16 _availableTokenId, bytes32 _root, uint8 _indexWL, bool _saleActive, uint128 _mintPrice) external onlyOwner {
-        setMerkleRoot(_root);
-        setIndexWL(_indexWL);
-        setSaleActive(_saleActive);
-        setMintPrice(_mintPrice);
-        setAvailableTokenID(_availableTokenId);
-    }
-*/
-
-const setSaleParams = async () => {
+const whitelistSaleSetup = async () => {
   await contract
     .connect(signer)
-    .setAllSaleParams(
-      499,
-      merkleTree.getHexRoot(),
-      0,
-      false,
-      ethers.utils.parseEther("0.25")
-    );
+    .setAllSaleParams(499, root, 0, false, ethers.utils.parseEther("0.25"));
+};
+
+const publicSaleSetup = async () => {
+  await contract.connect(signer).setSaleActive(true);
+  await contract.connect(signer).setMintPrice(ethers.utils.parseEther("0.27"));
 };
 
 const setBaseURI = async (uri) => {
   await contract.connect(signer).setBaseURI(uri);
 };
 
-const getTokenURI = async () => {
-  const uri = await contract.connect(signer).tokenURI(0);
-  return uri;
-};
-
-// setSaleParams();
-
+// whitelistSaleSetup();
+// publicSaleSetup();
 setBaseURI("ipfs://QmXqRRY9NBoGQdmEB5aZq2TNJAThLSpYi6eqbEfrNgTdms/");
