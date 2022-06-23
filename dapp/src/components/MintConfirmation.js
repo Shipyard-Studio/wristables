@@ -4,7 +4,7 @@ import React from 'react';
 function MintConfirmation ({error, txHash, reciept}) { 
 
     function errorText () {
-        if (error) {
+        if (error != null || error != undefined) {
             if (error.message == 'execution reverted: claimed') {
                 return 'Already Claimed'
             } else if (error.code == 4001) {
