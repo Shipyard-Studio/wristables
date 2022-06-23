@@ -38,5 +38,5 @@ const setBaseURI = async (uri) => {
 
 // whitelistSaleSetup();
 // publicSaleSetup();
-// setBaseURI("ipfs://QmXqRRY9NBoGQdmEB5aZq2TNJAThLSpYi6eqbEfrNgTdms/");
-mintFirstTokenToManagement();
+setBaseURI("ipfs://QmanCYDxfTM97zBxHQGair8gnCcTyZE5AqncSn434NqB47/");
+// mintFirstTokenToManagement();
