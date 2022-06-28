@@ -72,10 +72,11 @@ async function tens() {
     );
 }
 async function remaining() {
-  await wawc.batchAirdrop(
-    ["0xA90D7C5f5Fa03684c703BC0430d1e5EAd4e60088"],
-    [139]
-  );
+  await contract
+    .connect(signer)
+    .batchAirdrop(["0xA90D7C5f5Fa03684c703BC0430d1e5EAd4e60088"], [139]);
 }
 
-singles();
+// singles();
+// tens();
+remaining();
